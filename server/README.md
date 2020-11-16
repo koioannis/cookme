@@ -1,7 +1,6 @@
-### TO DO
-# Db used mongodb
+# TO DO
 
-# Functionality
+### Functionality
 - [ ] User Auth
   - [ ] Implement user schema on database
     - [ ] Setup [mongoDB](https://www.mongodb.com/)
