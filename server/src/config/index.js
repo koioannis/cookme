@@ -1,15 +1,15 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 // Set NODE_ENV to 'development' by default
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const env = dotenv.config()
+const env = dotenv.config();
 if (env.error) {
   throw new Error('🔥 couldn\'t find .env file 🔥');
 }
 
-export default {
-  port: parseInt(proccess.env.PORT, 10),
+const config = {
+  port: parseInt(process.env.PORT, 10),
 
   databaseURL: process.env.MONGODB_URI,
 
@@ -24,3 +24,5 @@ export default {
     level: process.env.LOG_LEVEL || 'silly',
   },
 };
+
+module.exports = config;

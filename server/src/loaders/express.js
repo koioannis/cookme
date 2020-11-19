@@ -4,16 +4,16 @@ const helmet = require('helmet');
 const methodOverride = require('method-override');
 
 const config = require('../config');
-const routes = require('./api');
+const routes = require('../api');
 
-export default ({ app }) => {
+const expressLoader = (app) => {
   /**
    * Health Status endpoints
   */
   app.get('/status', (req, res) => {
     res.status(200).end();
   });
-  app.head('/status', (req,res) => {
+  app.head('/status', (req, res) => {
     res.status(200).end();
   });
 
@@ -42,7 +42,7 @@ export default ({ app }) => {
     }
     return next(error);
   });
-  app.use((error, req, res, next) => {
+  app.use((error, req, res) => {
     res.status(error.status || 500);
     res.json({
       errors: {
@@ -51,3 +51,5 @@ export default ({ app }) => {
     });
   });
 };
+
+module.exports = expressLoader;
