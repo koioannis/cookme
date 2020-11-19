@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const userInfo = require('./UserInfo');
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema('User', {
   username: {
     type: String,
     required: true,
@@ -20,8 +19,8 @@ const userSchema = new mongoose.Schema({
     max: 1024,
   },
   userInfo: {
-    type: userInfo,
-    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'UserInfo',
   },
 });
 

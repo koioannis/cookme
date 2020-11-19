@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userInfoSchema = new mongoose.Schema({
+const userInfoSchema = new mongoose.Schema('UserInfo', {
   firstName: {
     type: String,
     required: false,
@@ -12,11 +12,6 @@ const userInfoSchema = new mongoose.Schema({
     required: false,
     max: 255,
     min: 6,
-  },
-  password: {
-    type: String,
-    required: true,
-    max: 1024,
   },
 });
 
