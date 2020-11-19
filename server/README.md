@@ -17,9 +17,9 @@
 ### Functionality
 - [ ] User Auth
   - [ ] Implement user schema on database
-    - [ ] Setup [mongoDB](https://www.mongodb.com/)
+    - [x] Setup [mongoDB](https://www.mongodb.com/)
     - [ ] Connect mongo to nodejs
-    - [ ] Create user document
+    - [ ] Create user model
   - [ ] Sign in
   - [ ] Sign out
   - [ ] Sign up
