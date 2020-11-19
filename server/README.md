@@ -1,6 +1,6 @@
 # TO DO
 
-# Project Architecture
+### Project Architecture
 
 ```bash
 ./src
