@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const userInfoSchema = new mongoose.Schema({
+  _user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false,
+  },
   firstName: {
     type: String,
     required: false,
@@ -13,11 +18,5 @@ const userInfoSchema = new mongoose.Schema({
     max: 255,
     min: 6,
   },
-  password: {
-    type: String,
-    required: true,
-    max: 1024,
-  },
 });
-
-module.exports = userInfoSchema;
+module.exports = mongoose.model('UserInfo', userInfoSchema);
