@@ -4,14 +4,16 @@
 
 ```
 ./src
-├── api-routes    app routes / controllers
-├── config        config files
-├── loaders       loaders for startup modules 
-├── models        db models
-├── scripts       long npm scripts
-├── services      business logic
-└── subscribers   async task event handlers
-├── app.js        app entry point
+├── api
+│   └── routes
+├── config
+├── decorators
+├── loaders
+├── models
+│   └── user
+├── scripts
+├── services
+└── subscribers
 ```
 
 ### Functionality
