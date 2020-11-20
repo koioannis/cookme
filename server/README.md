@@ -2,7 +2,7 @@
 
 ### Project Architecture
 
-```bash
+```
 ./src
 ├── api-routes    app routes / controllers
 ├── config        config files
@@ -15,12 +15,17 @@
 ```
 
 ### Functionality
+- [ ] Create A Mapper for the DTOs
 - [ ] User Auth
-  - [x] Implement user schema on database
+  - [x] Implement User & UserInfo schema on database
     - [x] Setup [mongoDB](https://www.mongodb.com/)
     - [x] Connect mongo to nodejs
-    - [x] Create user model
+    - [x] Create User & UserInfo model
+  - [ ] Sign up
+      - [x] User can sign up
+      - [x] Server checks for duplicate entries (Both email and username)
+      - [ ] Create one to one relationship for User and UserInfo
+      - [ ] Create UserInfo upon registration
   - [ ] Sign in
   - [ ] Sign out
-  - [ ] Sign up
   - [ ] Forgot Password

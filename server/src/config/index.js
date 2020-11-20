@@ -23,6 +23,12 @@ const config = {
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },
+
+  agenda: {
+    collection: process.env.AGENDA_COLLECTION_NAME,
+    processEvery: parseInt(process.env.AGENDA_POOL_TIME, 10),
+    maxConcurrency: process.env.AGENDA_MAX_CONCURRENCY,
+  },
 };
 
 module.exports = config;
