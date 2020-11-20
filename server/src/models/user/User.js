@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const userInfo = require('./UserInfo');
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
+    required: false,
     min: 6,
     max: 255,
   },
@@ -19,10 +18,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     max: 1024,
   },
-  userInfo: {
-    type: userInfo,
+  salt: {
+    type: String,
+    required: true,
+    max: 32,
+  },
+  _userInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'UserInfo',
     required: false,
   },
 });
 
-module.exports = userSchema;
+module.exports = mongoose.model('User', userSchema);
