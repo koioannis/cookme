@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
-const userInfoSchema = new mongoose.Schema('UserInfo', {
+const userInfoSchema = new mongoose.Schema({
+  _user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false,
+  },
   firstName: {
     type: String,
     required: false,
@@ -14,5 +19,4 @@ const userInfoSchema = new mongoose.Schema('UserInfo', {
     min: 6,
   },
 });
-
-module.exports = userInfoSchema;
+module.exports = mongoose.model('UserInfo', userInfoSchema);

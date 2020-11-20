@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const helloworld = require('./routes/helloworld');
+const auth = require('./routes/auth');
 
 const apiRoutes = () => {
   const app = Router();
 
-  helloworld(app);
+  auth(app);
 
   return app;
 };
