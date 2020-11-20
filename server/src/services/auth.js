@@ -65,9 +65,9 @@ class AuthService {
         { username: user.username },
         { email: user.email },
       ],
-    }, (error, user) => {
+    }, (error, userFound) => {
       if (error) this.logger.error('Error in searching if user exists %o', error);
-      if (user) found = true;
+      if (userFound) found = true;
     });
 
     return found;
