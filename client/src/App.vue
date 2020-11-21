@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="whole-page-height">
-
     <Navbar />
+
     <b-row class="whole-page-height">
       <b-col col lg="6" md="5">
         <div class="left-wrapper">
@@ -11,10 +11,17 @@
           <b-button size="lg" class="mt-lg-5 mt-sm-3 sign-in">Εγγραγή</b-button>
         </div>
       </b-col>
+
       <b-col col lg="6" md="7">
         <div class="landing-img">
           <div class="search-wrapper">
-            <div class="search-text"><!-- Continue --></div>
+            <div class="search-wrapper-box">
+            <label class="search-text">Ψάξε την αγαπημένη σου συνταγή:</label>
+            <div class="search-input-wrapper rounded shadow-lg">
+              <img src="./assets/magnifying_glass.svg" class="magnifying-img ml-3" alt="">
+              <input class= "search-box ml-3" type="text" name="test" placeholder="Πληκτρολόγισε..">
+            </div>
+            </div>
           </div>
           <div class="small-quote">Πείνασες ; Ετοίμασες!</div>
         </div>
@@ -47,7 +54,7 @@ export default {
     }
 
     .landing-img {
-      background-image: url("./assets/Group.svg");
+      background-image: url("./assets/landing_asset.svg");
       height: 100%;
       background-position: left;
       background-repeat: no-repeat;
@@ -82,5 +89,42 @@ export default {
         border: none;
       }
     }
+
+    .search-wrapper-box {
+      padding-top: 40%;
+      padding-left: 20%;
+
+      .search-text {
+        color: #FFFFFF;
+        opacity: 0.7;
+        font-size: 1.2em;
+      }
+
+      .search-input-wrapper {
+        background: rgba(255, 255, 255, 0.4);
+        width: 60%;
+
+        .magnifying-img {
+          width: 7%;
+          margin-top: -0.3em;
+        }
+
+        .search-box {
+          font-size: 1.1em;
+          background: rgba($color: #ffffff, $alpha: 0.0);
+          color: white;
+          opacity: 1;
+          border: none;
+          width: fit-content;
+          height: 4em;
+          outline: none;
+        }
+
+        .search-box::placeholder {
+          color: white;
+        }
+      }
+    }
+
   }
 </style>
