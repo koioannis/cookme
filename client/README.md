@@ -21,4 +21,4 @@
 
 ## Conclusion
 
-In 2 years from know on this site should be **the most famous** cooking site on planet earth. I hope so 😋
+In 2 years from know on this site should be **the most famous** cooking site on planet earth. 😋
