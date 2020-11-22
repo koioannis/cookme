@@ -7,7 +7,6 @@ const mongooseLoader = async () => {
     useCreateIndex: true,
     useUnifiedTopology: true,
   });
-  console.log('DB connected');
   return connection.connection.db;
 };
 
