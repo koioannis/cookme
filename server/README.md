@@ -29,7 +29,7 @@
       - [x] User can sign up
       - [x] Server checks for duplicate entries (Both email and username)
       - [x] Create one to one relationship for User and UserInfo
-      - [x] Create UserInfo upon registration if needed
+      - [] Create UserInfo upon registration if needed
   - [ ] Sign in
   - [ ] Sign out
   - [ ] Forgot Password
