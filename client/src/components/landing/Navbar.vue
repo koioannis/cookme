@@ -1,23 +1,23 @@
 <template>
   <div class="abs-nav">
-    <b-navbar class="abs-navbar" type="dark" variant="transparent">
-    <b-navbar-brand href="#">
-      <img src="../../assets/logo.svg" class="img-logo">
-    </b-navbar-brand>
+    <b-navbar type="dark" variant="transparent">
+      <b-navbar-brand href="#">
+        <img src="../../assets/logo.svg" class="img-logo">
+      </b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-    <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-auto">
-        <b-nav-form>
-          <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
-            Ανακάλυψε</span></b-nav-item>
-          <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
-            Πως λειτουργεί ;</span></b-nav-item>
-          <b-button class="sign-in-btn" size="md">Σύνδεση</b-button>
-        </b-nav-form>
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+            <b-nav-form>
+              <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
+                Ανακάλυψε</span></b-nav-item>
+              <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
+                Πως λειτουργεί ;</span></b-nav-item>
+              <b-button class="sign-in-btn" size="md">Σύνδεση</b-button>
+            </b-nav-form>
+          </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
   </div>
 </template>
 
