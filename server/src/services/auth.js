@@ -2,8 +2,10 @@ const { Service, Container } = require('typedi');
 const { randomBytes } = require('crypto');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-
 const { EventDispatcher } = require('../decorators/eventDispatcher');
+const objectMapper = require('object-mapper');
+
+const UserDTO = require('../mapping/user/UserDTO');
 const config = require('../config');
 
 Service();
@@ -15,11 +17,11 @@ class AuthService {
     this.eventDispatcher = EventDispatcher;
   }
 
-  async SignUp(userDTO) {
+  async SignUp(User) {
     try {
       const userAlreadyInDb = await this.checkIfUserAlreadyInDb({
-        username: userDTO.username,
-        email: userDTO.email,
+        username: User.username,
+        email: User.email,
       });
 
       if (userAlreadyInDb) return { message: 'Username or Email already exists' };
@@ -27,14 +29,21 @@ class AuthService {
       const salt = randomBytes(32);
       this.logger.silly('Hashing password');
 
-      const hashedPassword = await argon2.hash(userDTO.password, { salt });
+      const hashedPassword = await argon2.hash(User.password, salt);
 
       this.logger.silly('Creating user db record');
+      // const userInfoRecord = '',
+      // if (User.userInfo) {
+      //   const userInfoRecord = await this.userInfoModel.create({
+      //     ...User.userInfo,
+      //   });
+      // }
 
       const userRecord = await this.userModel.create({
-        username: userDTO.username,
-        email: userDTO.email,
+        username: User.username,
+        email: User.email,
         salt: salt.toString('hex'),
+        userInfo: userInfoRecord,
         password: hashedPassword,
       });
 
@@ -45,12 +54,8 @@ class AuthService {
         throw new Error('User cannot be created');
       }
 
-      /* @TODO
-        Create a mapper layer for the DTO
-      */
-      const user = userRecord.toObject();
-      Reflect.deleteProperty(user, 'password');
-      Reflect.deleteProperty(user, 'salt');
+      this.logger.debug(JSON.stringify(userRecord));
+      const user = objectMapper(userRecord, UserDTO);
       return { user, token };
     } catch (error) {
       this.logger.error(error);
