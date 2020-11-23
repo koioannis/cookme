@@ -4,7 +4,7 @@
       <div class="search-wrapper-box">
         <label class="search-text">Ψάξε την αγαπημένη σου συνταγή:</label>
         <div class="search-input-wrapper rounded shadow-lg">
-          <img src="../../assets/magnifying_glass.svg" class="magnifying-img ml-3" alt="">
+          <img src="@/assets/magnifying_glass.svg" class="magnifying-img ml-3" alt="">
           <input class= "search-box ml-3" type="text" name="test" placeholder="Πληκτρολόγισε..">
         </div>
       </div>
@@ -21,7 +21,7 @@ export default {
 
 <style scoped lang="scss">
   .landing-img {
-    background-image: url("../../assets/landing_asset.svg");
+    background-image: url('../../assets/landing_asset.svg');
     height: 100%;
     background-position: left;
     background-repeat: no-repeat;

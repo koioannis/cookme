@@ -4,16 +4,16 @@
       id="carousel-fade"
       style="text-shadow: 0px 0px 2px #000" fade indicators>
       <b-carousel-slide
-        caption="First slide"
-        img-src="https://picsum.photos/1024/480/?image=21"
+        caption="Σαλάτε 10 εποχών"
+        :img-src="require('@/assets/car1.jpg')"
       ></b-carousel-slide>
       <b-carousel-slide
-        caption="Second Slide"
-        img-src="https://picsum.photos/1024/480/?image=21"
+        caption="Μοσχάρι Καρέ"
+        :img-src="require('@/assets/car2.jpg')"
       ></b-carousel-slide>
       <b-carousel-slide
-        caption="Third Slide"
-        img-src="https://picsum.photos/1024/480/?image=22"
+        caption="Μπέργκερ αλά μπουρνέ"
+        :img-src="require('@/assets/car3.jpg')"
       ></b-carousel-slide>
     </b-carousel>
   </div>
@@ -24,7 +24,3 @@ export default {
   name: 'RecipeCarousel',
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>
