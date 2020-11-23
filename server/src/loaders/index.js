@@ -18,7 +18,7 @@ const loader = async (expressApp) => {
   const userDetailsModel = {
     name: 'userDetailsModel',
     model: userDetails,
-  }
+  };
 
   const agenda = await dependencyInjector({
     mongoConnection,
