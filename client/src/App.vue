@@ -10,16 +10,45 @@
       </b-col>
     </b-row>
 
-    <div class="whole-page-height-grey">
+    <div class="whole-page-height-grey d-flex flex-column justify-content-center">
       <div class="header-text-wrapper d-flex justify-content-center">
         <img src="./assets/star.svg" alt="star" class="star-img d-none d-sm-block">
         <div class="ml-2 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
       </div>
-      <RecipeCard class="mt-5" />
+      <b-row class="card-view-wrapper">
+        <b-card-group deck>
+          <!-- Need to make the request -->
+          <div v-for="item in cardElements" :key="item">
+            <RecipeCard class="mt-5" />
+          </div>
+        </b-card-group>
+      </b-row>
     </div>
 
-    <div>
-      <RecipeCarousel />
+    <b-row class="carousel-wrapper">
+      <b-col md="6">
+        <RecipeCarousel />
+      </b-col>
+      <b-col md="6">
+        <div class="looking-description-wrapper">
+          <h1><b>Τι ψάχνεις ;</b></h1>
+          <div class="lead mt-md-4 mt-sm-2 looking-text">Lorem ipsum dolor, sit
+            amet consectetur adipisicing elit. Sed, sequi. Lorem ipsum dolor sit, amet con
+            sectetur adipisicing elit. Commodi laboriosam vero cum maxime facere incidunt adipisc
+            impedit necessitatibus dolor quibusdam fugiat explicabo odio nihil harum ut vel porro
+            impedit necessitatibus dolor quibusdam fugiat explicabo odio nihil harum ut vel porro
+            impedit necessitatibus dolor quibusdam fugiat explicabo odio nihil harum ut vel porro
+            lam hic aliquid! Eum accusamus optio, facere deserunt provident necessitatibus.
+            <br />
+            <br />
+            <small class="looking-description-quote">- Πείνασες; Ετοίμασες! -</small>
+          </div>
+        </div>
+      </b-col>
+    </b-row>
+
+    <div class="whole-page-height-grey">
+
     </div>
   </div>
 </template>
@@ -39,6 +68,11 @@ export default {
     RightSearch,
     RecipeCard,
     RecipeCarousel,
+  },
+  data() {
+    return {
+      cardElements: 4,
+    };
   },
 };
 </script>
@@ -63,13 +97,32 @@ export default {
   }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
   .star-img {
     width: inherit;
   }
 
   .header-text-wrapper {
-    padding-top: 4.5%;
     height: fit-content;
+  }
+
+  .card-view-wrapper {
+    justify-content: center;
+  }
+
+  .carousel-wrapper {
+    height: max-content;
+  }
+
+  .looking-description-wrapper {
+    width: 70%;
+    position: relative;
+    top: 17%;
+    left: 10%;
+
+    .looking-description-quote {
+      float: right;
+      opacity: 0.9;
+    }
   }
 </style>
