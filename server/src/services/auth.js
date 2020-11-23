@@ -13,12 +13,14 @@ class AuthService {
   constructor() {
     this.logger = Container.get('logger');
     this.userModel = Container.get('userModel');
-    this.userInfoModel = Container.get('userInfoModel');
+    this.userDetailsModel = Container.get('userDetailsModel');
     this.eventDispatcher = EventDispatcher;
   }
 
   async SignUp(User) {
     try {
+
+      // Check if user exists
       const userAlreadyInDb = await this.checkIfUserAlreadyInDb({
         username: User.username,
         email: User.email,
@@ -26,27 +28,28 @@ class AuthService {
 
       if (userAlreadyInDb) return { message: 'Username or Email already exists' };
 
+      // Create pwd
       const salt = randomBytes(32);
       this.logger.silly('Hashing password');
-
       const hashedPassword = await argon2.hash(User.password, salt);
-
       this.logger.silly('Creating user db record');
-      // const userInfoRecord = '',
-      // if (User.userInfo) {
-      //   const userInfoRecord = await this.userInfoModel.create({
-      //     ...User.userInfo,
-      //   });
-      // }
 
+      // Integrate with DB
+      let userDetailsRecord = null;
+      if (User.userDetails) {
+        userDetailsRecord = await this.userDetailsModel.create({
+          ...User.userDetails,
+        });
+      }
       const userRecord = await this.userModel.create({
         username: User.username,
         email: User.email,
         salt: salt.toString('hex'),
-        userInfo: userInfoRecord,
+        userDetails: userDetailsRecord,
         password: hashedPassword,
       });
 
+      // JWT
       this.logger.silly('Generating JWT');
       const token = this.generateToken(userRecord);
 

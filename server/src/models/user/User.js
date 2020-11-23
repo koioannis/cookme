@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     max: 32,
   },
-  userInfo: {
+  userDetails: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'UserInfo',
     required: false,
