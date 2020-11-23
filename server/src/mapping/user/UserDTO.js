@@ -2,8 +2,8 @@ const UserDTO = {
   username: 'username',
   email: 'email',
   id: '_id',
-  'userInfo.firstName': 'userInfo.firstName',
-  'userInfo.lastName': 'userInfo.lastName',
+  'userDetails.firstName': 'userDetails.firstName',
+  'userDetails.lastName': 'userDetails.lastName',
 };
 
 module.exports = UserDTO;

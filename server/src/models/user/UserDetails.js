@@ -19,4 +19,4 @@ const userDetailsSchema = new mongoose.Schema({
     min: 6,
   },
 });
-module.exports = mongoose.model('UserInfo', userDetails);
+module.exports = mongoose.model('UserDetails', userDetailsSchema);

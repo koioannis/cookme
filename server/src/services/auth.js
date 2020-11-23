@@ -7,6 +7,7 @@ const objectMapper = require('object-mapper');
 
 const UserDTO = require('../mapping/user/UserDTO');
 const config = require('../config');
+const LoggerInstance = require('../loaders/logger');
 
 Service();
 class AuthService {
@@ -57,7 +58,6 @@ class AuthService {
         throw new Error('User cannot be created');
       }
 
-      this.logger.debug(JSON.stringify(userRecord));
       const user = objectMapper(userRecord, UserDTO);
       return { user, token };
     } catch (error) {
