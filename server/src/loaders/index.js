@@ -3,7 +3,7 @@ const mongooseLoader = require('./mongoose');
 const dependencyInjector = require('./dependencyInjector');
 const jobsLoader = require('./jobs');
 const User = require('../models/user/User');
-const UserInfo = require('../models/user/UserInfo');
+const userDetails = require('../models/user/userDetails');
 const Logger = require('./logger');
 
 const loader = async (expressApp) => {
@@ -15,16 +15,16 @@ const loader = async (expressApp) => {
     name: 'userModel',
     model: User,
   };
-  const userInfoModel = {
-    name: 'userInfoModel',
-    model: UserInfo,
+  const userDetailsModel = {
+    name: 'userDetailsModel',
+    model: userDetails,
   }
 
   const agenda = await dependencyInjector({
     mongoConnection,
     models: [
       userModel,
-      userInfoModel,
+      userDetailsModel,
     ],
   });
 
