@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
 
 const config = require('../config');
 const routes = require('../api');
@@ -19,9 +20,10 @@ const expressLoader = (app) => {
 
   app.use(methodOverride());
 
+  app.use(helmet());
   app.use(cors());
   app.use(bodyParser.json());
-  app.use(helmet());
+  app.use(cookieParser());
 
   app.use(config.api.prefix, routes());
 
@@ -42,9 +44,10 @@ const expressLoader = (app) => {
     }
     return next(error);
   });
-  app.use((error, req, res) => {
+  // use next parameter to trigger this function
+  app.use((error, req, res, next) => {
     res.status(error.status || 500);
-    res.json({
+    res.send({
       errors: {
         message: error.message,
       },
