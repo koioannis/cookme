@@ -1,9 +1,9 @@
 <template>
-  <div id="app" class="whole-page-height">
+  <div id="app">
     <Navbar />
     <b-row class="whole-page-height">
       <b-col col lg="6" md="5">
-        <QuoteInfo />
+        <LandingInfo />
       </b-col>
       <b-col col lg="6" md="7">
         <RightSearch />
@@ -15,24 +15,19 @@
         <img src="./assets/star.svg" alt="star" class="star-img d-none d-sm-block">
         <div class="ml-2 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
       </div>
-      <b-row class="card-view-wrapper">
-        <b-card-group deck>
+      <b-row style="margin: auto;">
           <!-- Need to make the request -->
-          <div v-for="item in cardElements" :key="item">
-            <RecipeCard class="mt-5" />
-          </div>
-        </b-card-group>
+            <b-col lg="3" v-for="item in cardElements" :key="item">
+                <RecipeCard class="mt-5" />
+              </b-col>
       </b-row>
     </div>
 
-    <b-row class="carousel-wrapper">
-      <b-col md="6">
-        <RecipeCarousel />
-      </b-col>
-      <b-col md="6">
+    <div class="carousel-wrapper d-lg-flex">
+        <RecipeCarousel style="width: 50%"/>
         <div class="looking-description-wrapper">
           <h1><b>Τι ψάχνεις ;</b></h1>
-          <div class="lead mt-md-4 mt-sm-2 looking-text">Lorem ipsum dolor, sit
+          <div class="lead mt-md-3 mt-sm-2 looking-text">Lorem ipsum dolor, sit
             amet consectetur adipisicing elit. Sed, sequi. Lorem ipsum dolor sit, amet con
             sectetur adipisicing elit. Commodi laboriosam vero cum maxime facere incidunt adipisc
             impedit necessitatibus dolor quibusdam fugiat explicabo odio nihil harum ut vel porro
@@ -40,34 +35,37 @@
             impedit necessitatibus dolor quibusdam fugiat explicabo odio nihil harum ut vel porro
             lam hic aliquid! Eum accusamus optio, facere deserunt provident necessitatibus.
             <br />
-            <br />
             <small class="looking-description-quote">- Πείνασες; Ετοίμασες! -</small>
           </div>
         </div>
-      </b-col>
-    </b-row>
+    </div>
 
-    <div class="whole-page-height-grey">
-
+    <div style="background-color: #F7F7F7">
+      <FooterQuote />
+      <FooterAbout />
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from './components/landing/Navbar.vue';
-import QuoteInfo from './components/landing/QuoteInfo.vue';
+import LandingInfo from './components/landing/LandingInfo.vue';
 import RightSearch from './components/landing/RightSearch.vue';
 import RecipeCard from './components/landing/RecipeCard.vue';
 import RecipeCarousel from './components/landing/RecipeCarousel.vue';
+import FooterQuote from './components/landing/FooterQuote.vue';
+import FooterAbout from './components/landing/FooterAbout.vue';
 
 export default {
   name: 'app',
   components: {
     Navbar,
-    QuoteInfo,
+    LandingInfo,
     RightSearch,
     RecipeCard,
     RecipeCarousel,
+    FooterQuote,
+    FooterAbout,
   },
   data() {
     return {
@@ -82,17 +80,17 @@ export default {
     margin: 0;
     padding: 0;
     color: #353535;
-    height: 100%;
     overflow-x: hidden;
 
     .whole-page-height {
-      height: 100%;
       position: relative;
+      height: 48em;
     }
 
     .whole-page-height-grey {
-      height: 100%;
       background-color: #F7F7F7;
+      padding-top: 5em;
+      padding-bottom: 5em;
     }
   }
 </style>
@@ -106,19 +104,14 @@ export default {
     height: fit-content;
   }
 
-  .card-view-wrapper {
-    justify-content: center;
-  }
-
   .carousel-wrapper {
-    height: max-content;
+    height: fit-content;
   }
 
   .looking-description-wrapper {
-    width: 70%;
+    width: 40%;
     position: relative;
-    top: 17%;
-    left: 10%;
+    margin: auto;
 
     .looking-description-quote {
       float: right;
