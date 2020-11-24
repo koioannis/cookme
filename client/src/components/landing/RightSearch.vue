@@ -3,7 +3,7 @@
     <div class="search-wrapper">
       <div class="search-wrapper-box">
         <label class="search-text">Ψάξε την αγαπημένη σου συνταγή:</label>
-        <div class="search-input-wrapper rounded shadow-lg">
+        <div class="search-input-wrapper rounded shadow-lg d-flex">
           <img src="@/assets/magnifying_glass.svg" class="magnifying-img ml-3" alt="">
           <input class= "search-box ml-3" type="text" name="test" placeholder="Πληκτρολόγισε..">
         </div>
@@ -38,18 +38,18 @@ export default {
   }
 
   .search-wrapper-box {
-    padding-top: 40%;
+    padding-top: 35%;
     padding-left: 20%;
 
     .search-text {
       color: #FFFFFF;
       opacity: 0.7;
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
 
     .search-input-wrapper {
       background: rgba(255, 255, 255, 0.4);
-      width: 60%;
+      width: 25em;
 
       .magnifying-img {
         width: 7%;
@@ -62,7 +62,7 @@ export default {
         color: white;
         opacity: 1;
         border: none;
-        width: inherit;
+        width: 80%;
         height: 4em;
         outline: none;
       }
