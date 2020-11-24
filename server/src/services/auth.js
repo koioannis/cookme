@@ -25,15 +25,19 @@ class AuthService {
         email: userData.email,
       });
 
-      if (userAlreadyInDb) return { data: { error: 'Username or Email already exists' } };
+      if (userAlreadyInDb) {
+        const error = new Error('User already exists');
+        error.status = 200;
+        throw error;
+      }
 
-      // Create pwd
+      // Created hashed password
       const salt = randomBytes(32);
       this.logger.silly('Hashing password');
       const hashedPassword = await argon2.hash(userData.password, salt);
       this.logger.silly('Creating user db record');
 
-      // Integrate with DB
+      // Save data to DB
       let userDetailsRecord = null;
       if (userData.userDetails) {
         userDetailsRecord = await this.userDetailsModel.create({
@@ -48,7 +52,7 @@ class AuthService {
         password: hashedPassword,
       });
 
-      // JWT
+      // Generate jwt and send the response
       this.logger.silly('Generating JWT');
       const token = this.generateToken(userRecord);
 
@@ -74,7 +78,7 @@ class AuthService {
   }
 
   async SignIn(userData) {
-    const userRecord = await this.userModel.findOne({username: userData.username});
+    const userRecord = await this.userModel.findOne({ email: userData.email });
 
     if (!userRecord) {
       throw new Error('user not registered');
@@ -95,7 +99,7 @@ class AuthService {
 
       return {
         data: {
-          username: user.username,
+          email: user.email,
         },
         token,
       };

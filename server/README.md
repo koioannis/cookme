@@ -15,6 +15,12 @@
 ├── services
 └── subscribers
 ```
+### Documentation
+- [ ] Configure swagger
+ - [ ] Add Auth routes
+  - [ ] Sign in
+  - [ ] Sign out
+  - [ ] Sign out
 
 ### Functionality
 - [x] Create A Mapper for the DTOs
