@@ -45,7 +45,7 @@ const expressLoader = (app) => {
     return next(error);
   });
   // use next parameter to trigger this function
-  app.use((error, req, res) => {
+  app.use((error, req, res, next) => {
     res.status(error.status || 500);
     res.send({
       errors: {

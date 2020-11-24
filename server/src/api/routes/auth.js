@@ -37,7 +37,7 @@ const auth = (app) => {
         }
         res.json(retValue.data);
 
-        res.status(201).end();
+        return res.status(201);
       } catch (error) {
         logger.error('Error %o', error);
 
@@ -47,7 +47,7 @@ const auth = (app) => {
 
   route.post('/signin', celebrate({
     body: Joi.object({
-      username: Joi.string().required(),
+      email: Joi.string().required(),
       password: Joi.string().required(),
     }),
   }),
@@ -68,7 +68,7 @@ const auth = (app) => {
       }
       res.json(retValue.data);
 
-      return res.status(200).end();
+      return res.status(200);
     } catch (error) {
       logger.error('error : %o', error);
       return next(error);
