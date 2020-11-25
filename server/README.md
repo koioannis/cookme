@@ -39,4 +39,4 @@
   - [x] Sign in
   - [x] Sign out
   - [ ] Verify Email Address
-  - [ ] Forgot Password
+  - [x] Forgot Password
