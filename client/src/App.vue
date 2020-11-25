@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
+    <LogIn />
     <b-row class="whole-page-height">
       <b-col col lg="6" md="5">
         <LandingInfo />
@@ -17,9 +18,10 @@
       </div>
       <b-row style="margin: auto;">
           <!-- Need to make the request -->
-            <b-col lg="3" v-for="item in cardElements" :key="item">
-                <RecipeCard class="mt-5" />
-              </b-col>
+          <b-col md="6" class="mt-5" lg="3" style="width: 25em"
+          v-for="item in cardElements" :key="item">
+            <RecipeCard />
+          </b-col>
       </b-row>
     </div>
 
@@ -55,6 +57,7 @@ import RecipeCard from './components/landing/RecipeCard.vue';
 import RecipeCarousel from './components/landing/RecipeCarousel.vue';
 import FooterQuote from './components/landing/FooterQuote.vue';
 import FooterAbout from './components/landing/FooterAbout.vue';
+import LogIn from './components/auth/LogIn.vue';
 
 export default {
   name: 'app',
@@ -66,6 +69,7 @@ export default {
     RecipeCarousel,
     FooterQuote,
     FooterAbout,
+    LogIn,
   },
   data() {
     return {
@@ -76,11 +80,12 @@ export default {
 </script>
 
 <style lang="scss">
-    html, body {
+  html, body {
     margin: 0;
     padding: 0;
     color: #353535;
     overflow-x: hidden;
+    padding-right: 0px !important;
 
     .whole-page-height {
       position: relative;
