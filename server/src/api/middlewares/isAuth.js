@@ -7,11 +7,11 @@ function isAuth(req, res, next) {
       config.jwtSecret,
       (error, decoded) => {
         if (error) {
-          const newError = new Error('Invalid Token');
+          const newError = new Error(error.name);
           newError.status = 400;
           throw newError;
         }
-        res.locals.id = decoded.id;
+        res.locals = decoded;
       });
     return next();
   }

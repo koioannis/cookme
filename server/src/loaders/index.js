@@ -3,7 +3,7 @@ const mongooseLoader = require('./mongoose');
 const dependencyInjector = require('./dependencyInjector');
 const jobsLoader = require('./jobs');
 const User = require('../models/user/User');
-const userDetails = require('../models/user/userDetails');
+const userDetails = require('../models/user/UserDetails');
 const Logger = require('./logger');
 
 const loader = async (expressApp) => {
