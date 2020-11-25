@@ -26,7 +26,7 @@
 - [x] Create A Mapper for the DTOs
 - [ ] User Auth
   - General to be implemented
-    -[x] created userDTO
+    - [x] created userDTO
   - [x] Implement User & UserInfo schema on database
     - [x] Setup [mongoDB](https://www.mongodb.com/)
     - [x] Connect mongo to nodejs
@@ -39,4 +39,4 @@
   - [x] Sign in
   - [x] Sign out
   - [ ] Verify Email Address
-  - [x] Forgot Password
+  - [x] Forgot Password (Via JWTs)
