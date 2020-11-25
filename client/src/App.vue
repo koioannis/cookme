@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <LogIn />
+    <SignTemplate />
     <b-row class="whole-page-height">
       <b-col col lg="6" md="5">
         <LandingInfo />
@@ -57,7 +57,7 @@ import RecipeCard from './components/landing/RecipeCard.vue';
 import RecipeCarousel from './components/landing/RecipeCarousel.vue';
 import FooterQuote from './components/landing/FooterQuote.vue';
 import FooterAbout from './components/landing/FooterAbout.vue';
-import LogIn from './components/auth/LogIn.vue';
+import SignTemplate from './components/auth/SignTemplate.vue';
 
 export default {
   name: 'app',
@@ -69,7 +69,7 @@ export default {
     RecipeCarousel,
     FooterQuote,
     FooterAbout,
-    LogIn,
+    SignTemplate,
   },
   data() {
     return {
