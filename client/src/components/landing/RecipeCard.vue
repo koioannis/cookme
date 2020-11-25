@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body style="max-width: 20em;">
+  <b-card no-body style="width: fit-content">
     <template #header>
       <div class="d-flex ml-1 user-info">
         <div class="user-img shadow-lg"></div>

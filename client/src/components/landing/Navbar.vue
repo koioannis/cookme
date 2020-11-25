@@ -13,7 +13,8 @@
                 Ανακάλυψε</span></b-nav-item>
               <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
                 Πως λειτουργεί ;</span></b-nav-item>
-              <b-button class="sign-in-btn" size="md">Σύνδεση</b-button>
+              <b-button class="sign-in-btn" size="md"
+              @click="$bvModal.show('sign-in')">Σύνδεση</b-button>
             </b-nav-form>
           </b-navbar-nav>
       </b-collapse>
