@@ -3,7 +3,6 @@ const { celebrate, Joi } = require('celebrate');
 const { Container } = require('typedi');
 
 const AccountService = require('../../services/account.js');
-const middlewares = require('../middlewares');
 
 const route = Router();
 const account = (app) => {
@@ -17,11 +16,15 @@ const account = (app) => {
       }),
     }),
     async (req, res, next) => {
-      logger.debug('Calling Forgot Password endpoint wth body %o', req.body);
+      try {
+        logger.debug('Calling Forgot Password endpoint wth body %o', req.body);
 
-      const accountServiceInstance = Container.get(AccountService);
-      await accountServiceInstance.forgotPassword(req.body.email);
-      res.status(200).json({ message: 'An email has been sent' }).end();
+        const accountServiceInstance = Container.get(AccountService);
+        await accountServiceInstance.forgotPassword(req.body.email);
+        res.status(200).json({ message: 'An email has been sent' }).end();
+      } catch (error) {
+        return next(error);
+      }
     });
 
   route.post('/reset-password',
@@ -29,18 +32,21 @@ const account = (app) => {
       body: Joi.object({
         resetPasswordToken: Joi.string().required(),
         newPassword: Joi.string().required(),
+        userId: Joi.string().required(),
       }),
     }),
-    middlewares.isResetTokenValid,
     async (req, res, next) => {
       logger.debug('Calling Reset Password endpoint wth body %o', req.body);
       const accountServiceInstance = Container.get(AccountService);
-      const message = await accountServiceInstance.resetPassword(
-        {
-          userId: res.locals.userId,
-          newPassword: req.body.newPassword,
-        },
-      );
+      let message;
+
+      try {
+        message = await accountServiceInstance.resetPassword(req.body);
+      } catch (error) {
+        error.status = 200;
+        return next(error);
+      }
+
       res.status(200).json(message);
     });
 };
