@@ -9,8 +9,8 @@ class NodeMailer {
     this.transporter = nodemailer.createTransport({
       service: 'gmail' || config.email.service,
       auth: {
-        user: 'giannis7331@gmail.com',
-        pass: 'Giannis852',
+        user: config.gmail.username,
+        pass: config.gmail.password,
       },
     });
   }

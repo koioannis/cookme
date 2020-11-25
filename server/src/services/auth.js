@@ -129,10 +129,6 @@ class AuthService {
   }
 
   generateToken(user) {
-    const today = new Date();
-    const exp = new Date(today);
-    exp.setDate(today.getDate() + 60);
-
     // eslint-disable-next-line no-underscore-dangle
     this.logger.silly(`Sign JWT for userID: ${user._id}`);
     return jwt.sign(
@@ -140,9 +136,11 @@ class AuthService {
         // eslint-disable-next-line no-underscore-dangle
         id: user._id,
         role: user.role,
-        exp: exp.getTime() / 1000,
       },
       config.jwtSecret,
+      {
+        expiresIn: '3h',
+      },
     );
   }
 }
