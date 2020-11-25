@@ -2,7 +2,6 @@ const { Service, Container } = require('typedi');
 const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
 const { randomBytes } = require('crypto');
-const config = require('../config');
 
 Service();
 class AccountService {
@@ -12,14 +11,36 @@ class AccountService {
   }
 
   async resetPassword(data) {
+    const user = await this.userModel.findOne({ _id: data.userId }, (error, result) => {
+      if (error) throw error;
+    });
+
+    try {
+      jwt.verify(data.resetPasswordToken,
+        user.password,
+        (error, decoded) => {
+          if (error) {
+            const newError = new Error(error.name);
+            newError.status = 400;
+            throw newError;
+          }
+          if (user._id !== decoded.id) throw new Error('Ids doesn\'t match');
+        });
+    } catch (error) {
+      this.logger.info(error);
+      throw error;
+    }
     const salt = randomBytes(32);
     this.logger.silly('Hashing password');
     const hashedPassword = await argon2.hash(data.newPassword, salt);
 
-    const filter = { _id: data.userId };
-    const update = { password: hashedPassword, salt };
-    this.userModel.findOneAndUpdate(filter, update, (error, result) => {
-      if (error) throw error;
+    await this.userModel.updateOne({ _id: user._id }, { password: hashedPassword, salt });
+    const nodemailer = Container.get('nodemailer');
+    nodemailer.sendEmail({
+      to: user.email,
+      username: user.username,
+      subject: 'Password Reset',
+      template: '../templates/reset-password-email.html',
     });
 
     return { message: 'Password successfully changed' };
@@ -45,8 +66,7 @@ class AccountService {
           Generate the required url for the reset password
           Requires front end migration
         */
-        // eslint-disable-next-line no-underscore-dangle
-        url: this.generateJtwResetToken(user._id),
+        url: this.generateJtwResetToken(user),
       }, (error) => {
         if (error) throw error;
       });
@@ -56,14 +76,13 @@ class AccountService {
     }
   }
 
-  generateJtwResetToken(userId) {
-    // eslint-disable-next-line no-underscore-dangle
-    this.logger.silly(`Sign JWT Password Reset Token for user: ${userId}`);
+  generateJtwResetToken(user) {
+    this.logger.silly(`Sign JWT Password Reset Token for user: ${user._id}`);
     return jwt.sign(
       {
-        id: userId,
+        id: user._id,
       },
-      config.jwtResetPasswordSecret,
+      user.password,
       {
         expiresIn: '10m',
       },
