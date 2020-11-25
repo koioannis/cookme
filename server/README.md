@@ -4,16 +4,20 @@
 
 ```
 ./src
-├── api
-│   └── routes
-├── config
-├── decorators
-├── loaders
-├── models
-│   └── user
-├── scripts
-├── services
-└── subscribers
+    ├── api
+    │   ├── middlewares
+    │   └── routes
+    ├── config
+    ├── decorators
+    ├── loaders
+    ├── mapping
+    │   └── user
+    ├── models
+    │   └── user
+    ├── scripts
+    ├── services
+    ├── subscribers
+    └── templates
 ```
 ### Documentation
 - [ ] Configure swagger
