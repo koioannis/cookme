@@ -7,7 +7,7 @@ const ApiRoutes = require('../ApiRoutes');
 
 const route = Router();
 const account = (app) => {
-  app.use('/account', route);
+  app.use(route);
   const logger = Container.get('logger');
 
   route.post(ApiRoutes.ForgotPassword,

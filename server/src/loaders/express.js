@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 
-const config = require('../config');
 const routes = require('../api');
 
 const expressLoader = (app) => {
@@ -24,6 +23,8 @@ const expressLoader = (app) => {
   app.use(cors());
   app.use(bodyParser.json());
   app.use(cookieParser());
+
+  app.use(routes());
 
   // catch 404 errors and forward them to error handler
   app.use((req, res, next) => {
