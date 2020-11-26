@@ -25,8 +25,6 @@ const expressLoader = (app) => {
   app.use(bodyParser.json());
   app.use(cookieParser());
 
-  app.use(config.api.prefix, routes());
-
   // catch 404 errors and forward them to error handler
   app.use((req, res, next) => {
     const error = new Error('Not Found');
