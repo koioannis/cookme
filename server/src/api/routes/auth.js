@@ -4,12 +4,13 @@ const { celebrate, Joi } = require('celebrate');
 
 const middlewares = require('../middlewares');
 const AuthService = require('../../services/auth');
+const ApiRoutes = require('../ApiRoutes');
 
 const route = Router();
 const auth = (app) => {
-  app.use('/auth', route);
+  app.use(route);
 
-  route.post('/signup',
+  route.post(ApiRoutes.SignUp,
     celebrate({
       body: Joi.object({
         username: Joi.string().required(),
@@ -45,7 +46,7 @@ const auth = (app) => {
       }
     });
 
-  route.post('/signin', celebrate({
+  route.post(ApiRoutes.SignIn, celebrate({
     body: Joi.object({
       email: Joi.string().required(),
       password: Joi.string().required(),
@@ -75,7 +76,7 @@ const auth = (app) => {
     }
   });
 
-  route.post('/signout', middlewares.isAuth, (req, res, next) => {
+  route.post(ApiRoutes.SignOut, middlewares.isAuth, (req, res, next) => {
     const logger = Container.get('logger');
     logger.debug('Calling Sign-out endpoint iwth body: %o', req.body);
     try {

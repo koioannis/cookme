@@ -10,6 +10,7 @@ if (env.error) {
 
 const config = {
   port: parseInt(process.env.PORT, 10),
+  apiUrl: process.env.API_URL,
 
   databaseURL: process.env.MONGODB_URI,
 

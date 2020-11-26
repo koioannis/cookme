@@ -11,6 +11,7 @@ class AccountService {
   }
 
   async resetPassword(data) {
+    // eslint-disable-next-line no-unused-vars
     const user = await this.userModel.findOne({ _id: data.userId }, (error, result) => {
       if (error) throw error;
     });
