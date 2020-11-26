@@ -1,31 +1,36 @@
 <template>
-  <b-row class="footer-description flex-column align-items-center">
+  <div class="footer-description text-center">
     <b-icon icon="heart" font-scale="3" style="color: #F04C84" class="mb-3"></b-icon>
-    10.489 άτομα
+    <div>10.489 άτομα</div>
     <blockquote class="blockquote">
       <h4 class="mb-3 text-center">
         Μπείτε και εσεις στην ομάδα μας και μοιραστείτε τις συνταγές<br />
         σας με ολόκληρο τον κόσμο!
       </h4>
-      <footer class="blockquote-footer">Η κοινώτητα μας</footer>
+      <footer class="blockquote-footer text-left">Η κοινώτητα μας</footer>
     </blockquote>
-    <b-button size="lg" class="shadow-sm sign-in">Εγγραγή</b-button>
-  </b-row>
+    <b-button @click="signBtnClicked" size="lg" class="custom-button">Εγγραγή</b-button>
+  </div>
 </template>
 
 <script>
+import EventBus from '../../main';
+
 export default {
   name: 'FooterQuote',
+  methods: {
+    signBtnClicked() {
+      EventBus.$emit('signinOption', false);
+      this.$bvModal.show('sign-in');
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-  .sign-in {
-    background-color: #F04C84;
-    border: none;
-  }
-
   .footer-description {
+    margin: auto;
+    width: 45%;
     padding-top: 5em;
     padding-bottom: 5em;
   }

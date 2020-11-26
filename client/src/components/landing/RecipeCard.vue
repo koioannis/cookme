@@ -32,7 +32,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
   .user-info {
     margin-bottom: -0.6em;
 

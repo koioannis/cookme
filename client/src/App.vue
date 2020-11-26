@@ -2,6 +2,7 @@
   <div id="app">
     <Navbar />
     <SignTemplate />
+    <Instructions />
     <b-row class="whole-page-height">
       <b-col col lg="6" md="5">
         <LandingInfo />
@@ -18,7 +19,7 @@
       </div>
       <b-row style="margin: auto;">
           <!-- Need to make the request -->
-          <b-col md="6" class="mt-5" lg="3" style="width: 25em"
+          <b-col md="6" class="mt-5" lg="3" style="width: 25em;margin: auto"
           v-for="item in cardElements" :key="item">
             <RecipeCard />
           </b-col>
@@ -26,7 +27,7 @@
     </div>
 
     <div class="carousel-wrapper d-lg-flex">
-        <RecipeCarousel style="width: 50%"/>
+        <RecipeCarousel class="carousel"/>
         <div class="looking-description-wrapper">
           <h1><b>Τι ψάχνεις ;</b></h1>
           <div class="lead mt-md-3 mt-sm-2 looking-text">Lorem ipsum dolor, sit
@@ -57,6 +58,7 @@ import RecipeCard from './components/landing/RecipeCard.vue';
 import RecipeCarousel from './components/landing/RecipeCarousel.vue';
 import FooterQuote from './components/landing/FooterQuote.vue';
 import FooterAbout from './components/landing/FooterAbout.vue';
+import Instructions from './components/landing/Instruction.vue';
 import SignTemplate from './components/auth/SignTemplate.vue';
 
 export default {
@@ -70,6 +72,7 @@ export default {
     FooterQuote,
     FooterAbout,
     SignTemplate,
+    Instructions,
   },
   data() {
     return {
@@ -97,6 +100,19 @@ export default {
       padding-top: 5em;
       padding-bottom: 5em;
     }
+
+    .custom-button {
+      background-color: #F04C84;
+      border: none;
+    }
+    .custom-button:hover {
+      background-color: rgb(224, 57, 113);
+    }
+    .custom-button:active, .custom-button:focus {
+      box-shadow: 1px 1px 6px #f73e7cad !important;
+      outline: none;
+      background-color: rgb(224, 57, 113) !important;
+    }
   }
 </style>
 
@@ -121,6 +137,21 @@ export default {
     .looking-description-quote {
       float: right;
       opacity: 0.9;
+    }
+  }
+
+  .carousel {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .carousel {
+      width: 100%;
+    }
+    .looking-description-wrapper {
+      width: 80%;
+      padding-top: 3em;
+      padding-bottom: 3em;
     }
   }
 </style>
