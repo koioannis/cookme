@@ -2,24 +2,26 @@
   <div class="footer-about">
     <img src="@/assets/logo_white.svg" class="logo mt-5" alt="logo">
     <div class="line mt-3"></div>
-    <b-row class="about-row mt-5 mb-5 justify-content-between text-center">
+    <h2 class="mt-4">Social Media</h2>
+
+    <b-row class="about-row mb-5 justify-content-between text-center">
       <b-col md="4">
-          Θα θέλαμε να προσφέρουμε κάτι όσο
+          <p>Θα θέλαμε να προσφέρουμε κάτι όσο
           μπορούμε και θέλουμε. Ψάχνουμε ανθρώπους
           δημιουργικούς με στόχο το μοίρασμα της
-          γνώσης.
+          γνώσης.</p>
           <footer class="blockquote-footer text-left">Η ομάδα μας!</footer>
       </b-col>
 
       <b-col md="4">
-        <div>Social Media</div>
-        <b-icon icon="camera" font-scale="3"></b-icon>
-        <b-icon icon="heart" font-scale="2.5" class="ml-3"></b-icon>
-        <b-icon icon="star" font-scale="2.8" class="ml-3"></b-icon>
+        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="mr-2 social-imgs"/>
+        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="social-imgs"/>
+        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="ml-2 social-imgs" />
       </b-col>
 
       <b-col md="4">
-        <table class="text-left">
+        <h4 class="text-left" style="color: #F04C84">FAG</h4>
+        <table class="text-left question-table">
           <tr>
             <th>Ποιοι είμαστε ;</th>
             <th>Όροι χρήσης</th>
@@ -35,9 +37,11 @@
         </table>
       </b-col>
     </b-row>
-    <div class="copywrite-text pt-3 mb-4">© 2020 Με επιφύλαξη όλων των δικαιωμάτων.
+    <div class="copywrite-text text-center pt-3 mb-4">
+      © 2020 Με επιφύλαξη όλων των δικαιωμάτων.
       Όροι χρήσης, Πολιτική ιδιωτικού απορρήτου και
-      Πολιτική περί cookies του CookMe.</div>
+      Πολιτική περί cookies του CookMe.
+    </div>
   </div>
 </template>
 
@@ -58,7 +62,7 @@ export default {
   }
 
   .logo {
-    width: 15%;
+    width: 18em;
   }
 
   .about-row {
@@ -74,5 +78,23 @@ export default {
   .copywrite-text {
     font-size: 0.8em;
     border-top: 0.5px solid #F04C84;
+  }
+
+  .social-imgs {
+    width: 3.5em;
+    cursor: pointer;
+  }
+
+  .question-table {
+    width: 22em;
+  }
+
+  .question-table th {
+    opacity: 0.8;
+  }
+
+  .question-table th:hover {
+    opacity: 1;
+    cursor: pointer;
   }
 </style>

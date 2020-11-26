@@ -2,7 +2,7 @@
   <div class="abs-nav">
     <b-navbar type="dark" variant="transparent">
       <b-navbar-brand href="#">
-        <img src="../../assets/logo.svg" class="img-logo">
+        <img src="@/assets/logo.svg" class="img-logo">
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -11,20 +11,28 @@
             <b-nav-form>
               <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
                 Ανακάλυψε</span></b-nav-item>
-              <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
-                Πως λειτουργεί ;</span></b-nav-item>
-              <b-button class="sign-in-btn" size="md"
-              @click="$bvModal.show('sign-in')">Σύνδεση</b-button>
+              <b-nav-item @click="$bvModal.show('instruction')" class="mr-lg-3 mr-md-1" href="#">
+                <span class="nav-item-style"> Πως λειτουργεί ;</span></b-nav-item>
+              <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
             </b-nav-form>
           </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <!-- <img src="@/assets/logo.svg" style="margin: auto" class="d-md-none d-sm-block"> -->
   </div>
 </template>
 
 <script>
+import EventBus from '@/main';
+
 export default {
   name: 'Navbar',
+  methods: {
+    signBtnClicked() {
+      EventBus.$emit('signinOption', true);
+      this.$bvModal.show('sign-in');
+    },
+  },
 };
 </script>
 
@@ -50,11 +58,6 @@ export default {
 
     .nav-item-style:hover {
       opacity: 0.9;
-    }
-
-    .sign-in-btn {
-      background-color: #F04C84;
-      border: none;
     }
   }
 </style>

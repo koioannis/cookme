@@ -1,23 +1,40 @@
-# Client Side
+# Client
 
 *This is the client side of `cookme.com` a social site about cooking.*
 
 ## Table of Content (TOC)
 
 - [Technologies](#technologies)
-- [Description](#description)
+- [Description](#description-documentation)
 - [Project Steps](#project-steps)
 - [Conclusion](#conclusion)
 
 ## Technologies
 
-## Description
+#### This repository is currently using:
+    -> Vuejs
+    -> Vuex
+    -> Vue Router
+    -> Bootstrap
+
+## Description (Documentation)
 
 ## Project Steps
 
-#### Not-Done
-
-#### Done
+1. [ ] Landing Page
+    - [ ] Authentication
+        - [x] Sign In
+        - [x] Sign Up
+        - [ ] Forgot Password
+    - [ ] How does it work
+2. [ ] About
+    - [ ] Create all the different endpoints
+3. [ ] Discover
+    -  SignedIn
+        - [ ] View Posts
+        - [ ] Interact with the posts
+    - SignedOut
+        - [ ] View Posts
 
 ## Conclusion
 

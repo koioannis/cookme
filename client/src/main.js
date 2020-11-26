@@ -14,6 +14,10 @@ Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
+// Global EventBus -- Communication between Children
+const EventBus = new Vue();
+export default EventBus;
+
 new Vue({
   router,
   store,
