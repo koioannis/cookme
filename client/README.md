@@ -31,6 +31,7 @@
     - [x] Create all the different endpoints
     - [ ] Add more endpoints
     - [ ] Create Contact form
+    - [ ] Optimize the code
 3. [ ] Discover
     -  SignedIn
         - [ ] View Posts
