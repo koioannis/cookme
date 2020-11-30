@@ -2,7 +2,9 @@
   <div class="abs-nav">
     <b-navbar type="dark" variant="transparent">
       <b-navbar-brand href="#">
-        <img src="@/assets/logo.svg" class="img-logo">
+        <router-link to="/">
+          <img src="@/assets/logo.svg" class="img-logo">
+        </router-link>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
