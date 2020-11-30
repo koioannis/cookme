@@ -23,16 +23,21 @@
         <h4 class="text-left" style="color: #F04C84">FAG</h4>
         <table class="text-left question-table">
           <tr>
-            <th>Ποιοι είμαστε ;</th>
-            <th>Όροι χρήσης</th>
+            <th><router-link to="/about/who" class="question-link">Ποιοι είμαστε;</router-link></th>
+            <th><router-link to="/about/terms" class="question-link">Όροι χρήσης</router-link></th>
           </tr>
           <tr>
-            <th>Πώς λειτουργεί ;</th>
-            <th>Τι θα θέλατε ;</th>
+            <th>
+              <router-link to="/about/usage" class="question-link">Πώς λειτουργεί;</router-link>
+            </th>
+            <th><router-link to="/about/who" class="question-link">Τι θα θέλατε;</router-link></th>
           </tr>
           <tr>
-            <th>Επικοινωνία</th>
-            <th>Πολιτική Προστασία</th>
+            <th><router-link to="/about/who" class="question-link">Επικοινωνία</router-link></th>
+            <th>
+              <router-link to="/about/policies" class="question-link">
+              Πολιτική Προστασία</router-link>
+            </th>
           </tr>
         </table>
       </b-col>
@@ -91,6 +96,11 @@ export default {
 
   .question-table th {
     opacity: 0.8;
+  }
+
+  .question-link {
+    text-decoration: none;
+    color: white;
   }
 
   .question-table th:hover {

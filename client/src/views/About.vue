@@ -11,38 +11,17 @@
     <div style="background-color: #F7F7F7;">
       <b-row class="about-section">
         <b-col cols="4" sm="4" class="text-md-left navigation-left d-none d-md-block">
-          <h4 class="font-weight-bold mb-2">
+          <h4 class="font-weight-bold mb-3 ml-1">
             Τι ψάχνεις ;</h4>
-          <div class="mt-4 text-muted">Πως Λειτουργεί</div>
-          <div class="mt-4 text-muted">Όροι χρήσης</div>
-          <div class="mt-4 text-muted">Ποιοι είμαστε</div>
-          <div class="mt-4 text-muted">Όροι χρήσης</div>
-          <div class="mt-4 text-muted">Πως Λειτουργεί</div>
-          <div class="mt-4 text-muted">Ποιοι είμαστε</div>
-          <div class="mt-4 text-muted">Επικοινωνία μαζί μας</div>
+          <div v-for="(value, key) in navItems" :key="value" class="mt-4">
+            <router-link :to={path:value.path} class="question-link"
+              :class="{'question-link-pressed':(key === currentPage)}">
+              {{ value.title }}
+            </router-link>
+          </div>
         </b-col>
         <b-col sm="8" class="text-md-left text-center pl-5 about-corpus">
-          <h2 id="title" class="font-weight-bold">Ποιοι είμαστε ;</h2>
-          <p id="corpus" class="mt-4 lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            <br />
-            <br />
-            Lorem ipsum dolor sit amet consectetur ad
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisici
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, itaque.
-          </p>
+          <router-view></router-view>
         </b-col>
       </b-row>
     </div>
@@ -60,6 +39,8 @@ import SignTemplate from '@/components/auth/SignTemplate.vue';
 import Instruction from '@/components/landing/Instruction.vue';
 import FooterAbout from '@/components/landing/FooterAbout.vue';
 
+import AboutNavItems from '@/components/about/AboutNavItems.json';
+
 export default {
   name: 'About',
   components: {
@@ -69,9 +50,17 @@ export default {
     Instruction,
     FooterAbout,
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
+  updated() {
+    window.scrollTo(0, 0);
+    this.currentPage = this.$router.currentRoute.name;
+  },
   data() {
     return {
-
+      navItems: AboutNavItems,
+      currentPage: this.$router.currentRoute.name,
     };
   },
 };
@@ -100,6 +89,22 @@ export default {
 
   .about-corpus {
     border-left: 2px solid rgba(201, 201, 201, 0.466);
+  }
+
+  .question-link {
+    text-decoration: none;
+    color: rgb(131, 131, 131);
+    padding: 0.4em;
+  }
+
+  .question-link:hover {
+    opacity: 0.8;
+  }
+
+  .question-link-pressed {
+    color: white;
+    background-color: #F04C84;
+    border-radius: 5px;
   }
 
   @media only screen and (max-width: 700px) {

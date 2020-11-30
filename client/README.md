@@ -26,9 +26,11 @@
         - [x] Sign In
         - [x] Sign Up
         - [ ] Forgot Password
-    - [ ] How does it work
+    - [x] How does it work
 2. [ ] About
-    - [ ] Create all the different endpoints
+    - [x] Create all the different endpoints
+    - [ ] Add more endpoints
+    - [ ] Create Contact form
 3. [ ] Discover
     -  SignedIn
         - [ ] View Posts
