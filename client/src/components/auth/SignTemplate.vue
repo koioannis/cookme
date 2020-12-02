@@ -13,7 +13,10 @@
         <b-button size="md" class="google-btn mt-3">Google</b-button>
       </div>
       <small style="opacity: 0.9">Μάθετε περισσότερα για τους
-        <u class="signin-info">Όρους Χρήσης</u></small>
+        <router-link to="/about/terms" @click="closeModal()"
+        class="signin-info">Όρους Χρήσης</router-link>
+      </small>
+
       <div class="line mt-3 mb-3"></div>
       <SignIn v-if="signin" />
       <SignUp v-else/>
@@ -43,6 +46,11 @@ export default {
       this.signin = state;
     });
   },
+  methods: {
+    closeModal: () => {
+      this.$bvModal.hide('sign-in');
+    },
+  },
 };
 </script>
 
@@ -51,6 +59,7 @@ export default {
     color: #cf2860;
     cursor: pointer;
     opacity: 1;
+    text-decoration: underline;
   }
 
   .sign-selected {

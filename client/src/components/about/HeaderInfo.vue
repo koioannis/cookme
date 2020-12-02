@@ -6,7 +6,8 @@
         <h1 style="font-size: 4em"><b>Ερωτήσεις</b></h1>
         <p class="contact-info text-muted text-center">
           Έαν δεν βλέπετε αυτό που ψάχνετε
-          <u>επικοινωνίστε</u><br />μαζί μας άμεσα!
+          <u><router-link to="/about/contact" style="color: #F04C84">επικοινωνίστε</router-link></u>
+          <br />μαζί μας άμεσα!
         </p>
         <b-button size="md" @click="signBtnClicked"
           class="custom-button">Εγγραφή</b-button>
@@ -39,10 +40,6 @@ export default {
 
   .contact-info {
     font-size: 0.9em;
-    u {
-      color: #F04C84;
-      cursor: pointer;
-    }
 
     u:hover {
       color: rgb(202, 48, 99);
