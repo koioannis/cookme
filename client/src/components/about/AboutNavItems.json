@@ -7,16 +7,20 @@
         "path": "/about/terms",
         "title": "Όροι χρήσης"
     },
-    "policies": {
-        "path": "/about/policies",
-        "title": "Πολιτική"
-    },
     "usage": {
         "path": "/about/usage",
         "title": "Πως Λειτουργεί ;"
     },
+    "fag": {
+        "path": "/about/fag",
+        "title": "Ερωτήσεις Χρηστών"
+    },
+    "policies": {
+        "path": "/about/policies",
+        "title": "Πολιτική"
+    },
     "contact": {
         "path": "/about/contact",
-        "title": "Επικοινωνία μαζί μας"
+        "title": "Επικοινωνία"
     }
 }

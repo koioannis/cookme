@@ -33,7 +33,6 @@ export default {
 <style lang="scss" scoped>
   .left-header-img {
     background-image: url('../../assets/about_header.svg');
-    background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
   }
