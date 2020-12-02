@@ -51,10 +51,14 @@ export default {
     FooterAbout,
   },
   mounted() {
-    window.scrollTo(0, 0);
+    window.scroll(0, 0);
   },
   updated() {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
     this.currentPage = this.$router.currentRoute.name;
   },
   data() {

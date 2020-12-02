@@ -30,10 +30,12 @@
             <th>
               <router-link to="/about/usage" class="question-link">Πώς λειτουργεί;</router-link>
             </th>
-            <th><router-link to="/about/who" class="question-link">Τι θα θέλατε;</router-link></th>
+            <th><router-link to="/about/fag" class="question-link">FAG</router-link></th>
           </tr>
           <tr>
-            <th><router-link to="/about/who" class="question-link">Επικοινωνία</router-link></th>
+            <th>
+              <router-link to="/about/contact" class="question-link">Επικοινωνία</router-link>
+            </th>
             <th>
               <router-link to="/about/policies" class="question-link">
               Πολιτική Προστασία</router-link>
