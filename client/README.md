@@ -25,12 +25,14 @@
     - [ ] Authentication
         - [x] Sign In
         - [x] Sign Up
-        - [ ] Forgot Password
+        - [x] Forgot Password
+        - [ ] Add functionality
     - [x] How does it work
 2. [ ] About
     - [x] Create all the different endpoints
-    - [ ] Add more endpoints
-    - [ ] Create Contact form
+    - [x] Add more endpoints
+    - [x] Create Contact form
+    - [ ] Make it more responsive
     - [ ] Optimize the code
 3. [ ] Discover
     -  SignedIn

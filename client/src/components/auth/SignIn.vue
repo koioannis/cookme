@@ -1,5 +1,6 @@
 <template>
   <form>
+    <div v-if="!forgotPassword">
       <div class="form-group">
         <input type="email" v-model="email" class="uneditable-input form-control"
         placeholder="Email" required>
@@ -10,7 +11,19 @@
         <small class="form-text text-muted">Τα στοιχεία σας θα είναι πάντα ασφαλής.</small>
       </div>
       <button type="submit" class="btn my-btn custom-button">Σύνδεση</button>
-      <u class="forgot-password-btn">Έχω ξεχάσει τον κωδικό πρόσβασης μου.</u>
+      <u class="forgot-password-btn" @click="forgotPasswordBtn">
+        Έχω ξεχάσει τον κωδικό πρόσβασης μου.</u>
+    </div>
+    <div v-else>
+      <p class="text-center" style="font-size: 0.9em">
+        Πληκτρολογίστε το <b>Email</b> σας και περιμένετε να σας στείλουμε το μήνυμα.</p>
+      <div class="form-group">
+        <input type="email" v-model="email" class="uneditable-input form-control"
+        placeholder="Email" required>
+        <button type="submit" class="btn my-btn custom-button mt-3">Σύνδεση</button>
+        <u class="forgot-password-btn" @click="forgotPasswordBtn">Επιστροφή</u>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -21,7 +34,15 @@ export default {
     return {
       email: '',
       password: '',
+      forgotPassword: false,
     };
+  },
+  methods: {
+    forgotPasswordBtn() {
+      this.email = '';
+      this.password = '';
+      this.forgotPassword = !this.forgotPassword;
+    },
   },
 };
 </script>
