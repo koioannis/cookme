@@ -1,0 +1,26 @@
+{
+    "who": {
+        "path": "/about/who",
+        "title": "Ποιοί είμαστε ;"
+    },
+    "terms": {
+        "path": "/about/terms",
+        "title": "Όροι χρήσης"
+    },
+    "usage": {
+        "path": "/about/usage",
+        "title": "Πως Λειτουργεί ;"
+    },
+    "fag": {
+        "path": "/about/fag",
+        "title": "Ερωτήσεις Χρηστών"
+    },
+    "policies": {
+        "path": "/about/policies",
+        "title": "Πολιτική"
+    },
+    "contact": {
+        "path": "/about/contact",
+        "title": "Επικοινωνία"
+    }
+}
