@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     max: 32,
   },
+  refreshTokens: [{
+    type: mongoose.Schema.Types.ObjectId,
+  }],
   userDetails: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'UserDetails',

@@ -1,14 +1,3 @@
-const { Router } = require('express');
-const auth = require('./routes/auth');
-const account = require('./routes/account');
+const apiRoutersV1 = require('./routes/v1');
 
-const apiRoutes = () => {
-  const app = Router();
-
-  auth(app);
-  account(app);
-
-  return app;
-};
-
-module.exports = apiRoutes;
+module.exports = apiRoutersV1;
