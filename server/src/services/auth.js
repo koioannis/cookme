@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
 const objectMapper = require('object-mapper');
 const randToken = require('rand-token');
-const addDays = require('date-fns/addDays');
+const dateFns = require('date-fns');
 
 const { EventDispatcher } = require('../decorators/eventDispatcher');
 const UserDTO = require('../mapping/user/UserDTO');
@@ -131,18 +131,48 @@ class AuthService {
   async RefreshToken({ oldAccessToken, oldRefreshToken }) {
     jwt.verify(oldAccessToken, config.jwtSecret, (error) => {
       if (!error || error.message !== 'jwt expired') {
-        const err = new Error('Jwt is not expired' || error.message);
+        const err = new Error(error || 'jwt is not expired');
         err.status = 400;
-        throw error;
+        throw err;
       }
     });
-
     const decodedData = jwt.decode(oldAccessToken);
-    this.logger.debug('%o', decodedData);
     const { userId, jti } = decodedData;
-    this.logger.debug(userId);
-    this.logger.debug(jti);
-    return { refreshToken: 'test', accessToken: 'test' };
+
+    let oldRefreshTokenId;
+    let refreshTokenError;
+    this.logger.debug(oldRefreshToken);
+    await this.refreshTokenModel.findOneAndDelete({ token: oldRefreshToken },
+      (error, refreshToken) => {
+        try {
+          if (error || !refreshToken) throw new Error('Did not find the refresh token in database');
+          if (!refreshToken.used) throw new Error('Token has not been user');
+          if (refreshToken.invalidated) throw new Error('Token has been invalidated');
+          if (dateFns.isPast(refreshToken.expireDate)) throw new Error('Refresh Token has expired');
+          if (jti !== refreshToken.jwtId) throw new Error('Jti of access token doesn\'t match the refresh token\'s jti');
+          if (userId !== String(refreshToken.user)) throw new Error('User on JWT must match the user on refresh token');
+          oldRefreshTokenId = refreshToken._id;
+        } catch (err) {
+          refreshTokenError = err;
+        }
+      });
+
+    if (refreshTokenError) throw refreshTokenError;
+
+    this.logger.debug(oldRefreshTokenId);
+    const userRecord = await this.userModel.findOne({ _id: userId }, (error, user) => {
+      if (error) throw error;
+      user.refreshTokens.pull({ _id: oldRefreshTokenId });
+      user.save();
+    });
+
+    const { accessToken, jwtid } = this.generateToken(userRecord);
+    const refreshToken = this.generateRefreshToken(userRecord, jwtid);
+    const refreshTokenRecord = await this.refreshTokenModel.create(refreshToken);
+    await userRecord.refreshTokens.push(refreshTokenRecord);
+    await userRecord.save();
+
+    return { refreshToken: refreshToken.token, accessToken };
   }
 
   async checkIfUserAlreadyInDb(user) {
@@ -160,14 +190,14 @@ class AuthService {
     return found;
   }
 
-  generateRefreshToken(user, jti) {
+  generateRefreshToken(user, jwtId) {
     this.logger.silly(`Creating RefreshToken for userID: ${user._id}`);
     const token = randToken.uid(256);
-    const expireDate = addDays(new Date(), 10);
+    const expireDate = dateFns.addDays(new Date(), 10);
     return {
       token,
       expireDate,
-      jwtId: jti,
+      jwtId,
       used: true,
       invalidated: false,
       user,
@@ -186,7 +216,7 @@ class AuthService {
       },
       config.jwtSecret,
       {
-        expiresIn: '30s',
+        expiresIn: '5s',
         jwtid,
       },
     );
