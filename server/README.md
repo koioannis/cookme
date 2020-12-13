@@ -29,7 +29,7 @@
 ### Functionality
 - [x] Create A Mapper for the DTOs
 - [ ] User Auth
-  - General to be implemented
+  - [x] General to be implemented
     - [x] created userDTO
   - [x] Implement User & UserInfo schema on database
     - [x] Setup [mongoDB](https://www.mongodb.com/)
