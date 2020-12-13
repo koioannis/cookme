@@ -98,7 +98,7 @@ const auth = (app) => {
     logger.info('Calling refresh endpoint with body %o', req.body);
 
     const oldAccessToken = req.body.accessToken;
-    const { oldRefreshToken } = req.cookies;
+    const oldRefreshToken = req.cookies.refreshToken;
     const authServiceInstance = Container.get(AuthService);
 
     try {
