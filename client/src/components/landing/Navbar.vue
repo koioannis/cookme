@@ -11,8 +11,11 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
             <b-nav-form>
-              <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
-                Ανακάλυψε</span></b-nav-item>
+              <b-nav-item class="mr-lg-3 mr-md-1" href="#">
+                <router-link to="/discovery" style="text-decoration: none;">
+                  <span class="nav-item-style">Ανακάλυψε</span>
+                </router-link>
+              </b-nav-item>
               <b-nav-item @click="$bvModal.show('instruction')" class="mr-lg-3 mr-md-1" href="#">
                 <span class="nav-item-style"> Πως λειτουργεί ;</span></b-nav-item>
               <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
