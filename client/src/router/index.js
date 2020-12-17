@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
+import Discover from '@/views/Discover.vue';
 
 import WhoAreWe from '@/components/about/ContentSection/WhoAreWe.vue';
 import HowItWorks from '@/components/about/ContentSection/HowItWorks.vue';
@@ -57,7 +58,12 @@ const routes = [
     ],
   },
   {
-    path: '*',
+    path: '/discovery',
+    name: 'Discover',
+    component: Discover,
+  },
+  {
+    path: '/*',
     name: 'Home',
     component: Home,
   },
