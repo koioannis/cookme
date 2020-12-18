@@ -5,15 +5,17 @@
         <img src="@/assets/logo.svg" class="img-logo">
       </router-link>
     </b-col>
-    <b-col cols="8" class="d-flex justify-content-center align-items-center">
+    <b-col cols-lg="8" cols-md="6"
+      class="d-lg-flex justify-content-center align-items-center d-none">
       <div class="search-wrapper p-3 d-flex align-items-center">
         <img src="@/assets/magnifying_glass_dark.svg" class="ml-3 magnifing-glass">
         <input type="text" placeholder="Αναζήτηση" class="ml-4">
       </div>
     </b-col>
-    <b-col class="d-flex align-items-center justify-content-end">
+    <b-col class="d-sm-flex align-items-center justify-content-end guest-btn d-none"
+      @click="$bvModal.show('sign-in')">
       <span class="font-weight-bold mr-3">Επισκέπτης</span>
-      <div style="width:20%; height:20%;background-color: #000">a</div>
+      <div class="user-img shadow-lg"></div>
     </b-col>
   </b-row>
 </template>
@@ -42,18 +44,32 @@ export default {
       .magnifing-glass {
         width: 2em;
       }
+
+      input {
+        width: 18em;
+        border: none;
+        background-color: #EEEEEE;
+        height: 100%;
+        outline: none;
+
+        placeholder {
+          color: #191311;
+        }
+      }
     }
 
-    .search-wrapper input {
-      width: 18em;
-      border: none;
-      background-color: #EEEEEE;
-      height: 100%;
-      outline: none;
-    }
+    .guest-btn {
+      cursor: pointer;
 
-    .search-wrapper input::placeholder {
-      color: #191311;
+      .user-img {
+        background-image: url('../../assets/small_person.jpg');
+        border: 1.3px solid #bdbdbd;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 100%;
+        width: 3em;
+        height: 3em;
+      }
     }
   }
 </style>
