@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body style="width: 20em">
+  <b-card class="card-wrapper" no-body>
     <template #header>
       <div class="d-flex ml-1 user-info">
         <div class="user-img shadow-lg"></div>
@@ -32,33 +32,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .user-info {
-    margin-bottom: -0.6em;
+  .card-wrapper {
+    width: 20em;
 
-    .user-img {
-      background-image: url('../../assets/small_person.jpg');
-      border: 2px solid #bdbdbd;
-      background-repeat: no-repeat;
-      background-size: cover;
-      border-radius: 100%;
-      width: 3em;
-      height: 3em;
-      overflow: hidden;
+    .user-info {
+      margin-bottom: -0.6em;
+
+      .user-img {
+        background-image: url('../../assets/small_person.jpg');
+        border: 2px solid #bdbdbd;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 100%;
+        width: 3em;
+        height: 3em;
+        overflow: hidden;
+      }
     }
-  }
 
-  .recipe-preview-img {
-    background-image: url('../../assets/small_food1.jpg');
-    background-size: cover;
-    will-change: transform;
-    background-repeat: no-repeat;
-    height: 12em;
+    .recipe-preview-img {
+      background-image: url('../../assets/small_food1.jpg');
+      background-size: cover;
+      will-change: transform;
+      background-repeat: no-repeat;
+      height: 12em;
 
-    background-position-y: -3em;
-  }
+      background-position-y: -3em;
+    }
 
-  .description {
-    font-size: 0.8em;
-    opacity: 0.8;
+    .description {
+      font-size: 0.8em;
+      opacity: 0.8;
+    }
   }
 </style>
