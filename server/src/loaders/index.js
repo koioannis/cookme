@@ -2,7 +2,6 @@ const expressLoader = require('./express');
 const mongooseLoader = require('./mongoose');
 const dependencyInjector = require('./dependencyInjector');
 const jobsLoader = require('./jobs');
-
 const Logger = require('./logger');
 const User = require('../models/user/User');
 const userDetails = require('../models/user/UserDetails');
