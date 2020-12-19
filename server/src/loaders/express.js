@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
+const { isCelebrateError } = require('celebrate');
 
 const routes = require('../api');
 
@@ -44,8 +45,13 @@ const expressLoader = (app) => {
     return next(error);
   });
   // use next parameter to trigger this function
-  app.use((error, req, res) => {
+  app.use((error, req, res, next) => {
     res.status(error.status || 500);
+
+    if (isCelebrateError(error)) {
+      res.status(400);
+    }
+
     res.send({
       errors: {
         message: error.message,

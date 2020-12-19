@@ -31,7 +31,7 @@ class AuthService {
 
       if (userAlreadyInDb) {
         const error = new Error('User already exists');
-        error.status = 200;
+        error.status = 409;
         throw error;
       }
 

@@ -11,7 +11,6 @@ const ApiRoutes = RouteFactory('v1');
 
 const auth = (app) => {
   app.use(route);
-
   route.post(ApiRoutes.Register,
     celebrate({
       body: Joi.object({
@@ -115,7 +114,7 @@ const auth = (app) => {
         });
       }
 
-      res.json({ jwt: accessToken }).status(200).end();
+      res.json({ accessToken }).status(200).end();
     } catch (error) {
       next(error);
     }
