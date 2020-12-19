@@ -12,9 +12,8 @@
         <input type="text" placeholder="Αναζήτηση" class="ml-4">
       </div>
     </b-col>
-    <b-col class="d-sm-flex align-items-center justify-content-end guest-btn d-none"
-      @click="$bvModal.show('sign-in')">
-      <span class="font-weight-bold mr-3">Επισκέπτης</span>
+    <b-col class="d-sm-flex align-items-center justify-content-end guest-btn d-none">
+      <span class="font-weight-bold mr-3" @click="$bvModal.show('sign-in')">Επισκέπτης</span>
       <div class="user-img shadow-lg"></div>
     </b-col>
   </b-row>
@@ -31,6 +30,8 @@ export default {
     padding-left: 6% !important;
     padding-right: 6% !important;
     background-color: white;
+    box-shadow: 0px 5px 30px #2e2e2e1a !important;
+    outline: none;
 
     .img-logo {
       width: 9em;
@@ -59,7 +60,9 @@ export default {
     }
 
     .guest-btn {
-      cursor: pointer;
+      span {
+        cursor: pointer;
+      }
 
       .user-img {
         background-image: url('../../assets/small_person.jpg');
