@@ -2,14 +2,16 @@ const { Router } = require('express');
 const { celebrate, Joi } = require('celebrate');
 const { Container } = require('typedi');
 
-const AccountService = require('../../services/account.js');
+const AccountService = require('../../../services/account.js');
+const RouteFactory = require('../../RouteFactory');
 
+const ApiRoutes = RouteFactory('v1');
 const route = Router();
 const account = (app) => {
-  app.use('/account', route);
+  app.use(route);
   const logger = Container.get('logger');
 
-  route.post('/forgot-password',
+  route.post(ApiRoutes.ForgotPassword,
     celebrate({
       body: Joi.object({
         email: Joi.string().required(),
@@ -21,13 +23,13 @@ const account = (app) => {
 
         const accountServiceInstance = Container.get(AccountService);
         await accountServiceInstance.forgotPassword(req.body.email);
-        res.status(200).json({ message: 'An email has been sent' }).end();
+        return res.status(200).json({ message: 'An email has been sent' });
       } catch (error) {
         return next(error);
       }
     });
 
-  route.post('/reset-password',
+  route.post(ApiRoutes.ResetPassword,
     celebrate({
       body: Joi.object({
         resetPasswordToken: Joi.string().required(),
@@ -47,7 +49,7 @@ const account = (app) => {
         return next(error);
       }
 
-      res.status(200).json(message);
+      return res.status(200).json(message);
     });
 };
 
