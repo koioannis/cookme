@@ -3,8 +3,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
+const { isCelebrateError } = require('celebrate');
 
-const config = require('../config');
 const routes = require('../api');
 
 const expressLoader = (app) => {
@@ -25,7 +25,7 @@ const expressLoader = (app) => {
   app.use(bodyParser.json());
   app.use(cookieParser());
 
-  app.use(config.api.prefix, routes());
+  app.use(routes());
 
   // catch 404 errors and forward them to error handler
   app.use((req, res, next) => {
@@ -47,6 +47,11 @@ const expressLoader = (app) => {
   // use next parameter to trigger this function
   app.use((error, req, res, next) => {
     res.status(error.status || 500);
+
+    if (isCelebrateError(error)) {
+      res.status(400);
+    }
+
     res.send({
       errors: {
         message: error.message,

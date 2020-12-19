@@ -23,6 +23,7 @@
     "celebrate": "^13.0.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "event-dispatch": "^0.4.1",
     "express": "^4.17.1",
@@ -33,7 +34,9 @@
     "mongoose": "^5.10.15",
     "nodemailer": "^6.4.16",
     "object-mapper": "^6.2.0",
+    "rand-token": "^1.0.1",
     "typedi": "^0.8.0",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {

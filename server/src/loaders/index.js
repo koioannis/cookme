@@ -2,9 +2,10 @@ const expressLoader = require('./express');
 const mongooseLoader = require('./mongoose');
 const dependencyInjector = require('./dependencyInjector');
 const jobsLoader = require('./jobs');
+const Logger = require('./logger');
 const User = require('../models/user/User');
 const userDetails = require('../models/user/UserDetails');
-const Logger = require('./logger');
+const refreshToken = require('../models/user/RefreshToken');
 
 const loader = async (expressApp) => {
   // eslint-disable-next-line no-unused-vars
@@ -20,11 +21,17 @@ const loader = async (expressApp) => {
     model: userDetails,
   };
 
+  const refreshTokenModel = {
+    name: 'refreshTokenModel',
+    model: refreshToken,
+  };
+
   const agenda = await dependencyInjector({
     mongoConnection,
     models: [
       userModel,
       userDetailsModel,
+      refreshTokenModel,
     ],
   });
 
