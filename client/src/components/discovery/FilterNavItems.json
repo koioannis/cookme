@@ -1,0 +1,18 @@
+{
+    "recent": {
+        "path": "/discovery/recent",
+        "title": "Πρόσφατες Συνταγές"
+    },
+    "popular": {
+        "path": "/discovery/popular",
+        "title": "Δημοφιλής Συνταγες"
+    },
+    "certified": {
+        "path": "/discovery/certified",
+        "title": "Πιστοποιημένες Συνταγές"
+    },
+    "hot": {
+        "path": "/discovery/hot",
+        "title": "Κορυφέες Συνταγές"
+    }
+}

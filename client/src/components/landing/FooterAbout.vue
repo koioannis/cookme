@@ -23,7 +23,7 @@
         <h4 class="text-left" style="color: #F04C84">FAG</h4>
         <table class="text-left question-table">
           <tr>
-            <th><router-link to="/about/who" class="question-link">Ποιοι είμαστε;</router-link></th>
+            <th><router-link to="/about/us" class="question-link">Ποιοι είμαστε;</router-link></th>
             <th><router-link to="/about/terms" class="question-link">Όροι χρήσης</router-link></th>
           </tr>
           <tr>
