@@ -57,13 +57,16 @@ class AuthService {
       });
 
       if (!userRecord) {
-        throw new Error('user cannot be created');
+        const error = new Error('Invalid Password or Email');
+        error.status = 401;
+        throw error;
       }
 
       // Generate accessToken & refreshToken
       const { accessToken, jwtid } = this.generateToken(userRecord);
       const refreshToken = this.generateRefreshToken(userRecord, jwtid);
       const refreshTokenRecord = await this.refreshTokenModel.create(refreshToken);
+      await refreshTokenRecord.save();
       await userRecord.refreshTokens.push(refreshTokenRecord);
       await userRecord.save();
 
@@ -102,6 +105,7 @@ class AuthService {
       const { accessToken, jwtid } = this.generateToken(userRecord);
       const refreshToken = this.generateRefreshToken(userRecord, jwtid);
       const refreshTokenRecord = await this.refreshTokenModel.create(refreshToken);
+      await refreshTokenRecord.save();
       await userRecord.refreshTokens.push(refreshTokenRecord);
       await userRecord.save();
 
@@ -119,7 +123,9 @@ class AuthService {
       };
     }
 
-    throw new Error('Invalid Password');
+    const error = new Error('Invalid Password or Email');
+    error.status = 401;
+    throw error;
   }
 
   Logout(res) {
@@ -132,7 +138,7 @@ class AuthService {
     jwt.verify(oldAccessToken, config.jwtSecret, (error) => {
       if (!error || error.message !== 'jwt expired') {
         const err = new Error(error || 'jwt is not expired');
-        err.status = 400;
+        err.status = 401;
         throw err;
       }
     });
@@ -145,7 +151,7 @@ class AuthService {
     await this.refreshTokenModel.findOneAndDelete({ token: oldRefreshToken },
       (error, refreshToken) => {
         try {
-          if (error || !refreshToken) throw new Error('Did not find the refresh token in database');
+          if (!refreshToken) throw new Error('Did not find the refresh token in database');
           if (!refreshToken.used) throw new Error('Token has not been user');
           if (refreshToken.invalidated) throw new Error('Token has been invalidated');
           if (dateFns.isPast(refreshToken.expireDate)) throw new Error('Refresh Token has expired');
@@ -156,8 +162,10 @@ class AuthService {
           refreshTokenError = err;
         }
       });
-
-    if (refreshTokenError) throw refreshTokenError;
+    if (refreshTokenError) {
+      refreshTokenError.status = 401;
+      throw refreshTokenError;
+    }
 
     this.logger.debug(oldRefreshTokenId);
     const userRecord = await this.userModel.findOne({ _id: userId }, (error, user) => {
@@ -169,6 +177,7 @@ class AuthService {
     const { accessToken, jwtid } = this.generateToken(userRecord);
     const refreshToken = this.generateRefreshToken(userRecord, jwtid);
     const refreshTokenRecord = await this.refreshTokenModel.create(refreshToken);
+    await refreshTokenRecord.save();
     await userRecord.refreshTokens.push(refreshTokenRecord);
     await userRecord.save();
 
