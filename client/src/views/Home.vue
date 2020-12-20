@@ -86,6 +86,8 @@ export default {
   .whole-page-height {
     position: relative;
     height: 48em;
+    background-color: white;
+    box-shadow: 0px 5px 30px #2e2e2e10 !important;
   }
 
   .whole-page-height-grey {
