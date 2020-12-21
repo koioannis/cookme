@@ -9,7 +9,7 @@
       </b-col>
 
       <b-col cols="7" class="mb-5">
-        <router-view></router-view>
+        <router-view :currentPage="currentPage"></router-view>
       </b-col>
 
       <b-col>
@@ -45,19 +45,21 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  #discovery {
-    height: 100%;
-
+  body {
     background-color: #EEEEEE;
 
-    .content-wrapper {
-      height: inherit;
-      margin-top: 5.9em;
+    #discovery {
+      height: 100%;
 
-      .side-bar {
-        background-color: #F7F7F7;
-        height: 100%;
-        width: 20%;
+      .content-wrapper {
+        height: inherit;
+        margin-top: 5.9em;
+
+        .side-bar {
+          background-color: #F7F7F7;
+          height: 100%;
+          width: 20%;
+        }
       }
     }
   }
