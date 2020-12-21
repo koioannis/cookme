@@ -8,15 +8,15 @@
     </div>
 
     <div class="filters-wrapper text-center">
-      <div v-for="(value, key) in navItems" :key="value" class="filters">
+      <div v-for="(value, key) in navItems" :key="key" class="filters">
         <router-link :to={path:value.path} class="pt-3 pb-3 filters-link"
           :class="{'filter-pressed':(key === currentPage)}">
           {{ value.title }}
         </router-link>
 
         <div v-if="value.children&&key === currentPage">
-          <div v-for="(sub_value) in value.children" :key="sub_value" class="filters">
-            <router-link :to={path:sub_value.path} class="pt-3 pb-3 filters-link"
+          <div v-for="(sub_value, key) in value.children" :key="key" class="filters">
+            <router-link :to={path:sub_value.path} class="pt-2 pb-2 filters-link"
               :class="{'filter-pressed':(key === currentPage)}">
               {{ sub_value.title }}
             </router-link>
@@ -64,6 +64,7 @@ export default {
       display: inline-block;
       width: 100%;
       color: black;
+      opacity: 0.96;
       text-decoration: none;
     }
 

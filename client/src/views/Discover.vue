@@ -4,15 +4,15 @@
 
     <Navbar class="fixed-top"/>
     <b-row class="content-wrapper">
-      <b-col class="d-none d-lg-block">
+      <b-col class="d-none d-md-block">
         <FiltersBar :currentPage="currentPage" class="side-bar"/>
       </b-col>
 
-      <b-col cols="7" class="mb-5">
+      <b-col lg="7" md="10" class="mb-5">
         <router-view :currentPage="currentPage"></router-view>
       </b-col>
 
-      <b-col>
+      <b-col class="d-none d-lg-block">
         <SignSideBar class="side-bar"/>
       </b-col>
     </b-row>

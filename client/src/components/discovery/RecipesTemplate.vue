@@ -33,6 +33,6 @@ export default {
 <style lang="scss" scoped>
   .category-title {
     border-bottom: 2px #F15D90 solid;
-    width: 40%;
+    width: fit-content;
   }
 </style>
