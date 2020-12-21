@@ -13,11 +13,8 @@ const posts = (app) => {
 
   route.post(ApiRoutes.CreatePost, middlewares.isAuth, celebrate({
     body: Joi.object({
-      data: Joi.object({
-        title: Joi.string().required(),
-        description: Joi.string().required(),
-      }),
-      accessToken: Joi.string(),
+      title: Joi.string().required(),
+      description: Joi.string().required(),
     }),
   }),
   async (req, res, next) => {
@@ -29,8 +26,8 @@ const posts = (app) => {
 
       const result = await postsServiceInstance.CreatePost({
         userId: res.locals.userId,
-        title: req.body.data.title,
-        description: req.body.data.description,
+        title: req.body.title,
+        description: req.body.description,
       });
 
       res.json(result);

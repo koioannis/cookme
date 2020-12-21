@@ -1,5 +1,5 @@
 const PostDTO = {
-  id: '_id',
+  _id: 'id',
   title: 'title',
   description: 'description',
   createdAt: 'createdAt',
