@@ -12,9 +12,7 @@ import Policies from '@/components/about/ContentSection/Policies.vue';
 import FAG from '@/components/about/ContentSection/FAG.vue';
 import Contact from '@/components/about/ContentSection/Contact.vue';
 
-import RecentRecipes from '@/components/discovery/ContentSection/RecentRecipes.vue';
-import CertifiedRecipes from '@/components/discovery/ContentSection/CertifiedRecipes.vue';
-import PopularRecipes from '@/components/discovery/ContentSection/PopularRecipes.vue';
+import ContentTemplate from '@/components/discovery/ContentTemplate.vue';
 
 Vue.use(VueRouter);
 
@@ -69,22 +67,37 @@ const routes = [
     children: [{
       path: 'recent',
       name: 'recent',
-      component: RecentRecipes,
+      component: ContentTemplate,
     },
     {
       path: 'certified',
       name: 'certified',
-      component: CertifiedRecipes,
+      component: ContentTemplate,
     },
     {
       path: 'popular',
       name: 'popular',
-      component: PopularRecipes,
+      component: ContentTemplate,
     },
     {
       path: 'hot',
       name: 'hot',
-      component: PopularRecipes,
+      component: ContentTemplate,
+    },
+    {
+      path: 'fast',
+      name: 'fast',
+      component: ContentTemplate,
+    },
+    {
+      path: 'cheap',
+      name: 'cheap',
+      component: ContentTemplate,
+    },
+    {
+      path: 'difficulty/:id',
+      name: 'difficulty',
+      component: ContentTemplate,
     },
     ],
   },

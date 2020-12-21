@@ -13,6 +13,15 @@
           :class="{'filter-pressed':(key === currentPage)}">
           {{ value.title }}
         </router-link>
+
+        <div v-if="value.children&&key === currentPage">
+          <div v-for="(sub_value) in value.children" :key="sub_value" class="filters">
+            <router-link :to={path:sub_value.path} class="pt-3 pb-3 filters-link"
+              :class="{'filter-pressed':(key === currentPage)}">
+              {{ sub_value.title }}
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </div>
