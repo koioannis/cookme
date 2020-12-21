@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
   },
   refreshTokens: [{
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'RefreshTokens',
+  }],
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
   }],
   userDetails: {
     type: mongoose.Schema.Types.ObjectId,

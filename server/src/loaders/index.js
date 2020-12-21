@@ -6,6 +6,7 @@ const Logger = require('./logger');
 const User = require('../models/user/User');
 const userDetails = require('../models/user/UserDetails');
 const refreshToken = require('../models/user/RefreshToken');
+const post = require('../models/Post');
 
 const loader = async (expressApp) => {
   // eslint-disable-next-line no-unused-vars
@@ -26,12 +27,18 @@ const loader = async (expressApp) => {
     model: refreshToken,
   };
 
+  const postModel = {
+    name: 'postModel',
+    model: post,
+  }
+
   const agenda = await dependencyInjector({
     mongoConnection,
     models: [
       userModel,
       userDetailsModel,
       refreshTokenModel,
+      postModel,
     ],
   });
 

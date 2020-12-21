@@ -20,11 +20,8 @@
     └── templates
 ```
 ### Documentation
-- [ ] Configure swagger
- - [ ] Add Auth routes
-  - [ ] Sign in
-  - [ ] Sign out
-  - [ ] Sign out
+- [x] Configure swagger
+ - [x] Add Auth routes
 
 ### Functionality
 - [x] Create A Mapper for the DTOs
@@ -44,3 +41,6 @@
   - [x] Sign out
   - [ ] Verify Email Address
   - [x] Forgot Password (Via JWTs)
+- [ ] Business Logic
+  - General to be implemented
+    - [ ] Create posts

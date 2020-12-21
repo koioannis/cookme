@@ -114,9 +114,10 @@ const auth = (app) => {
         });
       }
 
-      res.json({ accessToken }).status(200).end();
+      res.json({ accessToken });
+      return res.status(200);
     } catch (error) {
-      next(error);
+      return next(error);
     }
   });
 };
