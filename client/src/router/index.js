@@ -12,13 +12,13 @@ import Policies from '@/components/about/ContentSection/Policies.vue';
 import FAG from '@/components/about/ContentSection/FAG.vue';
 import Contact from '@/components/about/ContentSection/Contact.vue';
 
-import ContentTemplate from '@/components/discovery/ContentTemplate.vue';
+import RecipesTemplate from '@/components/discovery/RecipesTemplate.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
+    path: '*',
     name: 'Home',
     component: Home,
   },
@@ -67,44 +67,39 @@ const routes = [
     children: [{
       path: 'recent',
       name: 'recent',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     {
       path: 'certified',
       name: 'certified',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     {
       path: 'popular',
       name: 'popular',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     {
       path: 'hot',
       name: 'hot',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     {
       path: 'fast',
       name: 'fast',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     {
       path: 'cheap',
       name: 'cheap',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     {
       path: 'difficulty/:id',
       name: 'difficulty',
-      component: ContentTemplate,
+      component: RecipesTemplate,
     },
     ],
-  },
-  {
-    path: '/*',
-    name: 'Home',
-    component: Home,
   },
 ];
 
