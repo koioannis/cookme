@@ -11,11 +11,11 @@ class AccountService {
   }
 
   async resetPassword(data) {
-    // eslint-disable-next-line no-unused-vars
+    
     const user = await this.userModel.findOne({ _id: data.userId }, (error, result) => {
       if (error) throw error;
     });
-
+    
     try {
       jwt.verify(data.resetPasswordToken,
         user.password,
@@ -25,12 +25,14 @@ class AccountService {
             newError.status = 400;
             throw newError;
           }
-          if (user._id !== decoded.id) throw new Error('Ids doesn\'t match');
+          if (decoded.userId !== String(user._id)) throw new Error('Id of token didnt match id of request');
         });
     } catch (error) {
       this.logger.info(error);
       throw error;
     }
+
+
     const salt = randomBytes(32);
     this.logger.silly('Hashing password');
     const hashedPassword = await argon2.hash(data.newPassword, salt);
@@ -67,7 +69,7 @@ class AccountService {
           Generate the required url for the reset password
           Requires front end migration
         */
-        url: this.generateJtwResetToken(user),
+        url: `resetPasswordToken=${this.generateJtwResetToken(user)}?userId=${user._id}`  ,
       }, (error) => {
         if (error) throw error;
       });
@@ -81,7 +83,7 @@ class AccountService {
     this.logger.silly(`Sign JWT Password Reset Token for user: ${user._id}`);
     return jwt.sign(
       {
-        id: user._id,
+        userId: user._id,
       },
       user.password,
       {
