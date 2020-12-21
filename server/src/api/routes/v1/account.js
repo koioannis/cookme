@@ -34,6 +34,7 @@ const account = (app) => {
       body: Joi.object({
         resetPasswordToken: Joi.string().required(),
         newPassword: Joi.string().required(),
+        userId: Joi.string().required(),
       }),
     }),
     async (req, res, next) => {
