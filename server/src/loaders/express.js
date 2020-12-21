@@ -3,9 +3,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
 const { isCelebrateError } = require('celebrate');
 
 const routes = require('../api');
+const swaggerDocument = require('../../swagger.json');
 
 const expressLoader = (app) => {
   /**
@@ -26,6 +28,7 @@ const expressLoader = (app) => {
   app.use(cookieParser());
 
   app.use(routes());
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   // catch 404 errors and forward them to error handler
   app.use((req, res, next) => {

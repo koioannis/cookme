@@ -1,0 +1,432 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Cookme",
+    "version" : "1.0.0"
+  },
+  "servers" : [{
+    "url" : "{protocol}://localhost:3000/api/v1",
+    "variables" : {
+      "protocol" : {
+        "enum" : [ "http", "https" ],
+        "default" : "http"
+      }
+    },
+    "description" : "localhost server to test api"
+  }],
+  "tags" : [ {
+    "name" : "auth",
+    "description" : "Auth endpoints"
+  }, {
+    "name" : "account",
+    "description" : "Endpoints associated with the accounts"
+  } ],
+  "paths" : {
+    "/auth/register" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "Registers a user",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "allOf" : [ {
+                  "$ref" : "#/components/schemas/User"
+                }, {
+                  "type" : "object",
+                  "properties" : {
+                    "password" : {
+                      "type" : "string"
+                    }
+                  }
+                } ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User has been registered",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "$ref" : "#/components/schemas/User"
+                      }
+                    }
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "accessToken" : {
+                        "type" : "string"
+                      }
+                    }
+                  } ]
+                }
+              }
+            },
+            "headers" : {
+              "Set-Cookie" : {
+                "schema" : {
+                  "type" : "string",
+                  "example" : "Refreshtoken=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Username/Email already exists in database",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request. Email/username/password are required.",
+            "content" : {
+              "appplication/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "Logs in a user",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "email", "password" ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User has logged in",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "$ref" : "#/components/schemas/User"
+                      }
+                    }
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "accessToken" : {
+                        "type" : "string"
+                      }
+                    }
+                  } ]
+                }
+              }
+            },
+            "headers" : {
+              "Set-Cookie" : {
+                "schema" : {
+                  "type" : "string",
+                  "example" : "Refreshtoken=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Wrong email or password",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request. Email/password are required.",
+            "content" : {
+              "appplication/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "Logs out a user",
+        "security" : [ {
+          "basicAuth" : [ ]
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "accessToken" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User has been logged out",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "Set-Cookie" : {
+                "schema" : {
+                  "type" : "string",
+                  "example" : "token=RefreshToken; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "AccessToken has not been provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "AccessToken has expired",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "Refreshes an access token",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "accessToken" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "accessToken" ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Refreshed the token",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "accessToken" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "Set-Cookie" : {
+                "schema" : {
+                  "type" : "string",
+                  "example" : "Refreshtoken=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Access Token has not been provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Something went bad with the Refresh Or the Access Token",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/forgot-password" : {
+      "post" : {
+        "tags" : [ "account" ],
+        "summary" : "Sends an email to reset password",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "email" ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "If email was found, an email has been sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Email must be provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/reset-password" : {
+      "post" : {
+        "tags" : [ "account" ],
+        "summary" : "Resets the password",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "resetPasswordToken" : {
+                    "type" : "string"
+                  },
+                  "newPassword" : {
+                    "type" : "string"
+                  },
+                  "userId" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "resetPasswordToken", "newPassword", "userId" ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "basicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    },
+    "schemas" : {
+      "User" : {
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "username", "email" ]
+      },
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "object",
+            "properties" : {
+              "message" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
