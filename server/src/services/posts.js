@@ -32,7 +32,7 @@ class PostsService {
     const userRecord = await this.userModel.findOne({ _id: userId }).populate('posts');
     const posts = [];
 
-    userRecord.posts.forEach((post, index) => {
+    userRecord.posts.forEach((post) => {
       posts.push(objectMapper(post, postDTO));
     });
 

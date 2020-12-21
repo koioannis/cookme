@@ -4,7 +4,7 @@
     "title" : "Cookme",
     "version" : "1.0.0"
   },
-  "servers" : [{
+  "servers" : [ {
     "url" : "{protocol}://localhost:3000/api/v1",
     "variables" : {
       "protocol" : {
@@ -13,13 +13,16 @@
       }
     },
     "description" : "localhost server to test api"
-  }],
+  } ],
   "tags" : [ {
     "name" : "auth",
     "description" : "Auth endpoints"
   }, {
     "name" : "account",
     "description" : "Endpoints associated with the accounts"
+  }, {
+    "name" : "posts",
+    "description" : "Endpoints associated with the posts"
   } ],
   "paths" : {
     "/auth/register" : {
@@ -78,20 +81,20 @@
               }
             }
           },
-          "409" : {
-            "description" : "Username/Email already exists in database",
+          "400" : {
+            "description" : "Bad Request. Email/username/password are required.",
             "content" : {
-              "application/json" : {
+              "appplication/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 }
               }
             }
           },
-          "400" : {
-            "description" : "Bad Request. Email/username/password are required.",
+          "409" : {
+            "description" : "Username/Email already exists in database",
             "content" : {
-              "appplication/json" : {
+              "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 }
@@ -157,20 +160,20 @@
               }
             }
           },
-          "401" : {
-            "description" : "Wrong email or password",
+          "400" : {
+            "description" : "Email/password are required.",
             "content" : {
-              "application/json" : {
+              "appplication/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 }
               }
             }
           },
-          "400" : {
-            "description" : "Bad Request. Email/password are required.",
+          "401" : {
+            "description" : "Wrong email or password",
             "content" : {
-              "appplication/json" : {
+              "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 }
@@ -184,9 +187,6 @@
       "post" : {
         "tags" : [ "auth" ],
         "summary" : "Logs out a user",
-        "security" : [ {
-          "basicAuth" : [ ]
-        } ],
         "requestBody" : {
           "required" : true,
           "content" : {
@@ -390,17 +390,121 @@
               }
             }
           }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "If email was found, an email has been sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Email must be provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/create-post" : {
+      "post" : {
+        "tags" : [ "posts" ],
+        "summary" : "Creates a post",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "accessToken" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "accessToken" ]
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Post has been created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Make sure all properties are provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/get-all-posts" : {
+      "get" : {
+        "tags" : [ "posts" ],
+        "summary" : "Returns all the posts of a user",
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "X-Auth-Token",
+          "schema" : {
+            "type" : "string"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "All posts were returned",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Make sure all properties are provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
         }
       }
     }
   },
   "components" : {
-    "securitySchemes" : {
-      "basicAuth" : {
-        "type" : "http",
-        "scheme" : "basic"
-      }
-    },
     "schemas" : {
       "User" : {
         "type" : "object",
@@ -424,6 +528,23 @@
                 "type" : "string"
               }
             }
+          }
+        }
+      },
+      "Post" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string"
           }
         }
       }
