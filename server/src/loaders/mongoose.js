@@ -6,7 +6,7 @@ const mongooseLoader = async () => {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: true, 
+    useFindAndModify: true,
   });
   return connection.connection.db;
 };

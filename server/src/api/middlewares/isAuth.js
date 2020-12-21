@@ -11,7 +11,8 @@ function isAuth(req, res, next) {
           newError.status = 401;
           throw newError;
         }
-        res.locals = decoded;
+        res.locals.userId = decoded.userId;
+        res.locals.userRole = decoded.role;
       });
     return next();
   }
