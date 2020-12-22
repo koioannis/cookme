@@ -3,7 +3,7 @@
     <div class="title-wrapper">
       <div class="title pb-1 mb-4 mt-5 d-flex">
         <h4 class="mr-auto font-weight-bold">Φίλτρα</h4>
-        <img src="@/assets/filter_icon.svg" style="width: 1.7em">
+        <img src="@/assets/svg/filter_icon.svg" style="width: 1.7em">
       </div>
     </div>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="footer-about">
-    <img src="@/assets/logo_white.svg" class="logo mt-5" alt="logo">
+    <img src="@/assets/svg/logo_white.svg" class="logo mt-5" alt="logo">
     <div class="line mt-3"></div>
     <h2 class="mt-4">Social Media</h2>
 
@@ -14,9 +14,9 @@
       </b-col>
 
       <b-col md="4">
-        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="mr-2 social-imgs"/>
-        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="social-imgs"/>
-        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="ml-2 social-imgs" />
+        <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="mr-2 social-imgs"/>
+        <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="social-imgs"/>
+        <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="ml-2 social-imgs" />
       </b-col>
 
       <b-col md="4">

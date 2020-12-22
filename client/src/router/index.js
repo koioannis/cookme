@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Discover from '@/views/Discover.vue';
+import PostViewer from '@/views/PostViewer.vue';
 
 import WhoAreWe from '@/components/about/ContentSection/WhoAreWe.vue';
 import HowItWorks from '@/components/about/ContentSection/HowItWorks.vue';
@@ -100,6 +101,11 @@ const routes = [
       component: RecipesTemplate,
     },
     ],
+  },
+  {
+    path: '/view-post/:id',
+    name: 'view-post',
+    component: PostViewer,
   },
 ];
 
