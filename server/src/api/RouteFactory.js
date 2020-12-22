@@ -13,7 +13,9 @@ const RouteFactory = (version) => {
     RefreshToken: `${AuthBase}/refresh`,
     ForgotPassword: `${AccountBase}/forgot-password`,
     ResetPassword: `${AccountBase}/reset-password`,
-    CreatePost: `${PostsBase}/create-post`,
+
+    CreatePost: PostsBase,
+    PostAction: `${PostsBase}/:postId`,
     GetAllPosts: `${PostsBase}/get-all-posts`,
   };
 };

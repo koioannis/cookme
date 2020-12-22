@@ -10,6 +10,38 @@ class PostsService {
     this.postModel = Container.get('postModel');
   }
 
+  async DeletePost({ postId, userId }) {
+    const postRecord = await this.postModel.findOneAndDelete(
+      { $and: [{ _id: postId }, { user: userId }] },
+    );
+
+    if (!postRecord) {
+      const error = new Error('Post not found');
+      error.status = 404;
+      throw error;
+    }
+  }
+
+  async ModifyPost({ postId, data, userId }) {
+    const update = {};
+    if (data.title) update.title = data.title;
+    if (data.description) update.description = data.description;
+
+    const postRecord = await this.postModel.findOneAndUpdate({
+      $and: [{ _id: postId }, { user: userId }],
+    }, update, (error) => {
+      if (error) throw error;
+    }, { new: true });
+
+    if (!postRecord) {
+      const error = new Error('Post not found');
+      error.status = 404;
+      throw error;
+    }
+
+    return objectMapper(postRecord, postDTO);
+  }
+
   async CreatePost({ userId, title, description }) {
     const userRecord = await this.userModel.findOne({ _id: userId }, (error, user) => {
       if (error) throw error;
@@ -29,7 +61,7 @@ class PostsService {
   }
 
   async GetAllPosts({ userId }) {
-    const userRecord = await this.userModel.findOne({ _id: userId }).populate('posts');
+    const userRecord = await this.userModel.findOne({ _id: userId }).populate('posts').exec();
     const posts = [];
 
     userRecord.posts.forEach((post) => {
