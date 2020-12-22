@@ -3,7 +3,7 @@
     <b-navbar type="dark" variant="transparent">
       <b-navbar-brand href="#">
         <router-link to="/">
-          <img src="@/assets/logo.svg" class="img-logo">
+          <img src="@/assets/svg/logo.svg" class="img-logo">
         </router-link>
       </b-navbar-brand>
 
@@ -23,7 +23,7 @@
           </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <!-- <img src="@/assets/logo.svg" style="margin: auto" class="d-md-none d-sm-block"> -->
+    <!-- <img src="@/assets/svg/logo.svg" style="margin: auto" class="d-md-none d-sm-block"> -->
   </div>
 </template>
 

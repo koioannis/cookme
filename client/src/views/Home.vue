@@ -14,7 +14,7 @@
 
     <div class="whole-page-height-grey d-flex flex-column justify-content-center">
       <div class="header-text-wrapper d-flex justify-content-center">
-        <img src="@/assets/star.svg" alt="star" class="star-img d-none d-sm-block">
+        <img src="@/assets/svg/star.svg" alt="star" class="star-img d-none d-sm-block">
         <div class="ml-2 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
       </div>
       <b-row style="margin: auto;">

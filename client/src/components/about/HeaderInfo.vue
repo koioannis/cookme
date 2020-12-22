@@ -39,7 +39,7 @@ export default {
   }
 
   .left-header-img {
-    background-image: url('../../assets/about_header.svg');
+    background-image: url('../../assets/svg/about_header.svg');
     background-repeat: no-repeat;
     height: 100%;
   }

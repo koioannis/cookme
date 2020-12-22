@@ -2,13 +2,13 @@
   <b-row class="p-3 nav-wrapper">
     <b-col>
       <router-link to="/">
-        <img src="@/assets/logo.svg" class="img-logo">
+        <img src="@/assets/svg/logo.svg" class="img-logo">
       </router-link>
     </b-col>
     <b-col cols-lg="8" cols-md="6"
       class="d-lg-flex justify-content-center align-items-center d-none">
       <div class="search-wrapper p-3 d-flex align-items-center">
-        <img src="@/assets/magnifying_glass_dark.svg" class="ml-3 magnifing-glass">
+        <img src="@/assets/svg/magnifying_glass_dark.svg" class="ml-3 magnifing-glass">
         <input type="text" placeholder="Αναζήτηση" class="ml-4">
       </div>
     </b-col>
