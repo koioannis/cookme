@@ -20,6 +20,12 @@ class PostsService {
       error.status = 404;
       throw error;
     }
+
+    const userRecord = await this.userModel.findOne({ _id: postRecord.user });
+
+    const index = userRecord.posts.indexOf(postRecord._id);
+    userRecord.posts.splice(index, 1);
+    await userRecord.save();
   }
 
   async ModifyPost({ postId, data, userId }) {
@@ -43,7 +49,7 @@ class PostsService {
   }
 
   async CreatePost({ userId, title, description }) {
-    const userRecord = await this.userModel.findOne({ _id: userId }, (error, user) => {
+    const userRecord = await this.userModel.findOne({ _id: userId }, (error) => {
       if (error) throw error;
     });
     if (!userRecord) {

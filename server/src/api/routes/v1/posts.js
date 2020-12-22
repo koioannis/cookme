@@ -14,7 +14,7 @@ const posts = (app) => {
   route.delete(ApiRoutes.PostAction, middlewares.isAuth,
     async (req, res, next) => {
       const logger = Container.get('logger');
-      logger.debug('Calling Delete Post endpoint with params %o', req.params);
+      logger.debug('Calling Post (Delete) endpoint with params %o', req.params);
 
       try {
         const postsServiceInstance = Container.get(PostsService);
@@ -38,7 +38,7 @@ const posts = (app) => {
   }),
   async (req, res, next) => {
     const logger = Container.get('logger');
-    logger.debug('Calling Modify Post endpoint with body: %o and params %o', req.body, req.params);
+    logger.debug('Calling Post (Patch) endpoint with body: %o and params %o', req.body, req.params);
 
     try {
       const postsServiceInstance = Container.get(PostsService);
