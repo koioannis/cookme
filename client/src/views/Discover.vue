@@ -35,6 +35,7 @@ export default {
   },
   updated() {
     this.currentPage = this.$router.currentRoute.name;
+    window.scroll(0, 0);
   },
   data() {
     return {

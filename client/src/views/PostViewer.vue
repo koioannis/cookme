@@ -1,5 +1,7 @@
 <template>
   <div id="post">
+    <SignTemplate />
+
     <Navbar class="fixed-top"/>
     <b-row class="content-wrapper">
       <b-col class="d-none d-md-block">
@@ -18,6 +20,8 @@ import Navbar from '@/components/discovery/Navbar.vue';
 import CommentSection from '@/components/posts/CommentsSection.vue';
 import PostSection from '@/components/posts/PostSection.vue';
 
+import SignTemplate from '@/components/auth/SignTemplate.vue';
+
 export default {
   name: 'PostViewer',
   mounted() {
@@ -27,6 +31,7 @@ export default {
     Navbar,
     CommentSection,
     PostSection,
+    SignTemplate,
   },
 };
 </script>
