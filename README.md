@@ -1,5 +1,5 @@
 # cookme
-A full funcional socializing web app about cooking!
+A fully funcional socializing web app about cooking!
 
 ## What has already been done
 
