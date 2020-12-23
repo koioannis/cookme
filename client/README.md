@@ -48,7 +48,7 @@
         - [ ] Search Bar
         - [ ] Show Different Posts
 4. Post
-    - [ ] Show Information
+    - [x] Show Information
     - [ ] Make Responsive
     - [ ] Optimize the Code
     - [ ] Add Logic
