@@ -28,7 +28,7 @@ class FollowService {
     const userRecord = await this.userModel.findOne({ _id: userId });
     const userToUnfollowRecord = await this.userModel.findOne({ _id: userToUnfollowId });
 
-    if (!userRecord.following.includes(String(userToUnfollowRecord._id))) { 
+    if (!userRecord.following.includes(String(userToUnfollowRecord._id))) {
       const error = new Error('User is not following that user');
       error.status = 406;
       throw error;

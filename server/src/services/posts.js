@@ -8,6 +8,7 @@ class PostsService {
     this.logger = Container.get('logger');
     this.userModel = Container.get('userModel');
     this.postModel = Container.get('postModel');
+    this.ingredientModel = Container.get('ingredientModel');
   }
 
   async DeletePost({ postId, userId }) {
@@ -48,7 +49,9 @@ class PostsService {
     return objectMapper(postRecord, postDTO);
   }
 
-  async CreatePost({ userId, title, description }) {
+  async CreatePost({
+    userId, title, description, ingredients,
+  }) {
     const userRecord = await this.userModel.findOne({ _id: userId }, (error) => {
       if (error) throw error;
     });
@@ -57,9 +60,20 @@ class PostsService {
       error.status = 400;
       throw error;
     }
-
     const postRecord = await this.postModel.create({ title, description, user: userRecord });
 
+    const ingredientRecords = [];
+    ingredients.forEach(async (ingredient) => {
+      ingredientRecords.push(await this.ingredientModel.create({
+        name: ingredient.name,
+        quantity: ingredient.quantity,
+        post: postRecord,
+      }));
+    });
+
+    await postRecord.save();
+    await this.postModel.updateOne({ _id: postRecord._id },
+      { $push: { ingredients: { $each: ingredientRecords } } });
     await userRecord.posts.push(postRecord);
     await userRecord.save();
 
