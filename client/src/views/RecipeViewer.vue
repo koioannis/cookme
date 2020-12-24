@@ -9,17 +9,25 @@
       </b-col>
 
       <b-col cols="10">
-        <PostSection />
+        <b-row>
+          <b-col lg="8">
+            <RecipeBody />
+          </b-col>
+          <b-col class="mt-5 pt-4 d-lg-block d-none">
+            <IngredientsSection />
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/discovery/Navbar.vue';
 import CommentSection from '@/components/posts/CommentSection.vue';
-import PostSection from '@/components/posts/PostSection.vue';
+import IngredientsSection from '@/components/posts/IngredientsSection.vue';
+import RecipeBody from '@/components/posts/RecipeBody.vue';
 
+import Navbar from '@/components/discovery/Navbar.vue';
 import SignTemplate from '@/components/auth/SignTemplate.vue';
 
 export default {
@@ -30,8 +38,9 @@ export default {
   components: {
     Navbar,
     CommentSection,
-    PostSection,
     SignTemplate,
+    IngredientsSection,
+    RecipeBody,
   },
 };
 </script>
