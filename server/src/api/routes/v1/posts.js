@@ -59,6 +59,10 @@ const posts = (app) => {
     body: Joi.object({
       title: Joi.string().required(),
       description: Joi.string().required(),
+      ingredients: Joi.array().items(Joi.object({
+        name: Joi.string().required(),
+        quantity: Joi.string().required(),
+      })).required(),
     }),
   }),
   async (req, res, next) => {
@@ -72,6 +76,7 @@ const posts = (app) => {
         userId: res.locals.userId,
         title: req.body.title,
         description: req.body.description,
+        ingredients: req.body.ingredients,
       });
 
       res.json(result);

@@ -13,6 +13,10 @@ const postSchema = new mongoose.Schema({
     max: 255,
     min: 6,
   },
+  ingredients: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ingredient',
+  }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
