@@ -17,13 +17,13 @@
 
 <script>
 import Navbar from '@/components/discovery/Navbar.vue';
-import CommentSection from '@/components/posts/CommentsSection.vue';
+import CommentSection from '@/components/posts/CommentSection.vue';
 import PostSection from '@/components/posts/PostSection.vue';
 
 import SignTemplate from '@/components/auth/SignTemplate.vue';
 
 export default {
-  name: 'PostViewer',
+  name: 'RecipeViewer',
   mounted() {
     window.scroll(0, 0);
   },

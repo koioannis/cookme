@@ -1,7 +1,13 @@
 <template>
   <div id="post-body" class="mb-5">
     <div class="d-flex justify-content-between">
-      <h3 class="pb-3 recipe-title"><b>Μακαρόνια Μπογιαμπες</b></h3>
+      <h3 class="pb-3 recipe-title"><b>Μακαρόνια Μπογιαμπές</b></h3>
+      <div class="d-flex align-items-center mb-2 pb-2">
+        <div><b>4.3</b></div>
+        <img class="ml-1" src="@/assets/svg/star.svg" style="width: 20%;">
+        <div class="ml-3"><b>10.000</b></div>
+        <img src="@/assets/svg/impact_people.svg" style="width:20%;margin-right:-1.6em">
+      </div>
     </div>
 
     <img src="@/assets/carousel/image_1.jpg" class="shadow-lg mt-4 rounded img-fluid">
@@ -16,8 +22,8 @@
     </div>
 
     <div class="description mt-5 mb-5">
-      <h5 class="mt-4"><b>Περιγραφή</b></h5>
-      <div>
+      <h5 class="mt-4 recipe-description-title pb-2"><b>Περιγραφή</b></h5>
+      <div class="mt-4">
         Μέσο της μαγειρικής ανακαλύπτεις τις διάφορες ικανότητες σου.
         Το σίτε αυτό σου προσφέρει μια δυνατότητα ή ένα πάτημα για να ξεκλειδώσεις
         τις κρυμμένες ικανότητες που έχεις.
@@ -25,7 +31,7 @@
     </div>
 
     <div class="recipe-steps">
-      <h5 class="recipe-steps-title"><b>Βήματα</b></h5>
+      <h5 class="recipe-steps-title pb-2"><b>Βήματα</b></h5>
       <div class="mt-4" v-for="step in steps" :key="step">
         <div class="d-flex align-items-end">
           <div class="step-number font-weight-bold mr-3">{{step}}</div>
@@ -66,8 +72,20 @@ export default {
       width: 15%
     }
 
+    .recipe-description-title {
+      border-bottom: 1px solid black;
+      width: fit-content;
+      white-space: nowrap;
+    }
+
     .recipe-steps {
       width: 90%;
+
+      .recipe-steps-title {
+        border-bottom: 1px solid black;
+        width: fit-content;
+        white-space: nowrap;
+      }
 
       .step-number {
         color: #EF6D9A;
