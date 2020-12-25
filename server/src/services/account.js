@@ -10,12 +10,11 @@ class AccountService {
     this.userModel = Container.get('userModel');
   }
 
-  async resetPassword(data) {
-    
-    const user = await this.userModel.findOne({ _id: data.userId }, (error, result) => {
+  async ResetPassword(data) {
+    const user = await this.userModel.findOne({ _id: data.userId }, (error) => {
       if (error) throw error;
     });
-    
+
     try {
       jwt.verify(data.resetPasswordToken,
         user.password,
@@ -31,7 +30,6 @@ class AccountService {
       this.logger.info(error);
       throw error;
     }
-
 
     const salt = randomBytes(32);
     this.logger.silly('Hashing password');
@@ -49,7 +47,7 @@ class AccountService {
     return { message: 'Password successfully changed' };
   }
 
-  async forgotPassword(email) {
+  async ForgotPassword(email) {
     const user = await this.userModel.findOne({ email });
     try {
       this.logger.info('user: %o', user);
@@ -69,7 +67,7 @@ class AccountService {
           Generate the required url for the reset password
           Requires front end migration
         */
-        url: `resetPasswordToken=${this.generateJtwResetToken(user)}?userId=${user._id}`  ,
+        url: `resetPasswordToken=${this.generateJtwResetToken(user)}?userId=${user._id}`,
       }, (error) => {
         if (error) throw error;
       });

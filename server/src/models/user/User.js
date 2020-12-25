@@ -25,6 +25,19 @@ const userSchema = new mongoose.Schema({
   },
   refreshTokens: [{
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'RefreshTokens',
+  }],
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+  }],
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }],
+  following: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   }],
   userDetails: {
     type: mongoose.Schema.Types.ObjectId,
