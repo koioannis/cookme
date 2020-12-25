@@ -21,7 +21,9 @@
           <!-- Need to make the request -->
           <b-col md="6" class="mt-5" lg="3" style="width: 25em;margin: auto"
           v-for="item in cardElements" :key="item">
-            <RecipeCard />
+            <router-link to="/view-post/123" class="post-link">
+              <RecipeCard />
+            </router-link>
           </b-col>
       </b-row>
     </div>
@@ -117,6 +119,11 @@ export default {
       float: right;
       opacity: 0.9;
     }
+  }
+
+  .post-link {
+    color: black;
+    text-decoration: none;
   }
 
   .carousel {

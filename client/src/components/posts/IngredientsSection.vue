@@ -1,6 +1,6 @@
 <template>
-  <div id="ingredient-section" class="mt-5">
-    <div class="d-flex pr-2 pt-3 pb-2 user-info text-right justify-content-end">
+  <div id="ingredient-section" class="mt-lg-5 pt-5 ml-4">
+    <div class="pr-2 pt-3 pb-2 user-info text-right justify-content-end d-none d-lg-flex">
       <div class="user-cred ml-2">
         <b>Άκης Πετρετζίκης</b>
         <p class="small">Επαγγελματίας Μάγειρας</p>
@@ -93,6 +93,12 @@ export default {
   @media only screen and (max-width: 1400px) {
     #ingredient-section {
       width: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    #ingredient-section {
+      width: 60%;
     }
   }
 </style>

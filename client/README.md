@@ -49,7 +49,7 @@
         - [ ] Show Different Posts
 4. Post
     - [x] Show Information
-    - [ ] Make Responsive
+    - [x] Make Responsive
     - [ ] Optimize the Code
     - [ ] Add Logic
         - [ ] Ingredients Check
