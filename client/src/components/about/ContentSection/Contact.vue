@@ -34,9 +34,9 @@
         για να μάθετε περισσότερα για την <br />επικοινωνία μαζί μας.</div>
     </form>
     <div class="type-contacts mt-4">
-      <img src="@/assets/phone.svg">
+      <img src="@/assets/svg/phone.svg">
       <span class="ml-2 text-muted">+210 1231231</span>
-      <img src="@/assets/email.svg" class="ml-5">
+      <img src="@/assets/svg/email.svg" class="ml-5">
       <span class="ml-2 text-muted">support@cookme.com</span>
     </div>
   </div>

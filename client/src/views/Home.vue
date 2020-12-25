@@ -14,14 +14,16 @@
 
     <div class="whole-page-height-grey d-flex flex-column justify-content-center">
       <div class="header-text-wrapper d-flex justify-content-center">
-        <img src="@/assets/star.svg" alt="star" class="star-img d-none d-sm-block">
+        <img src="@/assets/svg/star.svg" alt="star" class="star-img d-none d-sm-block">
         <div class="ml-2 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
       </div>
       <b-row style="margin: auto;">
           <!-- Need to make the request -->
           <b-col md="6" class="mt-5" lg="3" style="width: 25em;margin: auto"
           v-for="item in cardElements" :key="item">
-            <RecipeCard />
+            <router-link to="/view-post/123" class="post-link">
+              <RecipeCard />
+            </router-link>
           </b-col>
       </b-row>
     </div>
@@ -86,6 +88,8 @@ export default {
   .whole-page-height {
     position: relative;
     height: 48em;
+    background-color: white;
+    box-shadow: 0px 5px 30px #2e2e2e10 !important;
   }
 
   .whole-page-height-grey {
@@ -115,6 +119,11 @@ export default {
       float: right;
       opacity: 0.9;
     }
+  }
+
+  .post-link {
+    color: black;
+    text-decoration: none;
   }
 
   .carousel {

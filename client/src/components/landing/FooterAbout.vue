@@ -1,6 +1,6 @@
 <template>
   <div class="footer-about">
-    <img src="@/assets/logo_white.svg" class="logo mt-5" alt="logo">
+    <img src="@/assets/svg/logo_white.svg" class="logo mt-5" alt="logo">
     <div class="line mt-3"></div>
     <h2 class="mt-4">Social Media</h2>
 
@@ -14,16 +14,16 @@
       </b-col>
 
       <b-col md="4">
-        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="mr-2 social-imgs"/>
-        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="social-imgs"/>
-        <img src="@/assets/social/facebook_logo.svg" alt="facebook" class="ml-2 social-imgs" />
+        <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="mr-2 social-imgs"/>
+        <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="social-imgs"/>
+        <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="ml-2 social-imgs" />
       </b-col>
 
       <b-col md="4">
         <h4 class="text-left" style="color: #F04C84">FAG</h4>
         <table class="text-left question-table">
           <tr>
-            <th><router-link to="/about/who" class="question-link">Ποιοι είμαστε;</router-link></th>
+            <th><router-link to="/about/us" class="question-link">Ποιοι είμαστε;</router-link></th>
             <th><router-link to="/about/terms" class="question-link">Όροι χρήσης</router-link></th>
           </tr>
           <tr>
