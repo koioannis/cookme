@@ -3,7 +3,7 @@
     <b-navbar type="dark" variant="transparent">
       <b-navbar-brand href="#">
         <router-link to="/">
-          <img src="@/assets/logo.svg" class="img-logo">
+          <img src="@/assets/svg/logo.svg" class="img-logo">
         </router-link>
       </b-navbar-brand>
 
@@ -11,8 +11,11 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
             <b-nav-form>
-              <b-nav-item class="mr-lg-3 mr-md-1" href="#"><span class="nav-item-style">
-                Ανακάλυψε</span></b-nav-item>
+              <b-nav-item class="mr-lg-3 mr-md-1" href="#">
+                <router-link to="/discovery" style="text-decoration: none;">
+                  <span class="nav-item-style">Ανακάλυψε</span>
+                </router-link>
+              </b-nav-item>
               <b-nav-item @click="$bvModal.show('instruction')" class="mr-lg-3 mr-md-1" href="#">
                 <span class="nav-item-style"> Πως λειτουργεί ;</span></b-nav-item>
               <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
@@ -20,7 +23,7 @@
           </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <!-- <img src="@/assets/logo.svg" style="margin: auto" class="d-md-none d-sm-block"> -->
+    <!-- <img src="@/assets/svg/logo.svg" style="margin: auto" class="d-md-none d-sm-block"> -->
   </div>
 </template>
 

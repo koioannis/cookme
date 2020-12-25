@@ -13,7 +13,7 @@
         <b-col cols="4" sm="4" class="text-md-left navigation-left d-none d-md-block">
           <h4 class="font-weight-bold mb-3 ml-1">
             Τι ψάχνεις ;</h4>
-          <div v-for="(value, key) in navItems" :key="value" class="mt-4">
+          <div v-for="(value, key) in navItems" :key="key" class="mt-4">
             <router-link :to={path:value.path} class="question-link"
               :class="{'question-link-pressed':(key === currentPage)}">
               {{ value.title }}

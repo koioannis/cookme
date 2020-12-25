@@ -1,0 +1,40 @@
+{
+    "recent": {
+        "path": "/discovery/recent",
+        "title": "Πρόσφατες Συνταγές"
+    },
+    "popular": {
+        "path": "/discovery/popular",
+        "title": "Δημοφιλής Συνταγες"
+    },
+    "hot": {
+        "path": "/discovery/hot",
+        "title": "Κορυφέες Συνταγές"
+    },
+    "certified": {
+        "path": "/discovery/certified",
+        "title": "Πιστοποιημένες Συνταγές"
+    },
+    "fast": {
+        "path": "/discovery/fast",
+        "title": "Γρήγορες Συνταγές"
+    },
+    "cheap": {
+        "path": "/discovery/cheap",
+        "title": "Φθήνες Συνταγές"
+    },
+    "difficulty": {
+        "path": "/discovery/difficulty/0",
+        "title": "Βαθμός Δυσκολίας Συνταγής",
+        "children": [
+            {
+                "title": "Εύκολες Συνταγές",
+                "path": "/discovery/difficulty/1"
+            },
+            {
+                "title": "Δύσκολες Συνταγές",
+                "path": "/discovery/difficulty/3"
+            }
+        ]
+    }
+}

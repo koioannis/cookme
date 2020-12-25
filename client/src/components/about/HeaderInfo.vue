@@ -1,5 +1,5 @@
 <template>
-  <b-row style="height: inherit;">
+  <b-row class="header-wrapper">
     <b-col sm="6">
       <div style="height: 100%;" class="d-flex flex-column
         justify-content-center align-items-center mt-2">
@@ -32,8 +32,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .header-wrapper {
+    box-shadow: 0px 5px 25px #2e2e2e11 !important;
+    outline: none;
+    height: inherit;
+  }
+
   .left-header-img {
-    background-image: url('../../assets/about_header.svg');
+    background-image: url('../../assets/svg/about_header.svg');
     background-repeat: no-repeat;
     height: 100%;
   }
