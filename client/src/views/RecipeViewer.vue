@@ -8,12 +8,12 @@
         <CommentSection class="side-bar"/>
       </b-col>
 
-      <b-col cols="10">
+      <b-col cols="10" class="ml-sm-5">
         <b-row>
           <b-col lg="8">
             <RecipeBody />
           </b-col>
-          <b-col class="mt-5 pt-4 d-lg-block d-none">
+          <b-col class="pt-4 d-sm-block d-none">
             <IngredientsSection />
           </b-col>
         </b-row>

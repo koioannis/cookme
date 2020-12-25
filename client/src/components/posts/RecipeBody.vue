@@ -1,5 +1,5 @@
 <template>
-  <div id="post-body" class="mb-5 mt-5 ml-4">
+  <div id="post-body" class="mb-lg-5 mt-5 ml-4">
     <div class="d-flex justify-content-between">
       <h3 class="pb-3 recipe-title"><b>Μακαρόνια Μπογιαμπές</b></h3>
       <div class="d-flex align-items-center mb-2 pb-2">
