@@ -4,6 +4,8 @@ const RouteFactory = (version) => {
   const Base = `/${BasePrefix}/${version}`;
   const AuthBase = `${Base}/auth`;
   const AccountBase = `${Base}/account`;
+  const PostsBase = `${Base}/posts`;
+  const FollowBase = `${Base}/followers`;
 
   return {
     Register: `${AuthBase}/register`,
@@ -12,6 +14,14 @@ const RouteFactory = (version) => {
     RefreshToken: `${AuthBase}/refresh`,
     ForgotPassword: `${AccountBase}/forgot-password`,
     ResetPassword: `${AccountBase}/reset-password`,
+
+    CreatePost: PostsBase,
+    PostAction: `${PostsBase}/:postId`,
+    GetAllPosts: `${PostsBase}/get-all-posts`,
+
+    Follow: `${FollowBase}/follow/:userId`,
+    GetAllFollowers: `${FollowBase}/get-all-followers`,
+    GetAllFollowing: `${FollowBase}/get-all-following`,
   };
 };
 

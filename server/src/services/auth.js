@@ -6,8 +6,6 @@ const uuid = require('uuid');
 const objectMapper = require('object-mapper');
 const randToken = require('rand-token');
 const dateFns = require('date-fns');
-
-const { EventDispatcher } = require('../decorators/eventDispatcher');
 const UserDTO = require('../mapping/user/UserDTO');
 const config = require('../config');
 
@@ -18,7 +16,6 @@ class AuthService {
     this.userModel = Container.get('userModel');
     this.userDetailsModel = Container.get('userDetailsModel');
     this.refreshTokenModel = Container.get('refreshTokenModel');
-    this.eventDispatcher = EventDispatcher;
   }
 
   async Register(userData) {
@@ -225,7 +222,7 @@ class AuthService {
       },
       config.jwtSecret,
       {
-        expiresIn: '5s',
+        expiresIn: '1h',
         jwtid,
       },
     );
