@@ -4,20 +4,21 @@
 
 ```
 ./src
-    ├── api
-    │   ├── middlewares
-    │   └── routes
-    ├── config
-    ├── decorators
-    ├── loaders
-    ├── mapping
-    │   └── user
-    ├── models
-    │   └── user
-    ├── scripts
-    ├── services
-    ├── subscribers
-    └── templates
+├── api
+│   ├── middlewares
+│   └── routes
+│       └── v1
+├── config
+├── decorators
+├── loaders
+├── mapping
+│   └── user
+├── models
+│   └── user
+├── scripts
+├── services
+├── subscribers
+└── templates
 ```
 ### Documentation
 - [x] Configure swagger
@@ -25,7 +26,7 @@
 
 ### Functionality
 - [x] Create A Mapper for the DTOs
-- [ ] User Auth
+- [x] User Auth
   - [x] General to be implemented
     - [x] created userDTO
   - [x] Implement User & UserInfo schema on database
@@ -39,8 +40,4 @@
       - [x] Create UserInfo upon registration if needed
   - [x] Sign in
   - [x] Sign out
-  - [ ] Verify Email Address
   - [x] Forgot Password (Via JWTs)
-- [ ] Business Logic
-  - General to be implemented
-    - [ ] Create posts
