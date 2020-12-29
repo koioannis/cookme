@@ -8,6 +8,7 @@ const userDetails = require('../models/user/UserDetails');
 const refreshToken = require('../models/user/RefreshToken');
 const post = require('../models/Post');
 const ingredient = require('../models/Ingredient');
+const comment = require('../models/Comment');
 
 const loader = async (expressApp) => {
   // eslint-disable-next-line no-unused-vars
@@ -38,6 +39,11 @@ const loader = async (expressApp) => {
     model: post,
   };
 
+  const commentModel = {
+    name: 'commentModel',
+    model: comment,
+  };
+
   const agenda = await dependencyInjector({
     mongoConnection,
     models: [
@@ -46,6 +52,7 @@ const loader = async (expressApp) => {
       refreshTokenModel,
       postModel,
       ingredientModel,
+      commentModel,
     ],
   });
 
