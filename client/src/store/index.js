@@ -24,7 +24,7 @@ export default new Vuex.Store({
             const token = response.accessToken;
 
             localStorage.setItem('access_token', token);
-            // context.commit('retrieveToken', token);
+            // /context.commit('retrieveToken', token);
             resolve(response);
           })
           .catch((error) => {
