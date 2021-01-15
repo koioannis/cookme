@@ -1,5 +1,11 @@
 <template>
-  <form>
+  <form action="#" @submit.prevent="register">
+    <div class="text-center text-danger mb-3 lead underline" style="font-size:1em">
+      <u>{{errorMessage}}</u></div>
+    <div class="form-group">
+      <input type="username" v-model="username" class="uneditable-input form-control"
+      placeholder="Username" required>
+    </div>
     <div class="form-group">
       <input type="email" v-model="email" class="uneditable-input form-control"
       placeholder="Email" required>
@@ -10,7 +16,7 @@
     </div>
     <div class="form-group">
       <input type="password" v-model="passwordVerify" class="uneditable-input form-control"
-      placeholder="Κωδικός" required>
+      placeholder="Επαλήθευση Κωδικού" required>
       <small class="form-text text-muted">Τα στοιχεία σας θα είναι πάντα ασφαλής.</small>
     </div>
     <button type="submit" class="btn my-btn custom-button">Εγγραφή</button>
@@ -24,10 +30,41 @@ export default {
   name: 'SignUp',
   data() {
     return {
+      username: '',
       email: '',
       password: '',
       passwordVerify: '',
+      errorMessage: '',
     };
+  },
+  methods: {
+    register() {
+      if (this.password !== this.passwordVerify) {
+        this.password = '';
+        this.passwordVerify = '';
+        this.errorMessage = 'Ο κωδικός πρόσβασης δεν τεριάζει!';
+      } else if (!/^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$/.test(this.password)) {
+        this.errorMessage = 'Ο κωδικός σας πρέπει να έχει ένα κεφάλαίο γράμμα ένα μικρό και έναν αριθμό.';
+        if (this.password.length < 8) this.errorMessage = 'Ο κωδικός σας πρέπει να έχει τουλάχιστον 8 χαρακτήρες';
+
+        this.password = '';
+        this.passwordVerify = '';
+      } else {
+        this.$store.dispatch('register', {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        })
+          .then(() => {
+            window.location.reload();
+          })
+          .catch((error) => {
+            this.password = '';
+            this.passwordVerify = '';
+            this.errorMessage = error;
+          });
+      }
+    },
   },
 };
 </script>
