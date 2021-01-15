@@ -18,9 +18,15 @@ export default new Vuex.Store({
         axios.post('/auth/login', {
           email: credentials.email,
           password: credentials.password,
+        }, { withCredentials: true }, {
+          headers: {
+            'Access-Control-Allow-Origin': 'http://localhost:8080/',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          },
         })
           .then((response) => {
             const token = response.data.accessToken;
+            console.log(response.headers.refreshToken);
 
             localStorage.setItem('access_token', token);
             // context.commit('retrieveToken', token);
