@@ -8,6 +8,10 @@ const userDetails = require('../models/user/UserDetails');
 const refreshToken = require('../models/user/RefreshToken');
 const post = require('../models/Post');
 const ingredient = require('../models/Ingredient');
+<<<<<<< HEAD
+=======
+const comment = require('../models/Comment');
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 
 const loader = async (expressApp) => {
   // eslint-disable-next-line no-unused-vars
@@ -38,6 +42,14 @@ const loader = async (expressApp) => {
     model: post,
   };
 
+<<<<<<< HEAD
+=======
+  const commentModel = {
+    name: 'commentModel',
+    model: comment,
+  };
+
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   const agenda = await dependencyInjector({
     mongoConnection,
     models: [
@@ -46,6 +58,10 @@ const loader = async (expressApp) => {
       refreshTokenModel,
       postModel,
       ingredientModel,
+<<<<<<< HEAD
+=======
+      commentModel,
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
     ],
   });
 

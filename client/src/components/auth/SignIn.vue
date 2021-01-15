@@ -1,7 +1,11 @@
 <template>
+<<<<<<< HEAD
   <form action="#" @submit.prevent="login">
     <div class="text-center text-danger mb-3 lead underline" style="font-size:1em">
       <u>{{errorMessage}}</u></div>
+=======
+  <form>
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
     <div v-if="!forgotPassword">
       <div class="form-group">
         <input type="email" v-model="email" class="uneditable-input form-control"
@@ -34,7 +38,10 @@ export default {
   name: 'SingIn',
   data() {
     return {
+<<<<<<< HEAD
       errorMessage: '',
+=======
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
       email: '',
       password: '',
       forgotPassword: false,
@@ -46,6 +53,7 @@ export default {
       this.password = '';
       this.forgotPassword = !this.forgotPassword;
     },
+<<<<<<< HEAD
     login() {
       if (this.forgotPassword === false) {
         this.$store.dispatch('login', {
@@ -61,6 +69,8 @@ export default {
           });
       }
     },
+=======
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   },
 };
 </script>

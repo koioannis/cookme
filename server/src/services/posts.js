@@ -9,6 +9,10 @@ class PostsService {
     this.userModel = Container.get('userModel');
     this.postModel = Container.get('postModel');
     this.ingredientModel = Container.get('ingredientModel');
+<<<<<<< HEAD
+=======
+    this.commentModel = Container.get('commentModel');
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   }
 
   async DeletePost({ postId, userId }) {
@@ -60,7 +64,11 @@ class PostsService {
       error.status = 400;
       throw error;
     }
+<<<<<<< HEAD
     const postRecord = await this.postModel.create({ title, description, user: userRecord });
+=======
+    const postRecord = await this.postModel.create({ title, description, user: userRecord._id });
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 
     const ingredientRecords = [];
     ingredients.forEach(async (ingredient) => {
@@ -77,6 +85,7 @@ class PostsService {
     await userRecord.posts.push(postRecord);
     await userRecord.save();
 
+<<<<<<< HEAD
     return objectMapper(postRecord, postDTO);
   }
 
@@ -90,6 +99,83 @@ class PostsService {
 
     return posts;
   }
+=======
+    const newPostRecord = await this.postModel.findOne({ _id: postRecord._id }).populate('ingredients');
+    return objectMapper(newPostRecord, postDTO);
+  }
+
+  async GetAllPosts({ userId }) {
+    const userRecord = await this.userModel.findOne({ _id: userId }).populate({
+      path: 'posts',
+      populate: {
+        path: 'comments',
+      },
+    }).populate({
+      path: 'posts',
+      populate: {
+        path: 'ingredients',
+      },
+    });
+    const posts = [];
+
+    this.logger.debug('%o', userRecord.posts[0]);
+    userRecord.posts.forEach((post) => {
+      this.logger.debug('%o', post);
+      posts.push(objectMapper(post, postDTO));
+    });
+    return posts;
+  }
+
+  async CreateComment({ userId, postId, content }) {
+    const commentRecord = await this.commentModel.create({ user: userId, post: postId, content });
+
+    const postRecord = await this.postModel.findOneAndUpdate({ _id: postId }, { $push: { comments: commentRecord } }, { new: true }).populate('comments').populate('ingredients').exec();
+
+    return objectMapper(postRecord, postDTO);
+  }
+
+  async DeleteComment({ postId, commentId }) {
+    const postRecord = await this.postModel.findOneAndUpdate(
+      { _id: postId },
+      { $pull: { comments: commentId } }, { new: true },
+    ).populate('comments').populate('ingredients').exec();
+
+    if (!postRecord) {
+      const error = new Error('Post not found');
+      error.status = 404;
+      throw error;
+    }
+    const oldCommentRecord = await this.commentModel.findOneAndDelete({ _id: commentId });
+    if (!oldCommentRecord) {
+      const error = new Error('Comment not found');
+      error.status = 404;
+      throw error;
+    }
+
+    this.logger.debug('%o', postRecord);
+    this.logger.debug(commentId);
+    return objectMapper(postRecord, postDTO);
+  }
+
+  async ModifyComment({ postId, commentId, content }) {
+    const commentRecord = await this.commentModel.findOneAndUpdate({ _id: commentId }, { content });
+
+    if (!commentRecord) {
+      const error = new Error('Comment not found');
+      error.status = 404;
+      throw error;
+    }
+
+    const postRecord = await this.postModel.findOne({ _id: postId }).populate('comments').populate('ingredients').exec();
+    if (!postRecord) {
+      const error = new Error('Post not found');
+      error.status = 404;
+      throw error;
+    }
+
+    return objectMapper(postRecord, postDTO);
+  }
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 }
 
 module.exports = PostsService;

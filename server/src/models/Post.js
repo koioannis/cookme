@@ -17,10 +17,21 @@ const postSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ingredient',
   }],
+<<<<<<< HEAD
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: false,
+=======
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment',
+  }],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   },
 }, { timestamps: true });
 

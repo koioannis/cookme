@@ -5,6 +5,10 @@ const middlewares = require('../../middlewares');
 
 const PostsService = require('../../../services/posts');
 const RouteFactory = require('../../RouteFactory');
+<<<<<<< HEAD
+=======
+const { resolveContent } = require('nodemailer/lib/shared');
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 
 const ApiRoutes = RouteFactory('v1');
 const route = Router();
@@ -100,6 +104,72 @@ const posts = (app) => {
       return next(error);
     }
   });
+<<<<<<< HEAD
+=======
+
+  route.post(ApiRoutes.CreateComment, middlewares.isAuth, celebrate({
+    body: Joi.object({
+      content: Joi.string().required(),
+    }).required(),
+  }),
+  async (req, res, next) => {
+    const logger = Container.get('logger');
+    logger.debug('Calling CreateComment end-point with body %o', req.body);
+    try {
+      const postsServiceInstance = Container.get(PostsService);
+      const result = await postsServiceInstance.CreateComment({
+        userId: res.locals.userId,
+        postId: req.params.postId,
+        content: req.body.content,
+      });
+
+      res.json(result);
+      return res.status(200);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
+  route.delete(ApiRoutes.Comment, middlewares.isAuth, async (req, res, next) => {
+    const logger = Container.get('logger');
+    logger.debug('Calling Comment (Delete) end-point');
+    try {
+      const postsServiceInstance = Container.get(PostsService);
+      const result = await postsServiceInstance.DeleteComment({
+        postId: req.params.postId,
+        commentId: req.params.commentId,
+      });
+
+      res.json(result);
+      return res.status(200);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
+  route.put(ApiRoutes.Comment, middlewares.isAuth, celebrate({
+    body: Joi.object({
+      content: Joi.string().required(),
+    }).required(),
+  }),
+  async (req, res, next) => {
+    const logger = Container.get('logger');
+    logger.debug('Calling Comment (Delete) end-point');
+    try {
+      const postsServiceInstance = Container.get(PostsService);
+      const result = await postsServiceInstance.ModifyComment({
+        postId: req.params.postId,
+        commentId: req.params.commentId,
+        content: req.body.content,
+      });
+
+      res.json(result);
+      return res.status(200);
+    } catch (error) {
+      return next(error);
+    }
+  });
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 };
 
 module.exports = posts;

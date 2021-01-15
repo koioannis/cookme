@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+<<<<<<< HEAD
 import axios from 'axios';
 
 Vue.use(Vuex);
@@ -9,10 +10,17 @@ axios.defaults.baseURL = 'http://localhost:3000/api/v1';
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('access_token') || null,
+=======
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  state: {
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   },
   mutations: {
   },
   actions: {
+<<<<<<< HEAD
     login(context, credentials) {
       return new Promise((resolve, reject) => {
         axios.post('/auth/login', {
@@ -47,6 +55,8 @@ export default new Vuex.Store({
           });
       });
     },
+=======
+>>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   },
   modules: {
   },
