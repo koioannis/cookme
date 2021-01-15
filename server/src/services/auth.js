@@ -88,7 +88,9 @@ class AuthService {
     const userRecord = await this.userModel.findOne({ email: userData.email });
 
     if (!userRecord) {
-      throw new Error('user not registered');
+      const error = new Error('user not registered');
+      error.status = 404;
+      throw error;
     }
 
     this.logger.silly('Checking password');
