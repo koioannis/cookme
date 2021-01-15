@@ -18,15 +18,10 @@ const RouteFactory = (version) => {
     CreatePost: PostsBase,
     PostAction: `${PostsBase}/:postId`,
     GetAllPosts: `${PostsBase}/get-all-posts`,
-<<<<<<< HEAD
-
-    Follow: `${FollowBase}/follow/:userId`,
-=======
     CreateComment: `${PostsBase}/comment/:postId`,
     Comment: `${PostsBase}/comment/:postId/:commentId`,
 
     Follow: `${FollowBase}/:userId`,
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
     GetAllFollowers: `${FollowBase}/get-all-followers`,
     GetAllFollowing: `${FollowBase}/get-all-following`,
   };

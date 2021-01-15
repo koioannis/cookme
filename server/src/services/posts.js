@@ -9,10 +9,7 @@ class PostsService {
     this.userModel = Container.get('userModel');
     this.postModel = Container.get('postModel');
     this.ingredientModel = Container.get('ingredientModel');
-<<<<<<< HEAD
-=======
     this.commentModel = Container.get('commentModel');
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
   }
 
   async DeletePost({ postId, userId }) {
@@ -64,11 +61,7 @@ class PostsService {
       error.status = 400;
       throw error;
     }
-<<<<<<< HEAD
-    const postRecord = await this.postModel.create({ title, description, user: userRecord });
-=======
     const postRecord = await this.postModel.create({ title, description, user: userRecord._id });
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 
     const ingredientRecords = [];
     ingredients.forEach(async (ingredient) => {
@@ -85,21 +78,6 @@ class PostsService {
     await userRecord.posts.push(postRecord);
     await userRecord.save();
 
-<<<<<<< HEAD
-    return objectMapper(postRecord, postDTO);
-  }
-
-  async GetAllPosts({ userId }) {
-    const userRecord = await this.userModel.findOne({ _id: userId }).populate('posts').exec();
-    const posts = [];
-
-    userRecord.posts.forEach((post) => {
-      posts.push(objectMapper(post, postDTO));
-    });
-
-    return posts;
-  }
-=======
     const newPostRecord = await this.postModel.findOne({ _id: postRecord._id }).populate('ingredients');
     return objectMapper(newPostRecord, postDTO);
   }
@@ -175,7 +153,6 @@ class PostsService {
 
     return objectMapper(postRecord, postDTO);
   }
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 }
 
 module.exports = PostsService;

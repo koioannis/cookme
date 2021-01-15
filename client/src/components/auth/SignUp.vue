@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <form action="#" @submit.prevent="register">
     <div class="text-center text-danger mb-3 lead underline" style="font-size:1em">
       <u>{{errorMessage}}</u></div>
@@ -7,9 +6,6 @@
       <input type="username" v-model="username" class="uneditable-input form-control"
       placeholder="Username" required>
     </div>
-=======
-  <form>
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
     <div class="form-group">
       <input type="email" v-model="email" class="uneditable-input form-control"
       placeholder="Email" required>
@@ -20,11 +16,7 @@
     </div>
     <div class="form-group">
       <input type="password" v-model="passwordVerify" class="uneditable-input form-control"
-<<<<<<< HEAD
       placeholder="Επαλήθευση Κωδικού" required>
-=======
-      placeholder="Κωδικός" required>
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
       <small class="form-text text-muted">Τα στοιχεία σας θα είναι πάντα ασφαλής.</small>
     </div>
     <button type="submit" class="btn my-btn custom-button">Εγγραφή</button>
@@ -38,7 +30,6 @@ export default {
   name: 'SignUp',
   data() {
     return {
-<<<<<<< HEAD
       username: '',
       email: '',
       password: '',
@@ -75,13 +66,6 @@ export default {
       }
     },
   },
-=======
-      email: '',
-      password: '',
-      passwordVerify: '',
-    };
-  },
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 };
 </script>
 

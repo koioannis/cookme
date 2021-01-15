@@ -5,10 +5,6 @@ const middlewares = require('../../middlewares');
 
 const PostsService = require('../../../services/posts');
 const RouteFactory = require('../../RouteFactory');
-<<<<<<< HEAD
-=======
-const { resolveContent } = require('nodemailer/lib/shared');
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 
 const ApiRoutes = RouteFactory('v1');
 const route = Router();
@@ -104,8 +100,6 @@ const posts = (app) => {
       return next(error);
     }
   });
-<<<<<<< HEAD
-=======
 
   route.post(ApiRoutes.CreateComment, middlewares.isAuth, celebrate({
     body: Joi.object({
@@ -169,7 +163,6 @@ const posts = (app) => {
       return next(error);
     }
   });
->>>>>>> 2bf3593116ba747d168d09f3f2e43f1016ffda66
 };
 
 module.exports = posts;
