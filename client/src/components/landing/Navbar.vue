@@ -1,30 +1,25 @@
 <template>
   <div class="abs-nav">
-    <b-navbar type="dark" variant="transparent">
-      <b-navbar-brand href="#">
-        <router-link to="/">
-          <img src="@/assets/svg/logo.svg" class="img-logo">
-        </router-link>
-      </b-navbar-brand>
+  <b-navbar toggleable="md" variant="transparent">
+    <b-navbar-brand href="/">
+        <img src="@/assets/svg/logo.svg" class="img-logo">
+    </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto">
-            <b-nav-form>
-              <b-nav-item class="mr-lg-3 mr-md-1" href="#">
-                <router-link to="/discovery" style="text-decoration: none;">
-                  <span class="nav-item-style">Ανακάλυψε</span>
-                </router-link>
-              </b-nav-item>
-              <b-nav-item @click="$bvModal.show('instruction')" class="mr-lg-3 mr-md-1" href="#">
-                <span class="nav-item-style"> Πως λειτουργεί ;</span></b-nav-item>
-              <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
-            </b-nav-form>
-          </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-    <!-- <img src="@/assets/svg/logo.svg" style="margin: auto" class="d-md-none d-sm-block"> -->
-  </div>
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item class="mr-lg-3 mr-md-1" href="/discovery">
+          <span class="nav-item-style">Ανακάλυψε</span>
+        </b-nav-item>
+        <b-nav-item @click="$bvModal.show('instruction')"  class="mr-lg-3 mr-md-1">
+          <span class="nav-item-style"> Πως λειτουργεί ;</span>
+        </b-nav-item>
+        <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</div>
 </template>
 
 <script>
@@ -52,17 +47,30 @@ export default {
     left: 0;
     right: 0;
 
-    .img-logo {
-      width: 7.5em;
-    }
-
     .nav-item-style {
       color: #fff;
       opacity: 0.7;
     }
 
-    .nav-item-style:hover {
-      opacity: 0.9;
+    .img-logo {
+      width: 7.5em;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .navbar-collapse {
+      background-color: rgb(255, 255, 255);
+      box-shadow: 1px 3px 10px #00000034 !important;
+      outline: none;
+      border-radius: 5px;
+      max-width: 70% !important;
+      margin-left: 30%;
+    }
+
+    .nav-item-style {
+      color: #000 !important;
+      opacity: 0.7;
+      margin-left: 0.5em;
     }
   }
 </style>
