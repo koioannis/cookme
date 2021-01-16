@@ -6,6 +6,7 @@ const RouteFactory = (version) => {
   const AccountBase = `${Base}/account`;
   const PostsBase = `${Base}/posts`;
   const FollowBase = `${Base}/followers`;
+  const AdminBase = `${Base}/admin`;
 
   return {
     Register: `${AuthBase}/register`,
@@ -24,6 +25,9 @@ const RouteFactory = (version) => {
     Follow: `${FollowBase}/:userId`,
     GetAllFollowers: `${FollowBase}/get-all-followers`,
     GetAllFollowing: `${FollowBase}/get-all-following`,
+
+    DeletePost: `${AdminBase}/post/:postId`,
+    DeleteComment: `${AdminBase}/comment/:commentId`,
   };
 };
 

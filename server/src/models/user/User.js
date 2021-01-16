@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     max: 32,
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+  },
   refreshTokens: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'RefreshTokens',

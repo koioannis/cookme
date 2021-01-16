@@ -12,7 +12,7 @@ function isAuth(req, res, next) {
           throw newError;
         }
         res.locals.userId = decoded.userId;
-        res.locals.userRole = decoded.role;
+        res.locals.isAdmin = decoded.isAdmin;
       });
     return next();
   }

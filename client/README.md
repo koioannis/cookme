@@ -58,4 +58,4 @@
 
 ## Conclusion
 
-In 2 years from know on this site should be **the most famous** cooking site on planet earth. 😋
+In 2 years from now on this site should be **the most famous** cooking site on planet earth. 😋
