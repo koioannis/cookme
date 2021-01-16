@@ -10,7 +10,6 @@ if (env.error) {
 
 const config = {
   port: parseInt(process.env.PORT, 10),
-  apiUrl: process.env.API_URL,
 
   databaseURL: process.env.MONGODB_URI,
 
@@ -19,7 +18,6 @@ const config = {
     password: process.env.GMAIL_PASSWORD,
   },
 
-  jwtResetPasswordSecret: process.env.JWT_RESET_PASSWORD_SECRET,
   jwtSecret: process.env.JWT_SECRET,
   jwtAlgo: process.env.JWT_ALGO,
 

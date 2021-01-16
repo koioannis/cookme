@@ -35,7 +35,7 @@ const expressLoader = (app) => {
   app.use(cookieParser());
 
   app.use(routes());
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   // catch 404 errors and forward them to error handler
   app.use((req, res, next) => {
