@@ -48,7 +48,7 @@ export default {
     },
     login() {
       if (this.forgotPassword === false) {
-        this.$store.dispatch('login', {
+        this.$store.dispatch('auth/login', {
           email: this.email,
           password: this.password,
         })
