@@ -34,4 +34,10 @@ export default {
     padding-top: 5em;
     padding-bottom: 5em;
   }
+
+  @media only screen and (max-width: 750px) {
+    .footer-description {
+      width: 90%;
+    }
+  }
 </style>

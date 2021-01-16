@@ -72,4 +72,16 @@ export default {
       }
     }
   }
+
+  @media only screen and (max-width: 750px) {
+    .search-wrapper-box {
+      padding-top: 25%;
+      padding-bottom: 15%;
+      padding-left: 5%;
+    }
+
+    .search-input-wrapper {
+      width: 20em !important;
+    }
+  }
 </style>

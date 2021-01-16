@@ -2,10 +2,10 @@
   <div class="footer-about">
     <img src="@/assets/svg/logo_white.svg" class="logo mt-5" alt="logo">
     <div class="line mt-3"></div>
-    <h2 class="mt-4">Social Media</h2>
 
     <b-row class="about-row mb-5 justify-content-between text-center">
-      <b-col md="4">
+      <b-col md="4" class="mt-3">
+          <h4 style="color: #F04C84">Σκοπός μας!</h4>
           <p>Θα θέλαμε να προσφέρουμε κάτι όσο
           μπορούμε και θέλουμε. Ψάχνουμε ανθρώπους
           δημιουργικούς με στόχο το μοίρασμα της
@@ -14,13 +14,14 @@
       </b-col>
 
       <b-col md="4">
+        <h4 class="text-md-center text-left mt-3 mb-2" style="color: #F04C84">Social Media</h4>
         <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="mr-2 social-imgs"/>
         <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="social-imgs"/>
         <img src="@/assets/svg/social/facebook_logo.svg" alt="facebook" class="ml-2 social-imgs" />
       </b-col>
 
       <b-col md="4">
-        <h4 class="text-left" style="color: #F04C84">FAG</h4>
+        <h4 class="text-left mt-3" style="color: #F04C84">FAG</h4>
         <table class="text-left question-table">
           <tr>
             <th><router-link to="/about/us" class="question-link">Ποιοι είμαστε;</router-link></th>
@@ -78,8 +79,8 @@ export default {
   }
 
   .line {
-    width: 70%;
-    border-bottom: 0.5px solid #F04C84;
+    width: 80%;
+    border-bottom: 1px solid #F04C84;
   }
 
   .copywrite-text {
@@ -108,5 +109,11 @@ export default {
   .question-table th:hover {
     opacity: 1;
     cursor: pointer;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .question-table {
+      width: 20em;
+    }
   }
 </style>

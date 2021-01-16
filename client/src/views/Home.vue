@@ -15,11 +15,11 @@
     <div class="whole-page-height-grey d-flex flex-column justify-content-center">
       <div class="header-text-wrapper d-flex justify-content-center">
         <img src="@/assets/svg/star.svg" alt="star" class="star-img d-none d-sm-block">
-        <div class="ml-2 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
+        <div class="ml-3 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
       </div>
       <b-row style="margin: auto;">
           <!-- Need to make the request -->
-          <b-col md="6" class="mt-5" lg="3" style="width: 25em;margin: auto"
+          <b-col md="6" class="mt-5" lg="3" style="width: 23em;margin: auto"
           v-for="item in cardElements" :key="item">
             <router-link to="/view-post/123" class="post-link">
               <RecipeCard />
@@ -78,8 +78,11 @@ export default {
   },
   data() {
     return {
-      cardElements: 4,
+      cardElements: (window.innerWidth < 750) ? 1 : 4,
     };
+  },
+  created() {
+    console.log(window.innerWidth);
   },
 };
 </script>

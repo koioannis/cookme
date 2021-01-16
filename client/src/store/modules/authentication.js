@@ -8,12 +8,12 @@ const authentication = {
   },
   mutations: {
     retrieveToken(state, token) {
-      state.token = token;
+      state.accessToken = token;
     },
   },
   getters: {
     loggedIn(state) {
-      return state.token !== null;
+      return state.accessToken !== null;
     },
   },
   actions: {
