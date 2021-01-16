@@ -20,8 +20,6 @@ npm install
 ```
 npm start
 ```
-  Navigate to `http://localhost:3000`
-
 - API Document endpoints
 
   swagger-ui  Endpoint : http://localhost:3000/docs ```
