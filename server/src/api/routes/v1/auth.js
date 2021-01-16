@@ -57,13 +57,13 @@ const auth = (app) => {
   async (req, res, next) => {
     const logger = Container.get('logger');
     logger.debug('Calling Sign-In endpoint with body: %o', req.body);
-
     try {
       const authServiceInstance = Container.get(AuthService);
       const authenticationResult = await authServiceInstance.Login(req.body);
 
       const { refreshToken, ...data } = authenticationResult;
       if (authenticationResult.accessToken && authenticationResult.refreshToken) {
+        logger.debug('Yeah, im sending cookie');
         res.cookie('refreshToken', refreshToken, {
           secure: false,
           httpOnly: true,

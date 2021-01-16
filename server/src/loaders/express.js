@@ -10,6 +10,13 @@ const routes = require('../api');
 const swaggerDocument = require('../../swagger.json');
 
 const expressLoader = (app) => {
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', 'test');
+    res.header('Access-Control-Allow-Headers', 'Set-Cookie, Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
   /**
    * Health Status endpoints
   */
@@ -23,7 +30,7 @@ const expressLoader = (app) => {
   app.use(methodOverride());
 
   app.use(helmet());
-  app.use(cors());
+  app.use(cors({ credentials: true, origin: true }));
   app.use(bodyParser.json());
   app.use(cookieParser());
 
