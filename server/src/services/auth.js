@@ -51,6 +51,7 @@ class AuthService {
         salt: salt.toString('hex'),
         userDetails: userDetailsRecord,
         password: hashedPassword,
+        isAdmin: false,
       });
 
       if (!userRecord) {
@@ -220,11 +221,11 @@ class AuthService {
       {
         // eslint-disable-next-line no-underscore-dangle
         userId: user._id,
-        role: user.role,
+        isAdmin: user.isAdmin,
       },
       config.jwtSecret,
       {
-        expiresIn: '1h',
+        expiresIn: '2h',
         jwtid,
       },
     );
