@@ -2,7 +2,7 @@
   <b-row class="p-3 nav-wrapper">
     <b-col>
       <router-link to="/">
-        <img src="@/assets/svg/logo.svg" class="img-logo">
+        <img src="@/assets/svg/logo.svg" class="img-logo mt-2">
       </router-link>
     </b-col>
     <b-col cols-lg="8" cols-md="6"

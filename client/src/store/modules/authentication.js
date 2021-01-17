@@ -43,7 +43,7 @@ const authentication = {
           username: data.username,
           email: data.email,
           password: data.password,
-        })
+        }, { withCredentials: true })
           .then((response) => {
             resolve(response);
           })
