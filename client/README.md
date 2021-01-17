@@ -5,19 +5,57 @@
 ## Table of Content (TOC)
 
 - [Technologies](#technologies)
-- [Description](#description-documentation)
+- [Description](#description-setup)
 - [Project Steps](#project-steps)
 - [Conclusion](#conclusion)
 
 ## Technologies
 
 #### This repository is currently using:
-    -> Vuejs
-    -> Vuex
-    -> Vue Router
-    -> Bootstrap
 
-## Description (Documentation)
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Version</th>
+    <th>Children</th>
+  </tr>
+  <tr>
+    <td>Vue</td>
+    <td>2.0</td>
+    <td>All of the below</td>
+  </tr>
+  <tr>
+    <td>Vuex</td>
+    <td>3.4.0</td>
+    <td>Axios - v0.21.0</td>
+  </tr>
+  <tr>
+    <td>Bootstrap</td>
+    <td>4.5.2</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td>Vue Router</td>
+    <td>3.2.0</td>
+    <td>None</td>
+  </tr>
+</table>
+
+## Description (SETUP)
+
+In order to **RUN** this repository you need to have `NodeJS` installed on your computer. If you already have `NodeJs` installed you just need to run on your terminal:
+
+```bash
+C:/> npm install
+```
+
+After all the dependencies are installed you simply need to run on your terminal:
+
+```bash
+C:/> npm start serve
+```
+
+After that visit [http://localhost:8080/](http://localhost:8080/). There you will find this project.
 
 ## Project Steps
 
