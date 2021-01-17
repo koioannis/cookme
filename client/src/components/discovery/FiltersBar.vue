@@ -1,7 +1,7 @@
 <template>
   <div class="position-fixed">
     <div class="title-wrapper">
-      <div class="title pb-1 mb-4 mt-5 d-flex">
+      <div class="title pb-1 d-flex">
         <h4 class="mr-auto font-weight-bold">Φίλτρα</h4>
         <img src="@/assets/svg/filter_icon.svg" style="width: 1.7em">
       </div>
@@ -47,6 +47,8 @@ export default {
   .title-wrapper {
     margin: auto;
     width: 80%;
+    margin-top: 11%;
+    margin-bottom: 4%;
 
     .title {
       border-bottom: 3px solid #EF6D9A;
@@ -55,6 +57,8 @@ export default {
 
   .filters-wrapper {
     font-size: 1.1em;
+    height: 70%;
+    overflow: auto;
 
     .filter-pressed {
       background-color: #D8D8D8;
@@ -72,5 +76,9 @@ export default {
       background-color: #d8d8d850;
       cursor: pointer;
     }
+  }
+
+  .filters-wrapper::-webkit-scrollbar {
+    display: none;
   }
 </style>

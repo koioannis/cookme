@@ -1,5 +1,6 @@
 <template>
-  <b-modal id="instruction" size="xl" centered hide-footer hide-header>
+  <b-modal id="instruction" size="xl" centered ok-only ok-variant="secondary"
+  ok-title="Κατάλαβα" hide-header>
     <h2 class="text-uppercase mt-4 mb-5 font-weight-bold text-center"
     style="color: #F15D90">ξεκινα να μαγειρευσεις σε 3 βηματα</h2>
 

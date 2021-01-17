@@ -73,6 +73,7 @@ export default {
   .sign-btn:hover {
     opacity: 0.9;
   }
+
   .modal-wrapper {
     width: 70%;
     margin: auto;
@@ -106,5 +107,12 @@ export default {
     outline: none !important;
     box-shadow: none !important;
     background-color: #dddddd !important;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .modal-wrapper {
+      width: 90%;
+      margin: auto;
+    }
   }
 </style>
