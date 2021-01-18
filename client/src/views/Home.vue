@@ -81,9 +81,6 @@ export default {
       cardElements: (window.innerWidth < 750) ? 1 : 4,
     };
   },
-  created() {
-    console.log(window.innerWidth);
-  },
 };
 </script>
 

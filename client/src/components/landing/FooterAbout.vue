@@ -115,5 +115,9 @@ export default {
     .question-table {
       width: 20em;
     }
+
+    .about-row, .copywrite-text {
+      width: 90%;
+    }
   }
 </style>

@@ -12,9 +12,24 @@
         <b-nav-item class="mr-lg-3 mr-md-1" href="/discovery">
           <span class="nav-item-style">Ανακάλυψε</span>
         </b-nav-item>
+
         <b-nav-item @click="$bvModal.show('instruction')"  class="mr-lg-3 mr-md-1">
           <span class="nav-item-style"> Πως λειτουργεί ;</span>
         </b-nav-item>
+
+        <b-nav-item-dropdown text="Ερωτήσεις" class="d-block d-md-none dropdown-menu active">
+          <b-dropdown-item class="dropdown-menu-item" href="/about/us">
+            Ποιοί είμαστε ;</b-dropdown-item>
+          <b-dropdown-item class="dropdown-menu-item" href="/about/terms">
+            Όροι χρήσης</b-dropdown-item>
+          <b-dropdown-item class="dropdown-menu-item" href="/about/usage">
+            Πως Λειτουργεί ;</b-dropdown-item>
+          <b-dropdown-item class="dropdown-menu-item" href="/about/fag">
+            Ερωτήσεις Χρηστών</b-dropdown-item>
+          <b-dropdown-item class="dropdown-menu-item" href="/about/policies">
+            Πολιτική</b-dropdown-item>
+        </b-nav-item-dropdown>
+
         <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
       </b-navbar-nav>
     </b-collapse>
@@ -52,6 +67,19 @@ export default {
       opacity: 0.7;
     }
 
+    .dropdown-menu {
+      border: none;
+      margin-top: -0.5em;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      opacity: 0.8;
+    }
+
+    .dropdown-menu-item {
+      color: #000 !important;
+      opacity: 0.9;
+    }
+
     .img-logo {
       width: 7.5em;
     }
@@ -69,7 +97,6 @@ export default {
 
     .nav-item-style {
       color: #000 !important;
-      opacity: 0.7;
       margin-left: 0.5em;
     }
   }

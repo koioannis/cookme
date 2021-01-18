@@ -20,7 +20,7 @@
             </router-link>
           </div>
         </b-col>
-        <b-col sm="8" class="text-md-left text-center pl-5 about-corpus">
+        <b-col sm="8" class="text-md-left text-center pl-md-5 about-corpus">
           <router-view></router-view>
         </b-col>
       </b-row>
@@ -114,6 +114,7 @@ export default {
   @media only screen and (max-width: 700px) {
     .about-section {
       width: 90%;
+      padding-top: 6em;
     }
 
     .about-corpus {
