@@ -4,8 +4,8 @@
     <div>10.489 άτομα</div>
     <blockquote class="blockquote">
       <h4 class="mb-3 text-center">
-        Μπείτε και εσεις στην ομάδα μας και μοιραστείτε τις συνταγές<br />
-        σας με ολόκληρο τον κόσμο!
+        Μπείτε και εσεις στην ομάδα μας και μοιραστείτε
+        τις συνταγές σας με ολόκληρο τον κόσμο!
       </h4>
       <footer class="blockquote-footer text-left">Η κοινώτητα μας</footer>
     </blockquote>

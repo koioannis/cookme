@@ -1,6 +1,6 @@
 <template>
   <div id="about">
-    <Navbar style="top: 2%"/>
+    <Navbar />
     <SignTemplate />
     <Instruction />
 

@@ -1,10 +1,11 @@
 <template>
   <b-container>
-    <h3 class="font-weight-bold mt-5 mb-2 pb-3 category-title">{{navItems[currentPage].title}}</h3>
+    <h3 class="font-weight-bold mt-md-5 mt-4 mb-2
+      pb-3 category-title">{{navItems[currentPage].title}}</h3>
     <b-row align-h="around" style="margin: auto">
       <div v-for='item in maxNumberOfRecipes' :key='item'>
         <router-link to="/view-post/123" class="post-link">
-          <RecipeCard class="mt-4 ml-4"/>
+          <RecipeCard class="mt-4 ml-md-4"/>
         </router-link>
       </div>
     </b-row>
@@ -41,5 +42,11 @@ export default {
   .post-link {
     color: black;
     text-decoration: none;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .category-title {
+      margin: auto;
+    }
   }
 </style>

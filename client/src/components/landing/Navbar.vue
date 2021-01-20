@@ -1,14 +1,14 @@
 <template>
   <div class="abs-nav">
-  <b-navbar toggleable="md" variant="transparent">
-    <b-navbar-brand href="/">
-        <img src="@/assets/svg/logo.svg" class="img-logo">
-    </b-navbar-brand>
+    <b-navbar toggleable="md" class="mt-1 pt-3 pt-md-auto mt-md-auto">
+      <b-navbar-brand href="/">
+       <img src="@/assets/svg/logo.svg" class="img-logo">
+     </b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-auto">
+      <b-collapse id="nav-collapse" is-nav>
+       <b-navbar-nav class="ml-auto">
         <b-nav-item class="mr-lg-3 mr-md-1" href="/discovery">
           <span class="nav-item-style">Ανακάλυψε</span>
         </b-nav-item>
@@ -98,6 +98,13 @@ export default {
     .nav-item-style {
       color: #000 !important;
       margin-left: 0.5em;
+    }
+
+    .abs-nav {
+      top: 0px;
+      width: 100%;
+      box-shadow: 1px 3px 10px #4e4e4e2a !important;
+      height: 12%;
     }
   }
 </style>

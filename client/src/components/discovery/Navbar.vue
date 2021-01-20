@@ -1,27 +1,51 @@
 <template>
-  <b-row class="p-3 nav-wrapper">
-    <b-col>
-      <router-link to="/">
-        <img src="@/assets/svg/logo.svg" class="img-logo mt-2">
-      </router-link>
-    </b-col>
-    <b-col cols-lg="8" cols-md="6"
-      class="d-lg-flex justify-content-center align-items-center d-none">
-      <div class="search-wrapper p-3 d-flex align-items-center">
-        <img src="@/assets/svg/magnifying_glass_dark.svg" class="ml-3 magnifing-glass">
-        <input type="text" placeholder="Αναζήτηση" class="ml-4">
-      </div>
-    </b-col>
-    <b-col class="d-sm-flex align-items-center justify-content-end guest-btn d-none">
-      <span class="font-weight-bold mr-3" @click="$bvModal.show('sign-in')">Επισκέπτης</span>
-      <div class="user-img shadow-lg"></div>
-    </b-col>
-  </b-row>
+  <div class="nav-wrapper">
+    <b-navbar toggleable="md" class="mt-2 mb-2">
+      <b-navbar-brand href="/">
+       <img src="@/assets/svg/logo.svg" class="img-logo">
+      </b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-nav-form class="mx-auto d-md-block d-none">
+          <div class="search-wrapper p-3 d-flex align-items-center">
+            <img src="@/assets/svg/magnifying_glass_dark.svg" class="ml-3 magnifing-glass">
+            <input type="text" placeholder="Αναζήτηση" class="ml-4">
+          </div>
+        </b-nav-form>
+
+        <b-navbar-nav @click="$bvModal.show('sign-in')" class="guest-wrapper d-md-flex d-none">
+          <span class="font-weight-bold mr-3 mt-2">Επισκέπτης</span>
+          <div class="user-img shadow-lg"></div>
+        </b-navbar-nav>
+
+        <b-navbar-nav class="ml-auto d-block d-md-none">
+          <b-nav-item class="mt-3 active" href="/about">
+            <span class="nav-item-style">Ερωτήσεις</span>
+          </b-nav-item>
+
+          <b-nav-item-dropdown text="Φίλτρα" class="mb-3 active">
+            <b-dropdown-item v-for="(value, key) in navItems" :key="key" :href="value.path">
+              {{ value.title }}
+            </b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
+import FiltertNavItems from '@/components/discovery/FilterNavItems.json';
+
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      navItems: FiltertNavItems,
+    };
+  },
 };
 </script>
 
@@ -34,7 +58,7 @@ export default {
     outline: none;
 
     .img-logo {
-      width: 9em;
+      width: 7.5em;
     }
 
     .search-wrapper {
@@ -59,20 +83,18 @@ export default {
       }
     }
 
-    .guest-btn {
-      span {
-        cursor: pointer;
-      }
+    .user-img {
+      background-image: url('../../assets/small_person.jpg');
+      border: 1.3px solid #bdbdbd;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 100%;
+      width: 3em;
+      height: 3em;
+    }
 
-      .user-img {
-        background-image: url('../../assets/small_person.jpg');
-        border: 1.3px solid #bdbdbd;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border-radius: 100%;
-        width: 3em;
-        height: 3em;
-      }
+    guest-wrapper:hover {
+      cursor: pointer !important;
     }
   }
 </style>

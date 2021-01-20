@@ -24,7 +24,7 @@ export default {
 
 <style scoped lang="scss">
   .left-wrapper {
-    margin-top: 28%;
+    margin-top: 32%;
     margin-left: 13%;
 
     .quote {
