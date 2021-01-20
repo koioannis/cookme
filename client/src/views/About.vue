@@ -81,7 +81,7 @@ export default {
   }
 
   .about-section {
-    width: 70%;
+    width: 80%;
     margin: auto;
     padding-top: 8em;
     padding-bottom: 10em;
@@ -115,6 +115,7 @@ export default {
     .about-section {
       width: 90%;
       padding-top: 6em;
+      padding-bottom: 4em;
     }
 
     .about-corpus {

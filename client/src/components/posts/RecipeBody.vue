@@ -2,7 +2,7 @@
   <div id="post-body" class="mb-lg-5 mt-5 ml-4">
     <div class="d-flex justify-content-between">
       <h3 class="pb-3 recipe-title"><b>Μακαρόνια Μπογιαμπές</b></h3>
-      <div class="d-flex align-items-center mb-2 pb-2">
+      <div class="d-md-flex d-none align-items-center mb-2 pb-2">
         <div><b>4.3</b></div>
         <img class="ml-1" src="@/assets/svg/star.svg" style="width: 20%;">
         <div class="ml-3"><b>10.000</b></div>
