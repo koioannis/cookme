@@ -4,7 +4,7 @@ const config = require('../../config');
 function isAuth(req, res, next) {
   const token = res.header('Authorization').split(' ')[1];
   if (token) {
-    jwt.verify(req.header('x-auth-token'),
+    jwt.verify(token,
       config.jwtSecret,
       (error, decoded) => {
         if (error) {
