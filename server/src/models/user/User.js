@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema({
   isAdmin: {
     type: Boolean,
     required: true,
+    deafult: false,
   },
   refreshTokens: [{
     type: mongoose.Schema.Types.ObjectId,
