@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
 function isAuth(req, res, next) {
-  if (req.header('x-auth-token')) {
+  const token = res.header('Authorization').split(' ')[1];
+  if (token) {
     jwt.verify(req.header('x-auth-token'),
       config.jwtSecret,
       (error, decoded) => {
