@@ -12,7 +12,6 @@ const swaggerDocument = require('../../swagger.json');
 const expressLoader = (app) => {
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', 'test');
     res.header('Access-Control-Allow-Headers', 'Authorization, Set-Cookie, Origin, X-Requested-With, Content-Type, Accept');
     next();
   });
