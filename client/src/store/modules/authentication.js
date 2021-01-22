@@ -87,14 +87,13 @@ const authentication = {
           },
         })
           .then(() => {
-            localStorage.removeItem('access_token');
             localStorage.removeItem('username');
+            localStorage.removeItem('access_token');
             context.commit('destroyToken');
             context.commit('destroyUsername');
             resolve();
           })
           .catch((error) => {
-            console.log('error');
             reject(error);
           });
       });
@@ -110,7 +109,6 @@ const authentication = {
         })
           .then((response) => {
             const token = response.data.accessToken;
-            console.log(token);
 
             localStorage.setItem('access_token', token);
             context.commit('retrieveToken', token);

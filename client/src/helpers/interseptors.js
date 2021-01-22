@@ -5,25 +5,24 @@ export default function setup() {
   // eslint-disable-next-line consistent-return
   axios.interceptors.response.use((response) => response, (error) => {
     if (error.response.data.errors.message === 'JsonWebTokenError') {
-      return new Promise((resolve) => {
-        resolve();
-      });
+      return Promise.resolve();
     }
     if (error.response.data.errors.message !== 'TokenExpiredError') {
-      return new Promise((resolve, reject) => {
-        reject(error);
-      });
+      return Promise.reject(error);
     }
 
     store.dispatch('auth/refreshToken')
       .then((token) => {
         const { config } = error;
-        console.log(token);
-        config.headers.authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Berear ${token}`;
 
         return new Promise((resolve, reject) => {
           axios.request(config).then((response) => {
-            resolve(response);
+            if (response.config.url === '/auth/logout') {
+              localStorage.removeItem('access_token');
+              store.commit('auth/destroyToken');
+            }
+            resolve();
           }).catch((errorReq) => {
             reject(errorReq);
           });

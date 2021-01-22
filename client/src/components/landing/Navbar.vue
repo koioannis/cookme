@@ -55,9 +55,9 @@ export default {
       this.$bvModal.show('sign-in');
     },
     logout() {
-      this.$store.dispatch('auth/refreshToken')
+      this.$store.dispatch('auth/logout')
         .then(() => {
-          // window.location.reload();
+          window.location.reload();
         });
     },
   },
