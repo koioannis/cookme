@@ -63,7 +63,6 @@ const auth = (app) => {
 
       const { refreshToken, ...data } = authenticationResult;
       if (authenticationResult.accessToken && authenticationResult.refreshToken) {
-        logger.debug('Yeah, im sending cookie');
         res.cookie('refreshToken', refreshToken, {
           secure: false,
           httpOnly: true,
@@ -96,7 +95,7 @@ const auth = (app) => {
     const logger = Container.get('logger');
     logger.info('Calling refresh endpoint with body %o', req.body);
 
-    const oldAccessToken = req.header('x-auth-token');
+    const oldAccessToken = req.header('Authorization').split(' ')[1];
     const oldRefreshToken = req.cookies.refreshToken;
     const authServiceInstance = Container.get(AuthService);
 
