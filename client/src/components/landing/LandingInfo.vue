@@ -3,8 +3,10 @@
     <div class="quote"><b>Μαγειρέψτε Εύκολα<br />και Γρήγορα</b></div>
     <div class="description mt-md-2">Μοιραστείτε τις αγαπημένες σας συνταγές και
     εμπνευστείτε από άλλους. Ένα σίτε με στόχο την δημιουργικότητα!</div>
-    <b-button size="lg" class="shadow-md mt-lg-5 mt-sm-2 mt-3 custom-button"
-    @click="signBtnClicked">Εγγραγή</b-button>
+    <b-button v-if="loggedIn" class="shadow-md mt-lg-5 mt-sm-2 mt-3 custom-button"
+      size="lg">Αρχική</b-button>
+    <b-button v-else size="lg" class="shadow-md mt-lg-5 mt-sm-2 mt-3 custom-button"
+      @click="signBtnClicked">Εγγραγή</b-button>
   </div>
 </template>
 
@@ -17,6 +19,11 @@ export default {
     signBtnClicked() {
       EventBus.$emit('signinOption', false);
       this.$bvModal.show('sign-in');
+    },
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
     },
   },
 };

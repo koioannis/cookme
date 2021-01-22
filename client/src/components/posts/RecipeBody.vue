@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="description mt-5 mb-5">
+    <div class="description mt-5 mb-md-5 mb-4">
       <h5 class="mt-4 recipe-description-title pb-2"><b>Περιγραφή</b></h5>
       <div class="mt-4">
         Μέσο της μαγειρικής ανακαλύπτεις τις διάφορες ικανότητες σου.

@@ -50,7 +50,7 @@ export default {
         this.password = '';
         this.passwordVerify = '';
       } else {
-        this.$store.dispatch('register', {
+        this.$store.dispatch('auth/register', {
           username: this.username,
           email: this.email,
           password: this.password,

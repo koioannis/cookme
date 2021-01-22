@@ -16,7 +16,7 @@
         </b-nav-form>
 
         <b-navbar-nav @click="$bvModal.show('sign-in')" class="guest-wrapper d-md-flex d-none">
-          <span class="font-weight-bold mr-3 mt-2">Επισκέπτης</span>
+          <span class="font-weight-bold mr-3 mt-2 pt-1">{{getUsername}}</span>
           <div class="user-img shadow-lg"></div>
         </b-navbar-nav>
 
@@ -45,6 +45,11 @@ export default {
     return {
       navItems: FiltertNavItems,
     };
+  },
+  computed: {
+    getUsername() {
+      return this.$store.getters['auth/getUsername'];
+    },
   },
 };
 </script>

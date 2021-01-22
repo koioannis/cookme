@@ -30,7 +30,14 @@
             Πολιτική</b-dropdown-item>
         </b-nav-item-dropdown>
 
-        <b-button class="custom-button" size="md" @click="signBtnClicked">Σύνδεση</b-button>
+        <b-navbar-nav v-if="loggedIn" class="d-md-flex text-light d-none user-wrapper"
+          @click="logout">
+          <span class="font-weight-bold mr-3 mt-2" style="opacity: 0.9">{{getUsername}}</span>
+          <div class="user-img shadow-lg"></div>
+        </b-navbar-nav>
+
+        <b-button v-else class="custom-button" size="md"
+          @click="signBtnClicked">Σύνδεση</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -46,6 +53,20 @@ export default {
     signBtnClicked() {
       EventBus.$emit('signinOption', true);
       this.$bvModal.show('sign-in');
+    },
+    logout() {
+      this.$store.dispatch('auth/refreshToken')
+        .then(() => {
+          // window.location.reload();
+        });
+    },
+  },
+  computed: {
+    getUsername() {
+      return this.$store.getters['auth/getUsername'];
+    },
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
     },
   },
 };
@@ -82,6 +103,20 @@ export default {
 
     .img-logo {
       width: 7.5em;
+    }
+
+    .user-wrapper {
+      cursor: pointer;
+    }
+
+    .user-img {
+      background-image: url('../../assets/small_person.jpg');
+      border: 4px solid #D96990;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 100%;
+      width: 3em;
+      height: 3em;
     }
   }
 

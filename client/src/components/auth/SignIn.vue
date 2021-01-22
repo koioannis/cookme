@@ -53,7 +53,7 @@ export default {
           password: this.password,
         })
           .then(() => {
-            // window.location.reload();
+            window.location.reload();
           })
           .catch((error) => {
             this.password = '';

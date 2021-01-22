@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
 function isAuth(req, res, next) {
-  const token = res.header('Authorization').split(' ')[1];
+  const token = req.header('Authorization').split(' ')[1];
   if (token) {
     jwt.verify(token,
       config.jwtSecret,
