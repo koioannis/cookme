@@ -11,22 +11,18 @@ export default function setup() {
       return Promise.reject(error);
     }
 
-    store.dispatch('auth/refreshToken')
-      .then((token) => {
-        const { config } = error;
-        config.headers.Authorization = `Berear ${token}`;
+    return new Promise((resolve, reject) => {
+      store.dispatch('auth/refreshToken')
+        .then((token) => {
+          const { config } = error;
+          config.headers.Authorization = `Berear ${token}`;
 
-        return new Promise((resolve, reject) => {
-          axios.request(config).then((response) => {
-            if (response.config.url === '/auth/logout') {
-              localStorage.removeItem('access_token');
-              store.commit('auth/destroyToken');
-            }
+          axios.request(config).then(() => {
             resolve();
           }).catch((errorReq) => {
             reject(errorReq);
           });
         });
-      });
+    });
   });
 }
