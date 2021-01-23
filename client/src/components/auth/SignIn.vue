@@ -43,8 +43,6 @@ export default {
       forgotPassword: false,
     };
   },
-  updated() {
-  },
   methods: {
     resetMessages() {
       this.successMessage = '';

@@ -109,7 +109,7 @@ const routes = [
     component: RecipeViewer,
   },
   {
-    path: '/account-management/forgot-password/:resetToken/:userId',
+    path: '/account-management/forgot-password',
     name: 'forgot-password',
     component: ForgotPassword,
   },
