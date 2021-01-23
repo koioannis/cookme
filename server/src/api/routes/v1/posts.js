@@ -11,6 +11,26 @@ const route = Router();
 const posts = (app) => {
   app.use(route);
 
+  route.get(ApiRoutes.PostAction, middlewares.isAuth,
+    async (req, res, next) => {
+      const logger = Container.get('logger');
+      logger.debug('Calling Post (GET) endpoint with params %o', req.params);
+
+      try {
+        const postsServiceInstance = Container.get(PostsService);
+
+        const result = await postsServiceInstance.GetPost({
+          postId: req.params.postId,
+          userId: res.locals.userId,
+        });
+
+        res.json(result);
+        return res.status(200);
+      } catch (error) {
+        return next(error);
+      }
+    });
+
   route.delete(ApiRoutes.PostAction, middlewares.isAuth,
     async (req, res, next) => {
       const logger = Container.get('logger');
@@ -59,6 +79,7 @@ const posts = (app) => {
     body: Joi.object({
       title: Joi.string().required(),
       description: Joi.string().required(),
+      steps: Joi.array().required(),
       ingredients: Joi.array().items(Joi.object({
         name: Joi.string().required(),
         quantity: Joi.string().required(),
@@ -77,6 +98,7 @@ const posts = (app) => {
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
+        steps: req.body.steps,
       });
 
       res.json(result);

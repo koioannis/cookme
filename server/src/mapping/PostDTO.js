@@ -3,12 +3,9 @@ const PostDTO = {
   title: 'title',
   description: 'description',
   createdAt: 'createdAt',
-  'ingredients[].name': 'ingredients[].name',
-  'ingredients[].quantity': 'ingredients[].quantity',
-  'comments[].content': 'comments[].content',
-  'comments[].user': 'comments[].user',
-  'comments[].createdAt': 'comments[].createdAt',
-  'comments[]._id': 'comments[].id',
+  grade: 'grade',
+  'user._id': 'user.id',
+  'user.username': 'user.username',
 };
 
 module.exports = PostDTO;

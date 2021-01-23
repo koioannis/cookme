@@ -13,6 +13,15 @@ const postSchema = new mongoose.Schema({
     max: 255,
     min: 6,
   },
+  grade: {
+    type: Number,
+    required: true,
+    default: () => Math.floor(Math.random() * 2 + 3),
+  },
+  steps: [{
+    type: String,
+    required: true,
+  }],
   ingredients: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Ingredient',

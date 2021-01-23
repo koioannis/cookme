@@ -17,7 +17,7 @@ const RouteFactory = (version) => {
     ResetPassword: `${AccountBase}/reset-password`,
 
     CreatePost: PostsBase,
-    PostAction: `${PostsBase}/:postId`,
+    PostAction: `${PostsBase}/post/:postId`,
     GetAllPosts: `${PostsBase}/get-all-posts`,
     CreateComment: `${PostsBase}/comment/:postId`,
     Comment: `${PostsBase}/comment/:postId/:commentId`,

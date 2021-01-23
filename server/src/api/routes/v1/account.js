@@ -43,7 +43,7 @@ const account = (app) => {
       let message;
 
       try {
-        message = await accountServiceInstance.resetPassword(req.body);
+        message = await accountServiceInstance.ResetPassword(req.body);
       } catch (error) {
         error.status = 200;
         return next(error);

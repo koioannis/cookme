@@ -225,7 +225,7 @@ class AuthService {
       },
       config.jwtSecret,
       {
-        expiresIn: '3s',
+        expiresIn: '1h',
         jwtid,
       },
     );

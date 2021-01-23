@@ -1,6 +1,7 @@
 const { Service, Container } = require('typedi');
 const objectMapper = require('object-mapper');
 const postDTO = require('../mapping/PostDTO');
+const detailedPostDTO = require('../mapping/DetailedPost');
 
 Service();
 class PostsService {
@@ -10,6 +11,18 @@ class PostsService {
     this.postModel = Container.get('postModel');
     this.ingredientModel = Container.get('ingredientModel');
     this.commentModel = Container.get('commentModel');
+  }
+
+  async GetPost({ postId, userId }) {
+    const postRecord = await this.postModel.findOne(
+      { $and: [{ _id: postId }, { user: userId }] },
+    ).populate({
+      path: 'comments',
+      populate: 'user',
+    }).populate('ingredients').populate('user');
+
+    this.logger.info('%o', postRecord);
+    return objectMapper(postRecord, detailedPostDTO);
   }
 
   async DeletePost({ postId, userId }) {
@@ -47,11 +60,11 @@ class PostsService {
       throw error;
     }
 
-    return objectMapper(postRecord, postDTO);
+    return objectMapper(postRecord, detailedPostDTO);
   }
 
   async CreatePost({
-    userId, title, description, ingredients,
+    userId, title, description, ingredients, steps,
   }) {
     const userRecord = await this.userModel.findOne({ _id: userId }, (error) => {
       if (error) throw error;
@@ -61,7 +74,13 @@ class PostsService {
       error.status = 400;
       throw error;
     }
-    const postRecord = await this.postModel.create({ title, description, user: userRecord._id });
+    this.logger.info(steps);
+    const postRecord = await this.postModel.create({
+      title,
+      description,
+      user: userRecord._id,
+      steps,
+    });
 
     const ingredientRecords = [];
     ingredients.forEach(async (ingredient) => {
@@ -78,20 +97,16 @@ class PostsService {
     await userRecord.posts.push(postRecord);
     await userRecord.save();
 
-    const newPostRecord = await this.postModel.findOne({ _id: postRecord._id }).populate('ingredients');
-    return objectMapper(newPostRecord, postDTO);
+    const newPostRecord = await this.postModel.findOne({ _id: postRecord._id }).populate('ingredients').populate('user');
+    return objectMapper(newPostRecord, detailedPostDTO);
   }
 
   async GetAllPosts({ userId }) {
-    const userRecord = await this.userModel.findOne({ _id: userId }).populate({
+    this.logger.debug('hello');
+    const userRecord = await this.userModel.findById(userId).populate({
       path: 'posts',
       populate: {
-        path: 'comments',
-      },
-    }).populate({
-      path: 'posts',
-      populate: {
-        path: 'ingredients',
+        path: 'user',
       },
     });
     const posts = [];
@@ -107,9 +122,18 @@ class PostsService {
   async CreateComment({ userId, postId, content }) {
     const commentRecord = await this.commentModel.create({ user: userId, post: postId, content });
 
-    const postRecord = await this.postModel.findOneAndUpdate({ _id: postId }, { $push: { comments: commentRecord } }, { new: true }).populate('comments').populate('ingredients').exec();
+    const postRecord = await this.postModel.findOneAndUpdate(
+      { _id: postId },
+      { $push: { comments: commentRecord } },
+      { new: true },
+    ).populate({
+      path: 'comments',
+      populate: 'user',
+    }).populate('ingredients').exec();
 
-    return objectMapper(postRecord, postDTO);
+    this.logger.debug('%o', postRecord);
+
+    return objectMapper(postRecord, detailedPostDTO);
   }
 
   async DeleteComment({ postId, commentId }) {
@@ -132,7 +156,7 @@ class PostsService {
 
     this.logger.debug('%o', postRecord);
     this.logger.debug(commentId);
-    return objectMapper(postRecord, postDTO);
+    return objectMapper(postRecord, detailedPostDTO);
   }
 
   async ModifyComment({ postId, commentId, content }) {
@@ -151,7 +175,7 @@ class PostsService {
       throw error;
     }
 
-    return objectMapper(postRecord, postDTO);
+    return objectMapper(postRecord, detailedPostDTO);
   }
 }
 
