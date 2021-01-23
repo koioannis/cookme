@@ -18,21 +18,16 @@
         </b-nav-item>
 
         <b-nav-item-dropdown text="Ερωτήσεις" class="d-block d-md-none dropdown-menu active">
-          <b-dropdown-item class="dropdown-menu-item" href="/about/us">
-            Ποιοί είμαστε ;</b-dropdown-item>
-          <b-dropdown-item class="dropdown-menu-item" href="/about/terms">
-            Όροι χρήσης</b-dropdown-item>
-          <b-dropdown-item class="dropdown-menu-item" href="/about/usage">
-            Πως Λειτουργεί ;</b-dropdown-item>
-          <b-dropdown-item class="dropdown-menu-item" href="/about/fag">
-            Ερωτήσεις Χρηστών</b-dropdown-item>
-          <b-dropdown-item class="dropdown-menu-item" href="/about/policies">
-            Πολιτική</b-dropdown-item>
+          <b-dropdown-item href="/about/us">Ποιοί είμαστε ;</b-dropdown-item>
+          <b-dropdown-item href="/about/terms">Όροι χρήσης</b-dropdown-item>
+          <b-dropdown-item href="/about/usage">Πως Λειτουργεί ;</b-dropdown-item>
+          <b-dropdown-item href="/about/fag">Ερωτήσεις Χρηστών</b-dropdown-item>
+          <b-dropdown-item href="/about/policies">Πολιτική</b-dropdown-item>
         </b-nav-item-dropdown>
 
         <b-navbar-nav v-if="loggedIn">
           <div class="d-md-flex user-wrapper">
-            <b-nav-item-dropdown class="mr-2 ml-md-auto ml-2 mb-2 mb-md-auto profile-menu"
+            <b-nav-item-dropdown class="mr-2 mb-2 mb-md-auto profile-menu active"
               :text="getUsername" right>
               <b-dropdown-item href="">Προβολή Προφίλ</b-dropdown-item>
               <b-dropdown-item href="">Προσθήκη συνταγής</b-dropdown-item>
@@ -92,9 +87,36 @@ export default {
     left: 0;
     right: 0;
 
+    .img-logo {
+      width: 7.5em;
+    }
+
     .nav-item-style {
       color: #fff;
       opacity: 0.7;
+    }
+
+    .user-wrapper {
+      cursor: pointer;
+
+      .user-img {
+        background-image: url('../../assets/small_person.jpg');
+        border: 4px solid #D96990;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 100%;
+        width: 3em;
+        height: 3em;
+      }
+    }
+
+    .profile-menu {
+      font-weight: bold;
+      opacity: 0.9;
+    }
+
+    .profile-menu:hover {
+      opacity: 0.82;
     }
 
     .dropdown-menu {
@@ -105,44 +127,24 @@ export default {
       opacity: 0.8;
     }
 
-    .dropdown-menu-item {
-      color: #000 !important;
-      opacity: 0.9;
-    }
-
-    .img-logo {
-      width: 7.5em;
-    }
-
-    .user-wrapper {
-      cursor: pointer;
-    }
-
-    ::v-deep .nav-link {
-      color: #f3f3f3 !important;
-    }
-
-    ::v-deep .nav-link span:hover, ::v-deep .profile-menu span:focus {
-      color: #e2e2e2 !important;
-    }
-
-    .profile-menu {
-      opacity: 0.9;
-      font-weight: bold;
-    }
-
-    .user-img {
-      background-image: url('../../assets/small_person.jpg');
-      border: 4px solid #D96990;
-      background-repeat: no-repeat;
-      background-size: cover;
-      border-radius: 100%;
-      width: 3em;
-      height: 3em;
+    ::v-deep .nav-link span, ::after {
+      color: #ebebeb;
     }
   }
 
   @media only screen and (max-width: 750px) {
+    .abs-nav {
+      top: 0px;
+      width: 100%;
+      box-shadow: 1px 3px 10px #4e4e4e2a !important;
+      height: 12%;
+    }
+
+    .nav-item-style {
+      color: #000 !important;
+      margin-left: 0.5em;
+    }
+
     .navbar-collapse {
       background-color: rgb(255, 255, 255);
       box-shadow: 1px 3px 10px #00000034 !important;
@@ -152,25 +154,15 @@ export default {
       margin-left: 30%;
     }
 
-    .nav-item-style {
-      color: #000 !important;
-      margin-left: 0.5em;
-    }
-
-    .abs-nav {
-      top: 0px;
-      width: 100%;
-      box-shadow: 1px 3px 10px #4e4e4e2a !important;
-      height: 12%;
-    }
-
-    ::v-deep .nav-link {
-      color: #000 !important;
-    }
-
     .profile-menu {
+      margin-left: 0.5em;
       margin-top: -0.6em;
       font-weight: normal !important;
+    }
+
+    ::v-deep .nav-link span, ::v-deep ::after {
+      color: rgb(0, 0, 0) !important;
+      opacity: 0.9 !important;
     }
   }
 </style>

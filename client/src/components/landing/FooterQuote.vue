@@ -9,7 +9,10 @@
       </h4>
       <footer class="blockquote-footer text-left">Η κοινώτητα μας</footer>
     </blockquote>
-    <b-button @click="signBtnClicked" size="lg" class="custom-button">Εγγραγή</b-button>
+    <b-button v-if="loggedIn" href="/discovery"
+      size="lg" class="custom-button">Αρχική</b-button>
+    <b-button @click="signBtnClicked" v-else size="lg"
+      class="custom-button">Εγγραφή</b-button>
   </div>
 </template>
 
@@ -22,6 +25,11 @@ export default {
     signBtnClicked() {
       EventBus.$emit('signinOption', false);
       this.$bvModal.show('sign-in');
+    },
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
     },
   },
 };

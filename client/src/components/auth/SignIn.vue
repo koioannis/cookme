@@ -2,6 +2,8 @@
   <form action="#" @submit.prevent="login">
     <div class="text-center text-danger mb-3 lead underline" style="font-size:1em">
       <u>{{errorMessage}}</u></div>
+    <div class="text-center text-success mb-3 lead underline" style="font-size:1em">
+      <u>{{successMessage}}</u></div>
     <div v-if="!forgotPassword">
       <div class="form-group">
         <input type="email" v-model="email" class="uneditable-input form-control"
@@ -35,18 +37,29 @@ export default {
   data() {
     return {
       errorMessage: '',
+      successMessage: '',
       email: '',
       password: '',
       forgotPassword: false,
     };
   },
+  updated() {
+  },
   methods: {
+    resetMessages() {
+      this.successMessage = '';
+      this.errorMessage = '';
+    },
     forgotPasswordBtn() {
+      this.resetMessages();
+
       this.email = '';
       this.password = '';
       this.forgotPassword = !this.forgotPassword;
     },
     login() {
+      this.resetMessages();
+
       if (this.forgotPassword === false) {
         this.$store.dispatch('auth/login', {
           email: this.email,
@@ -58,6 +71,17 @@ export default {
           .catch((error) => {
             this.password = '';
             this.errorMessage = error;
+          });
+      }
+      if (this.forgotPassword === true) {
+        this.$store.dispatch('account/forgotPassword', {
+          email: this.email,
+        })
+          .then(() => {
+            this.successMessage = 'Παρακάλουμε πολύ κοιτάξτε αν λάβατε το email που σας στείλαμε.';
+          })
+          .catch(() => {
+            this.errorMessage = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';
           });
       }
     },

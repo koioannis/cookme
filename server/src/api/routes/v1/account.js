@@ -22,7 +22,7 @@ const account = (app) => {
         logger.debug('Calling Forgot Password endpoint wth body %o', req.body);
 
         const accountServiceInstance = Container.get(AccountService);
-        await accountServiceInstance.forgotPassword(req.body.email);
+        await accountServiceInstance.ForgotPassword(req.body.email);
         return res.status(200).json({ message: 'An email has been sent' });
       } catch (error) {
         return next(error);

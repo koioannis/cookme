@@ -17,10 +17,7 @@
         <div class="h5">{{hotRecipeInfo.title}}</div>
         <div class="small mt-1">{{hotRecipeInfo.grade}}/5</div>
       </div>
-      <div class="description">
-        Μια σαλάτα που θα σας κάνει να γλύφετε
-        μέχρι και το τελευταίο δάκτυλο σας.
-      </div>
+      <div class="description">{{hotRecipeInfo.description}}</div>
     </b-card-body>
   </b-card>
 </template>
