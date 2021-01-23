@@ -13,9 +13,10 @@ const config = {
 
   databaseURL: process.env.MONGODB_URI,
 
-  gmail: {
+  forgotPassword: {
     username: process.env.GMAIL_USERNAME,
     password: process.env.GMAIL_PASSWORD,
+    url: process.env.FORGOT_PASSWORD_URL,
   },
 
   jwtSecret: process.env.JWT_SECRET,

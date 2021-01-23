@@ -2,6 +2,7 @@ const { Service, Container } = require('typedi');
 const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
 const { randomBytes } = require('crypto');
+const config = require('../config');
 
 Service();
 class AccountService {
@@ -61,13 +62,13 @@ class AccountService {
       nodemailer.sendEmail({
         to: user.email,
         username: user.username,
-        subject: 'Password Reset',
+        subject: 'CookMe - Password Reset',
         template: '../templates/forgot-password-email.html',
         /* @TODO
           Generate the required url for the reset password
           Requires front end migration
         */
-        url: `resetPasswordToken=${this.generateJtwResetToken(user)}?userId=${user._id}`,
+        url: `${config.forgotPassword.url}/resetPasswordToken=${this.generateJtwResetToken(user)}?userId=${user._id}`,
       }, (error) => {
         if (error) throw error;
       });
