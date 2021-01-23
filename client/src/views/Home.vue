@@ -20,9 +20,9 @@
       <b-row style="margin: auto;">
           <!-- Need to make the request -->
           <b-col md="6" class="mt-5" lg="3" style="width: 23em;margin: auto"
-          v-for="item in cardElements" :key="item">
+          v-for="(recipe, index) in hotRecipe" :key="index">
             <router-link to="/view-post/123" class="post-link">
-              <RecipeCard />
+              <RecipeCard :hotRecipeInfo="recipe"/>
             </router-link>
           </b-col>
       </b-row>
@@ -63,6 +63,8 @@ import FooterAbout from '@/components/landing/FooterAbout.vue';
 import Instructions from '@/components/landing/Instruction.vue';
 import SignTemplate from '@/components/auth/SignTemplate.vue';
 
+import BestRecipes from '@/helpers/temp/BestRecipes.json';
+
 export default {
   name: 'Home',
   components: {
@@ -78,7 +80,7 @@ export default {
   },
   data() {
     return {
-      cardElements: (window.innerWidth < 750) ? 1 : 4,
+      hotRecipe: BestRecipes,
     };
   },
 };

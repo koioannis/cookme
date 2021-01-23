@@ -4,7 +4,7 @@
     <div class="description mt-md-2">Μοιραστείτε τις αγαπημένες σας συνταγές και
     εμπνευστείτε από άλλους. Ένα σίτε με στόχο την δημιουργικότητα!</div>
     <b-button v-if="loggedIn" class="shadow-md mt-lg-5 mt-sm-2 mt-3 custom-button"
-      size="lg">Αρχική</b-button>
+      size="lg" href="/discovery">Αρχική</b-button>
     <b-button v-else size="lg" class="shadow-md mt-lg-5 mt-sm-2 mt-3 custom-button"
       @click="signBtnClicked">Εγγραγή</b-button>
   </div>

@@ -4,8 +4,8 @@
       <div class="d-flex ml-1 user-info">
         <div class="user-img shadow-lg"></div>
         <div class="user-cred ml-2">
-          <b>Μαρία Γεωργίου</b>
-          <p class="small">Επαγγελματίας Μάγειρας</p>
+          <b>{{hotRecipeInfo.user.name}}</b>
+          <p class="small">{{hotRecipeInfo.user.title}}</p>
         </div>
       </div>
     </template>
@@ -14,8 +14,8 @@
 
     <b-card-body>
       <div class="d-flex justify-content-between">
-        <div class="h5">Σαλάτα Μποέμι</div>
-        <div class="small mt-1">4.3/5</div>
+        <div class="h5">{{hotRecipeInfo.title}}</div>
+        <div class="small mt-1">{{hotRecipeInfo.grade}}/5</div>
       </div>
       <div class="description">
         Μια σαλάτα που θα σας κάνει να γλύφετε
@@ -28,6 +28,9 @@
 <script>
 export default {
   name: 'RecipeCard',
+  props: [
+    'hotRecipeInfo',
+  ],
 };
 </script>
 

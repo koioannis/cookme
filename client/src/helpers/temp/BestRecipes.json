@@ -1,0 +1,46 @@
+{
+  "1": {
+    "user": {
+      "name": "Μαρία Γεωργίου",
+      "title": "Επαγγελματίας Μάγειρας",
+      "image": "@/assets/small_person.jpg"
+    },
+    "image": "@/assets/small_food1.jpg",
+    "title": "Σαλάτα Μποέμι",
+    "grade": "5",
+    "description": "Μια σαλάτα που θα σας κάνει να γλύφετε μέχρι και το τελευταίο δάκτυλο σας."
+  },
+  "2": {
+    "user": {
+      "name": "Μάνος Νικολάου",
+      "title": "Επαγγελματίας Χομπίστας",
+      "image": "@/assets/small_person.jpg"
+    },
+    "image": "@/assets/small_food1.jpg",
+    "title": "Σαλάτα Μποέμι",
+    "grade": "5",
+    "description": "Μια σαλάτα που θα σας κάνει να γλύφετε μέχρι και το τελευταίο δάκτυλο σας."
+  },
+  "3": {
+    "user": {
+      "name": "Νικολέτα Νικού",
+      "title": "Μάγειρας",
+      "image": "@/assets/small_person.jpg"
+    },
+    "image": "@/assets/small_food1.jpg",
+    "title": "Σαλάτα Μποέμι",
+    "grade": "4.3",
+    "description": "Μια σαλάτα που θα σας κάνει να γλύφετε μέχρι και το τελευταίο δάκτυλο σας."
+  },
+  "4": {
+    "user": {
+      "name": "Γιάννης Τσίφτης",
+      "title": "SuChef",
+      "image": "@/assets/small_person.jpg"
+    },
+    "image": "@/assets/small_food1.jpg",
+    "title": "Σαλάτα Μποέμι",
+    "grade": "4.9",
+    "description": "Μια σαλάτα που θα σας κάνει να γλύφετε μέχρι και το τελευταίο δάκτυλο σας."
+  }
+}
