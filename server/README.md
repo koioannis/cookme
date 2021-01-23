@@ -22,7 +22,7 @@ npm start
 ```
 - API Document endpoints
 
-  swagger-ui  Endpoint : http://localhost:3000/docs ```
+  swagger-ui  Endpoint : http://localhost:3000/docs
 
 ## Configuring the .env file
 The .env file values are explained below:
@@ -36,6 +36,7 @@ The .env file values are explained below:
 | **LOG_LEVEL**            | The format of the messages displayed by the logger.
 | **GMAIL_USERNAME**       | The email used to send reset passoword emails.
 | **GMAIL_PASSWORD**       | The password of the gmail.
+| **FORGOT_PASSWORD_URL**       | The frontend endpoint for the forgot password.
 
 ## Project Structure
 The folder structure of this app is shown and explained below:
