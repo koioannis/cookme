@@ -5,6 +5,7 @@ import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Discover from '@/views/Discover.vue';
 import RecipeViewer from '@/views/RecipeViewer.vue';
+import ForgotPassword from '@/views/ForgotPassword.vue';
 
 import WhoAreWe from '@/components/about/ContentSection/WhoAreWe.vue';
 import HowItWorks from '@/components/about/ContentSection/HowItWorks.vue';
@@ -106,6 +107,11 @@ const routes = [
     path: '/view-post/:id',
     name: 'view-post',
     component: RecipeViewer,
+  },
+  {
+    path: '/account-management/forgot-password/:resetToken/:userId',
+    name: 'forgot-password',
+    component: ForgotPassword,
   },
 ];
 
