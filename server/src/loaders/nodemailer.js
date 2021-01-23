@@ -7,7 +7,7 @@ const config = require('../config');
 class NodeMailer {
   constructor() {
     this.transporter = nodemailer.createTransport({
-      service: 'gmail' || config.email.service,
+      service: 'Gmail',
       auth: {
         user: config.forgotPassword.username,
         pass: config.forgotPassword.password,

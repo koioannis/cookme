@@ -51,7 +51,6 @@ class AccountService {
   async ForgotPassword(email) {
     const user = await this.userModel.findOne({ email });
     try {
-      this.logger.info('user: %o', user);
       if (!user) {
         return;
       }
