@@ -67,7 +67,7 @@ class AccountService {
           Generate the required url for the reset password
           Requires front end migration
         */
-        url: `${config.forgotPassword.url}/resetPasswordToken=${this.generateJtwResetToken(user)}?userId=${user._id}`,
+        url: `${config.forgotPassword.url}?resetPasswordToken=${this.generateJtwResetToken(user)}&userId=${user._id}`,
       }, (error) => {
         if (error) throw error;
       });
