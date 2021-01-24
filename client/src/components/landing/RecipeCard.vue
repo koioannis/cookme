@@ -36,8 +36,8 @@ export default {
     margin-bottom: -0.6em;
 
     .user-img {
-      background-image: url('../../assets/small_person.jpg');
-      border: 2px solid #bdbdbd;
+      background-image: url('../../assets/svg/account_icon.svg');
+      border: 2px solid #999999;
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 100%;

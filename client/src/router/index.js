@@ -6,6 +6,7 @@ import About from '@/views/About.vue';
 import Discover from '@/views/Discover.vue';
 import RecipeViewer from '@/views/RecipeViewer.vue';
 import ForgotPassword from '@/views/ForgotPassword.vue';
+import ProfileViewer from '@/views/ProfileViewer.vue';
 
 import WhoAreWe from '@/components/about/ContentSection/WhoAreWe.vue';
 import HowItWorks from '@/components/about/ContentSection/HowItWorks.vue';
@@ -112,6 +113,11 @@ const routes = [
     path: '/account-management/forgot-password',
     name: 'forgot-password',
     component: ForgotPassword,
+  },
+  {
+    path: '/account/profile/:profileId',
+    name: 'profile',
+    component: ProfileViewer,
   },
 ];
 

@@ -100,7 +100,7 @@ export default {
       cursor: pointer;
 
       .user-img {
-        background-image: url('../../assets/small_person.jpg');
+        background-image: url('../../assets/svg/account_icon.svg');
         border: 4px solid #D96990;
         background-repeat: no-repeat;
         background-size: cover;
