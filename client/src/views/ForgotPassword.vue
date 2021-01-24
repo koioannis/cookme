@@ -1,21 +1,25 @@
 <template>
   <div id="forgot-password">
-    <h2 class="mt-5 mb-4 text-center"><b>*Αλλαγή κωδικού πρόσβασης*</b></h2>
-    <div class="text-danger mb-4 lead underline text-center" style="font-size:1em">
-      <u>{{errorMessage}}</u></div>
-    <form action="#" @submit.prevent="resetPassword">
-      <div class="form-group">
-        <p>Νέος Κωδικός Πρόσβασης<span style="color: red"> *</span></p>
-        <input type="password" class="big-input input-box p-3"
-          placeholder="Πληκτρολογίστε..." v-model="password" required>
-      </div>
-      <div class="form-group">
-        <p>Επαλήθευση<span style="color: red"> *</span></p>
-        <input type="password" class="big-input input-box p-3"
-          placeholder="Πληκτρολογίστε..." v-model="passwordVerify" required>
-      </div>
-      <button type="submit" class="btn my-btn custom-button mt-3">Αλλαγή</button>
-    </form>
+    <div class="forgot-password-wrapper text-center">
+      <img src="@/assets/svg/logo.svg" class="img-logo" @click="redirectHome">
+      <div class="text-danger mb-3 mt-3 lead underline text-center" style="font-size:1em">
+        <u>{{errorMessage}}</u></div>
+      <form action="#" @submit.prevent="resetPassword">
+        <div class="form-group">
+          <input type="password" class="big-input input-box p-3" id="passwordInput"
+            placeholder="Νέος Κωδικός Πρόσβασης." v-model="password" required>
+        </div>
+        <div class="form-group mt-4">
+          <input type="password" class="big-input input-box p-3" id="passwordVerifyInput"
+            placeholder="Επαλήθευση" v-model="passwordVerify" required>
+        </div>
+        <div class="text-left checkbox-password-show mt-4">
+          <input type="checkbox" id="showPasswordCheck" @click="showPassword">
+          <label for="showPasswordCheck" class="ml-2">Προβολή Κωδικού Πρόσβασης</label>
+        </div>
+        <button type="submit" class="btn my-btn custom-button mt-3">Αλλαγή</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -30,6 +34,20 @@ export default {
     };
   },
   methods: {
+    redirectHome() {
+      this.$router.push({ path: '/' });
+    },
+    showPassword() {
+      const passwordInput = document.getElementById('passwordInput');
+      const passwordVerifyInput = document.getElementById('passwordVerifyInput');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordVerifyInput.type = 'text';
+      } else {
+        passwordInput.type = 'password';
+        passwordVerifyInput.type = 'password';
+      }
+    },
     resetPassword() {
       if (this.password !== this.passwordVerify) {
         this.password = '';
@@ -61,12 +79,27 @@ export default {
 
 <style lang='scss' scoped>
   #forgot-password {
-    display: block;
-    width: fit-content;
-    margin: auto;
+    position: absolute;
+    background-color: #E6477D;
+    height: 100%;
+    width: 100%;
+
+    .forgot-password-wrapper {
+      background-color: #F7F7F7;
+      border-radius: 1em;
+      border: none;
+      padding: 3em;
+      width: 30%;
+      margin: auto;
+      margin-top: 10%;
+      border: none;
+      box-shadow: 2px 3px 20px #5555557e !important;
+      outline: none;
+    }
 
     .big-input {
-      width: 100%;
+      min-width: 80%;
+      width: fit-content;
     }
 
     .input-box {
@@ -77,10 +110,35 @@ export default {
     }
 
     .my-btn {
-      width: 100%;
+      width: 80%;
       height: 3em;
       background-color: #f73e7b;
       color: white;
+    }
+
+    .img-logo {
+      width: 14em;
+      margin: auto;
+      margin-bottom: 5%;
+      margin-top: 5%;
+      cursor: pointer;
+    }
+
+    .checkbox-password-show {
+      margin-left: 10%;
+    }
+  }
+
+  @media only screen and (max-width: 1500px) {
+    .forgot-password-wrapper {
+      width: 65% !important;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .forgot-password-wrapper {
+      width: 95% !important;
+      margin-top: 30% !important;
     }
   }
 </style>

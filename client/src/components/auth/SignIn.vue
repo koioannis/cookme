@@ -76,7 +76,7 @@ export default {
           email: this.email,
         })
           .then(() => {
-            this.successMessage = 'Παρακάλουμε πολύ κοιτάξτε αν λάβατε το email που σας στείλαμε.';
+            this.successMessage = 'Το email για την αλλαγή του κωδικού σας στάλθηκε με επιτυχία.';
           })
           .catch(() => {
             this.errorMessage = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';

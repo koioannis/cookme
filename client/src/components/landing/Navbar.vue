@@ -2,10 +2,10 @@
   <div class="abs-nav">
     <b-navbar toggleable="md" class="mt-1 pt-3 pt-md-auto mt-md-auto">
       <b-navbar-brand href="/">
-       <img src="@/assets/svg/logo.svg" class="img-logo">
-     </b-navbar-brand>
+        <img src="@/assets/svg/logo.svg" class="img-logo">
+      </b-navbar-brand>
 
-     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
        <b-navbar-nav class="ml-auto">
