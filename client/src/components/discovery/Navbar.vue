@@ -89,8 +89,8 @@ export default {
     }
 
     .user-img {
-      background-image: url('../../assets/small_person.jpg');
-      border: 1.3px solid #bdbdbd;
+      background-image: url('../../assets/svg/account_icon.svg');
+      border: 3px solid #c4c4c4a6;
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 100%;

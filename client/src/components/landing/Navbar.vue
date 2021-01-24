@@ -2,10 +2,10 @@
   <div class="abs-nav">
     <b-navbar toggleable="md" class="mt-1 pt-3 pt-md-auto mt-md-auto">
       <b-navbar-brand href="/">
-       <img src="@/assets/svg/logo.svg" class="img-logo">
-     </b-navbar-brand>
+        <img src="@/assets/svg/logo.svg" class="img-logo">
+      </b-navbar-brand>
 
-     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
        <b-navbar-nav class="ml-auto">
@@ -100,7 +100,7 @@ export default {
       cursor: pointer;
 
       .user-img {
-        background-image: url('../../assets/small_person.jpg');
+        background-image: url('../../assets/svg/account_icon.svg');
         border: 4px solid #D96990;
         background-repeat: no-repeat;
         background-size: cover;

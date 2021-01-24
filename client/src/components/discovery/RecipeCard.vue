@@ -39,7 +39,7 @@ export default {
       margin-bottom: -0.6em;
 
       .user-img {
-        background-image: url('../../assets/small_person.jpg');
+        background-image: url('../../assets/svg/account_icon.svg');
         border: 2px solid #bdbdbd;
         background-repeat: no-repeat;
         background-size: cover;
