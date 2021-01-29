@@ -15,9 +15,23 @@
           </div>
         </b-nav-form>
 
-        <b-navbar-nav @click="$bvModal.show('sign-in')" class="guest-wrapper d-md-flex d-none">
-          <span class="font-weight-bold mr-3 mt-2 pt-1">{{getUsername}}</span>
-          <div class="user-img shadow-lg"></div>
+        <b-navbar-nav v-if="loggedIn" class="d-md-flex d-none">
+          <div class="d-md-flex user-wrapper">
+            <b-nav-item-dropdown :text="getUsername" right
+              class="mr-2 mb-2 mt-1 smb-md-auto profile-menu active font-weight-bold">
+              <b-dropdown-item href="">Προβολή Προφίλ</b-dropdown-item>
+              <b-dropdown-item href="">Προσθήκη συνταγής</b-dropdown-item>
+              <b-dropdown-item @click="logout" class="d-md-block d-none">
+                Αποσύνδεση</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <div class="user-img shadow-lg d-none d-md-block"></div>
+          </div>
+        </b-navbar-nav>
+
+        <b-navbar-nav v-else
+          @click="$bvModal.show('sign-in')" class="guest-wrapper d-md-flex d-none">
+            <span class="font-weight-bold mr-3 mt-2 pt-1">{{getUsername}}</span>
+            <div class="user-img shadow-lg"></div>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto d-block d-md-none">
@@ -47,8 +61,20 @@ export default {
     };
   },
   computed: {
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
+    },
     getUsername() {
       return this.$store.getters['auth/getUsername'];
+    },
+  },
+  methods: {
+    logout() {
+      console.log('inside');
+      this.$store.dispatch('auth/logout')
+        .then(() => {
+          window.location.reload();
+        });
     },
   },
 };

@@ -15,7 +15,7 @@
         </div>
         <div class="text-left checkbox-password-show mt-4">
           <input type="checkbox" id="showPasswordCheck" @click="showPassword">
-          <label for="showPasswordCheck" class="ml-2">Προβολή Κωδικού Πρόσβασης</label>
+          <label for="showPasswordCheck" class="ml-2">Προβολή Κωδικού</label>
         </div>
         <button type="submit" class="btn my-btn custom-button mt-3">Αλλαγή</button>
       </form>
@@ -86,12 +86,13 @@ export default {
 
     .forgot-password-wrapper {
       background-color: #F7F7F7;
-      border-radius: 1em;
-      border: none;
       padding: 3em;
       width: 30%;
-      margin: auto;
-      margin-top: 10%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 1em;
       border: none;
       box-shadow: 2px 3px 20px #5555557e !important;
       outline: none;
@@ -120,7 +121,6 @@ export default {
       width: 14em;
       margin: auto;
       margin-bottom: 5%;
-      margin-top: 5%;
       cursor: pointer;
     }
 
@@ -129,16 +129,15 @@ export default {
     }
   }
 
-  @media only screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1800px) {
     .forgot-password-wrapper {
-      width: 65% !important;
+      width: 40% !important;
     }
   }
 
   @media only screen and (max-width: 800px) {
     .forgot-password-wrapper {
       width: 95% !important;
-      margin-top: 30% !important;
     }
   }
 </style>
