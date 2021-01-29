@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Navbar style="padding-top: 0.2em; padding-bottom: 0.2em"/>
+    <Navbar class="fixed-top"/>
 
     <div id="profile">
       <ProfileInformation />
       <div class="line-break"></div>
-      <b-row align-h="around" class="posts-wrapper">
+      <b-row align-h="around" class="posts-wrapper mb-5">
         <div v-for="index in testPosts" :key="index" class="mt-5">
           <RecipeCard  style="width: 20em"/>
         </div>
@@ -37,6 +37,7 @@ export default {
 <style lang="scss" scoped>
   #profile {
     background-color: #EEEEEE;
+    margin-top: 5em;
     position: absolute;
     width: 100%;
 
@@ -50,6 +51,13 @@ export default {
     .posts-wrapper {
       margin-left: 20%;
       margin-right: 20%;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .line-break {
+      margin-left: 10% !important;
+      margin-right: 10% !important;
     }
   }
 </style>

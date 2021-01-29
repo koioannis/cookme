@@ -19,7 +19,8 @@
           <div class="d-md-flex user-wrapper">
             <b-nav-item-dropdown :text="getUsername" right
               class="mr-2 mb-2 mt-1 smb-md-auto profile-menu active font-weight-bold">
-              <b-dropdown-item href="">Προβολή Προφίλ</b-dropdown-item>
+              <b-dropdown-item
+                :href="'/account/profile/' + getUsername">Προβολή Προφίλ</b-dropdown-item>
               <b-dropdown-item href="">Προσθήκη συνταγής</b-dropdown-item>
               <b-dropdown-item @click="logout" class="d-md-block d-none">
                 Αποσύνδεση</b-dropdown-item>
@@ -112,6 +113,10 @@ export default {
           color: #191311;
         }
       }
+    }
+
+    .dropdown-menu {
+      overflow: visible !important;
     }
 
     .user-img {

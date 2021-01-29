@@ -20,7 +20,7 @@
       <b-row style="margin: auto;">
           <!-- Need to make the request -->
           <b-col md="6" class="mt-5" lg="3" style="width: 23em;margin: auto"
-          v-for="(recipe, index) in hotRecipe" :key="index">
+            v-for="(recipe, index) in hotRecipe" :key="index">
             <router-link to="/view-post/123" class="post-link">
               <RecipeCard :hotRecipeInfo="recipe"/>
             </router-link>
