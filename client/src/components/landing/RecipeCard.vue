@@ -61,5 +61,4 @@ export default {
     font-size: 0.8em;
     opacity: 0.8;
   }
-
 </style>
