@@ -18,7 +18,8 @@ const RouteFactory = (version) => {
 
     CreatePost: `${PostsBase}/post`,
     PostAction: `${PostsBase}/post/:postId`,
-    GetAllPosts: `${PostsBase}/get-all-posts`,
+    GetAllPosts: `${PostsBase}/get-all-posts/:username`,
+    GetRandomPosts: `${PostsBase}/get-random-posts/:count`,
     CreateComment: `${PostsBase}/comment/:postId`,
     Comment: `${PostsBase}/comment/:postId/:commentId`,
 

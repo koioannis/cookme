@@ -114,7 +114,7 @@ const posts = (app) => {
     logger.debug('Calling Get-All-Posts endpoint with body: %o', req.body);
     try {
       const postsServiceInstance = Container.get(PostsService);
-      const result = await postsServiceInstance.GetAllPosts({ userId: res.locals.userId });
+      const result = await postsServiceInstance.GetAllPosts({ username: req.params.username });
 
       res.json(result);
       return res.status(200);
@@ -185,6 +185,24 @@ const posts = (app) => {
       return next(error);
     }
   });
+
+  route.get(ApiRoutes.GetRandomPosts, middlewares.isAuth,
+    async (req, res, next) => {
+      const logger = Container.get('logger');
+      logger.debug('Calling Comment (GetRandomPosts) end-point');
+      try {
+        const postsServiceInstance = Container.get(PostsService);
+        const result = await postsServiceInstance.GetRandomPosts({
+          count: req.params.count,
+          userId: res.locals.userId,
+        });
+
+        res.json(result);
+        return res.status(200);
+      } catch (error) {
+        return next(error);
+      }
+    });
 };
 
 module.exports = posts;

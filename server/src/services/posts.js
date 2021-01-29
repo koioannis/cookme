@@ -1,5 +1,6 @@
 const { Service, Container } = require('typedi');
 const objectMapper = require('object-mapper');
+const mongoose = require('mongoose');
 const postDTO = require('../mapping/PostDTO');
 const detailedPostDTO = require('../mapping/DetailedPost');
 
@@ -101,19 +102,21 @@ class PostsService {
     return objectMapper(newPostRecord, detailedPostDTO);
   }
 
-  async GetAllPosts({ userId }) {
-    this.logger.debug('hello');
-    const userRecord = await this.userModel.findById(userId).populate({
+  async GetAllPosts({ username }) {
+    const userRecord = await this.userModel.findOne({ username }).populate({
       path: 'posts',
       populate: {
         path: 'user',
       },
     });
+    if (!userRecord) {
+      const error = new Error('User not found');
+      error.status = 404;
+      throw error;
+    }
     const posts = [];
 
-    this.logger.debug('%o', userRecord.posts[0]);
     userRecord.posts.forEach((post) => {
-      this.logger.debug('%o', post);
       posts.push(objectMapper(post, postDTO));
     });
     return posts;
@@ -129,7 +132,7 @@ class PostsService {
     ).populate({
       path: 'comments',
       populate: 'user',
-    }).populate('ingredients').exec();
+    }).populate('ingredients').populate('user');
 
     this.logger.debug('%o', postRecord);
 
@@ -154,7 +157,6 @@ class PostsService {
       throw error;
     }
 
-    this.logger.debug('%o', postRecord);
     this.logger.debug(commentId);
     return objectMapper(postRecord, detailedPostDTO);
   }
@@ -176,6 +178,27 @@ class PostsService {
     }
 
     return objectMapper(postRecord, detailedPostDTO);
+  }
+
+  async GetRandomPosts({ count, userId }) {
+    const postRecords = await this.postModel.aggregate([
+      { $sample: { size: Number(count) } },
+      { $match: { user: { $not: { $eq: mongoose.Types.ObjectId(userId) } } } },
+    ]);
+
+    if (!postRecords) {
+      const error = new Error('Posts not found');
+      error.status = 404;
+      throw error;
+    }
+
+    const posts = [];
+
+    postRecords.forEach((post) => {
+      posts.push(objectMapper(post, postDTO));
+      this.logger.debug('%o', post.user);
+    });
+    return posts;
   }
 }
 
