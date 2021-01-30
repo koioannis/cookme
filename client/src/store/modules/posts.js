@@ -36,11 +36,11 @@ const posts = {
     fetchHolePost(context, data) {
       return new Promise((resolve, reject) => {
         axios.get(`/posts/post/${data.id}`, {
-        }, {
-          withCredentials: true,
           headers: {
+            Accept: 'application/json',
             Authorization: `Bearer ${context.rootState.auth.accessToken}`,
           },
+          withCredentials: true,
         })
           .then((response) => {
             resolve(response.data);

@@ -16,7 +16,7 @@ class PostsService {
 
   async GetPost({ postId, userId }) {
     const postRecord = await this.postModel.findOne(
-      { $and: [{ _id: postId }, { user: userId }] },
+      { _id: postId },
     ).populate({
       path: 'comments',
       populate: 'user',
