@@ -24,7 +24,7 @@
 
     <div class="recipe-steps">
       <h5 class="recipe-steps-title pb-2"><b>Βήματα</b></h5>
-      <div class="mt-4" v-for="(step, index) in steps[0]" :key="index">
+      <div class="mt-4" v-for="(step, index) in steps" :key="index">
         <div class="d-flex align-items-end">
           <div class="step-number font-weight-bold mr-3">{{index}}</div>
           <div class="mb-1">

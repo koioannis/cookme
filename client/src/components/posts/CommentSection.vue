@@ -4,7 +4,8 @@
     <h4 class="font-weight-bold text-center mt-5 pb-2 comment-title">Σχόλια</h4>
     <!-- TODO -->
 
-    <div class="sign-in-info">
+    <div class="mt-5 text-center" v-if="loggedIn">TODO</div>
+    <div class="sign-in-info" v-else>
       <div class="text-center">
         <div class="text-muted" style="font-size: 0.8em">
           Συνδεθείτε για να μπορείτε να<br>υποστηρίξετε τους φίλους σας.</div>
@@ -19,6 +20,11 @@
 <script>
 export default {
   name: 'CommentSection',
+  computed: {
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
+    },
+  },
 };
 </script>
 

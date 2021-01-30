@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     logout() {
-      console.log('inside');
       this.$store.dispatch('auth/logout')
         .then(() => {
           window.location.reload();

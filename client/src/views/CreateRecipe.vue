@@ -49,7 +49,8 @@ export default {
       description: 'Εδώ μπορείτε να γράψετε μια σύντομη περιγραφή.',
       estimatedCost: '--',
       ingredients: null,
-      steps: new Array(['Έδω μπαίνει το πρώτο βήμα.', 'Έδω μπαίνει το δεύτερο.']),
+      // eslint-disable-next-line no-array-constructor
+      steps: new Array('Έδω μπαίνει το πρώτο βήμα.', 'Έδω μπαίνει το δεύτερο.'),
     };
   },
   methods: {
