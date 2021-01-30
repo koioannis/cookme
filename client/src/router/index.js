@@ -7,6 +7,7 @@ import Discover from '@/views/Discover.vue';
 import RecipeViewer from '@/views/RecipeViewer.vue';
 import ForgotPassword from '@/views/ForgotPassword.vue';
 import ProfileViewer from '@/views/ProfileViewer.vue';
+import CreateRecipe from '@/views/CreateRecipe.vue';
 
 import WhoAreWe from '@/components/about/ContentSection/WhoAreWe.vue';
 import HowItWorks from '@/components/about/ContentSection/HowItWorks.vue';
@@ -105,7 +106,7 @@ const routes = [
     ],
   },
   {
-    path: '/view-post/:id',
+    path: '/post/view-post/:id',
     name: 'view-post',
     component: RecipeViewer,
   },
@@ -118,6 +119,11 @@ const routes = [
     path: '/account/profile/:profileId',
     name: 'profile',
     component: ProfileViewer,
+  },
+  {
+    path: '/post/create-post',
+    name: 'create-recipe',
+    component: CreateRecipe,
   },
 ];
 

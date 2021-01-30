@@ -13,7 +13,7 @@
           <b-col lg="8" class="mb-4 mb-md-auto">
             <RecipeBody />
           </b-col>
-          <b-col class="pt-4d-sm-block d-none">
+          <b-col class="pt-4 d-sm-block d-none">
             <IngredientsSection />
           </b-col>
         </b-row>

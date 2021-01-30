@@ -4,7 +4,7 @@
       pb-3 category-title">{{navItems[currentPage].title}}</h3>
     <b-row align-h="around" style="margin: auto">
       <div v-for='item in maxNumberOfRecipes' :key='item'>
-        <router-link to="/view-post/123" class="post-link">
+        <router-link to="/post/view-post/123" class="post-link">
           <RecipeCard class="mt-4 ml-md-4"/>
         </router-link>
       </div>
