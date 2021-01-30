@@ -33,6 +33,23 @@ const posts = {
           });
       });
     },
+    fetchHolePost(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.get(`/posts/post/${data.id}`, {
+        }, {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
+          },
+        })
+          .then((response) => {
+            resolve(response.data);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
   },
 };
 

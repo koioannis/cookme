@@ -32,8 +32,27 @@ import SignTemplate from '@/components/auth/SignTemplate.vue';
 
 export default {
   name: 'RecipeViewer',
+  data() {
+    return {
+      title: null,
+      description: null,
+      steps: null,
+      ingredients: null,
+    };
+  },
   mounted() {
     window.scroll(0, 0);
+  },
+  created() {
+    this.$store.dispatch('posts/fetchHolePost', {
+      id: this.$router.history.current.params.id,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(() => {
+        // this.$router.push({ path: '/' });
+      });
   },
   components: {
     Navbar,

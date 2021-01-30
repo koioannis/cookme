@@ -4,9 +4,7 @@
       <h3 class="pb-3 recipe-title"><b>Μακαρόνια Μπογιαμπές</b></h3>
       <div class="d-md-flex d-none align-items-center mb-2 pb-2">
         <div><b>4.3</b></div>
-        <img class="ml-1" src="@/assets/svg/star.svg" style="width: 20%;">
-        <div class="ml-3"><b>10.000</b></div>
-        <img src="@/assets/svg/impact_people.svg" style="width:20%;margin-right:-1.6em">
+        <img class="ml-1" src="@/assets/svg/star.svg" style="width: 30%;">
       </div>
     </div>
 

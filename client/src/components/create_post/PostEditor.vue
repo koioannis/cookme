@@ -2,7 +2,7 @@
   <form id="editor" @submit.prevent="createPost">
     <h3 class="text-center pt-5"><b><u>Συνταγή</u></b></h3>
     <div class="text-center text-danger mb-3 lead underline" style="font-size:1em">
-      <u>{{errorMessage}}</u></div>
+      <u>{{errorRespone}}</u></div>
 
     <div class="info-wrapper mt-5">
       <h5>Στοιχεία</h5>
