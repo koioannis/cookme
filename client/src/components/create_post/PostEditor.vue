@@ -23,12 +23,12 @@
       <b-row v-for="index in ingredientsNumber" :key="index" cols="2">
         <b-col class="form-group mt-1">
           <input type="text" class="small-input input-box p-3 mt-2"
-            placeholder="Τίτλος" v-model="ingredients[0][index-1].name" required>
+            placeholder="Τίτλος" v-model="ingredients[index-1].name" required>
         </b-col>
 
         <b-col class="form-group mt-1">
           <input type="text" class="small-input input-box p-3 mt-2"
-            placeholder="Τίτλος" v-model="ingredients[0][index-1].quantity" required>
+            placeholder="Τίτλος" v-model="ingredients[index-1].quantity" required>
         </b-col>
       </b-row>
       <b-button size="md" class="mt-2 custom-button" @click="addIngredient">
@@ -61,26 +61,27 @@ export default {
       estimatedCost: null,
       ingredientsNumber: 2,
       stepsNumber: 2,
-      ingredients: new Array([{ name: null, quantity: null }, { name: null, quantity: null }]),
+      // eslint-disable-next-line no-array-constructor
+      ingredients: new Array({ name: '', quantity: '' }, { name: '', quantity: '' }),
       steps: new Array(['', '']),
     };
   },
   methods: {
     addIngredient() {
       if (this.ingredientsNumber < 20) {
-        this.ingredients[0].push({ name: null, quantity: null });
+        this.ingredients.push({ name: '', quantity: '' });
         this.ingredientsNumber += 1;
       }
     },
     removeIngredient() {
       if (this.ingredientsNumber > 2) {
-        this.ingredients[0].pop();
+        this.ingredients.pop();
         this.ingredientsNumber -= 1;
       }
     },
     addStep() {
       if (this.stepsNumber < 15) {
-        this.ingredients[0].push('');
+        this.ingredients.push('');
         this.stepsNumber += 1;
       }
     },
@@ -91,6 +92,9 @@ export default {
       }
     },
   },
+  created() {
+    this.$emit('updateIngredients', this.ingredients);
+  },
   watch: {
     title() {
       this.$emit('updateTitle', this.title);
@@ -100,6 +104,9 @@ export default {
     },
     steps() {
       this.$emit('updateSteps', this.steps);
+    },
+    estimatedCost() {
+      this.$emit('updateEstimatedCost', this.estimatedCost);
     },
   },
 };

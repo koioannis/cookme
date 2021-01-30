@@ -11,7 +11,7 @@
               <RecipeBody :title="title" :description="description" :steps="steps"/>
             </b-col>
             <b-col class="pt-4 d-sm-block d-none">
-              <IngredientsSection />
+              <IngredientsSection :estimatedCost="estimatedCost" :ingredients="ingredients" />
             </b-col>
           </b-row>
         </b-col>
@@ -19,7 +19,9 @@
           <PostEditor class="side-bar fixed-left"
             @updateTitle="updateTitle"
             @updateDescription="updateDescription"
-            @updateSteps="updateSteps"/>
+            @updateSteps="updateSteps"
+            @updateEstimatedCost="updateEstimatedCost"
+            @updateIngredients="updateIngredients" />
         </b-col>
       </b-row>
     </div>
@@ -45,7 +47,7 @@ export default {
     return {
       title: 'Τίτλος',
       description: 'Εδώ μπορείτε να γράψετε μια σύντομη περιγραφή.',
-      estimatedCost: null,
+      estimatedCost: '--',
       ingredients: null,
       steps: new Array(['Έδω μπαίνει το πρώτο βήμα.', 'Έδω μπαίνει το δεύτερο.']),
     };
@@ -59,6 +61,12 @@ export default {
     },
     updateSteps(param) {
       this.steps = param;
+    },
+    updateEstimatedCost(param) {
+      this.estimatedCost = param;
+    },
+    updateIngredients(param) {
+      this.ingredients = param;
     },
   },
 };

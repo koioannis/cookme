@@ -21,7 +21,7 @@
               class="mr-2 mb-2 mt-1 smb-md-auto profile-menu active font-weight-bold">
               <b-dropdown-item
                 :href="'/account/profile/' + getUsername">Προβολή Προφίλ</b-dropdown-item>
-              <b-dropdown-item href="">Προσθήκη συνταγής</b-dropdown-item>
+              <b-dropdown-item href="/post/create-post">Προσθήκη συνταγής</b-dropdown-item>
               <b-dropdown-item @click="logout" class="d-md-block d-none">
                 Αποσύνδεση</b-dropdown-item>
             </b-nav-item-dropdown>
