@@ -1,7 +1,13 @@
+/* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
 function isAuth(req, res, next) {
+  if (!req.header('Authorization')) {
+    const error = new Error('JWT was not provided');
+    error.status = 400;
+    throw error;
+  }
   const token = req.header('Authorization').split(' ')[1];
   if (token) {
     jwt.verify(token,
@@ -17,10 +23,6 @@ function isAuth(req, res, next) {
       });
     return next();
   }
-
-  const error = new Error('JWT was not provided');
-  error.status = 400;
-  throw error;
 }
 
 module.exports = isAuth;

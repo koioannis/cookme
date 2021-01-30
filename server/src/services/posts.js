@@ -196,7 +196,6 @@ class PostsService {
 
     postRecords.forEach((post) => {
       posts.push(objectMapper(post, postDTO));
-      this.logger.debug('%o', post.user);
     });
     return posts;
   }
