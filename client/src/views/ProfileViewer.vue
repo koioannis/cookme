@@ -5,8 +5,8 @@
     <div id="profile">
       <ProfileInformation />
       <div class="line-break"></div>
-      <b-row align-h="around" class="posts-wrapper mb-5">
-        <div v-for="(post, index) in postData" :key="index" class="mt-5">
+      <b-row class="posts-wrapper mb-5">
+        <div v-for="(post, index) in postData" :key="index" class="recipe-card mt-5">
           <router-link :to="'/post/view-post/' + post.id" class="post-link">
             <RecipeCard :post="post" style="width: 20em"/>
           </router-link>
@@ -65,6 +65,10 @@ export default {
     .posts-wrapper {
       margin-left: 20%;
       margin-right: 20%;
+
+      .recipe-card {
+        margin-left: 2.8em;
+      }
     }
 
     .post-link {
@@ -77,6 +81,10 @@ export default {
     .line-break {
       margin-left: 10% !important;
       margin-right: 10% !important;
+    }
+
+    .recipe-card {
+      margin-left: 0em !important;
     }
   }
 </style>
