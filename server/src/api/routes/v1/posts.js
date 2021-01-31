@@ -11,7 +11,7 @@ const route = Router();
 const posts = (app) => {
   app.use(route);
 
-  route.get(ApiRoutes.PostAction, middlewares.isAuth,
+  route.get(ApiRoutes.PostAction,
     async (req, res, next) => {
       const logger = Container.get('logger');
       logger.debug('Calling Post (GET) endpoint with params %o', req.params);
@@ -109,7 +109,7 @@ const posts = (app) => {
     }
   });
 
-  route.get(ApiRoutes.GetAllPosts, middlewares.isAuth, async (req, res, next) => {
+  route.get(ApiRoutes.GetAllPosts, async (req, res, next) => {
     const logger = Container.get('logger');
     logger.debug('Calling Get-All-Posts endpoint with body: %o', req.body);
     try {
@@ -186,7 +186,7 @@ const posts = (app) => {
     }
   });
 
-  route.get(ApiRoutes.GetRandomPosts, middlewares.isAuth,
+  route.get(ApiRoutes.GetRandomPosts,
     async (req, res, next) => {
       const logger = Container.get('logger');
       logger.debug('Calling Comment (GetRandomPosts) end-point');

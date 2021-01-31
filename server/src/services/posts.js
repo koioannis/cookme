@@ -14,7 +14,7 @@ class PostsService {
     this.commentModel = Container.get('commentModel');
   }
 
-  async GetPost({ postId, userId }) {
+  async GetPost({ postId }) {
     const postRecord = await this.postModel.findOne(
       { _id: postId },
     ).populate({
@@ -22,7 +22,6 @@ class PostsService {
       populate: 'user',
     }).populate('ingredients').populate('user');
 
-    this.logger.info('%o', postRecord);
     return objectMapper(postRecord, detailedPostDTO);
   }
 
@@ -75,7 +74,6 @@ class PostsService {
       error.status = 400;
       throw error;
     }
-    this.logger.info(steps);
     const postRecord = await this.postModel.create({
       title,
       description,
@@ -134,8 +132,6 @@ class PostsService {
       populate: 'user',
     }).populate('ingredients').populate('user');
 
-    this.logger.debug('%o', postRecord);
-
     return objectMapper(postRecord, detailedPostDTO);
   }
 
@@ -157,7 +153,6 @@ class PostsService {
       throw error;
     }
 
-    this.logger.debug(commentId);
     return objectMapper(postRecord, detailedPostDTO);
   }
 
