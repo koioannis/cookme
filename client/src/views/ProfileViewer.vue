@@ -5,7 +5,7 @@
     <div id="profile">
       <ProfileInformation />
       <div class="line-break"></div>
-      <b-row class="posts-wrapper mb-5">
+      <b-row align-h="center" class="posts-wrapper mb-5">
         <div v-for="(post, index) in postData" :key="index" class="recipe-card mt-5">
           <router-link :to="'/post/view-post/' + post.id" class="post-link">
             <RecipeCard :post="post" style="width: 20em"/>
@@ -63,11 +63,11 @@ export default {
     }
 
     .posts-wrapper {
-      margin-left: 20%;
+      margin-left: 18%;
       margin-right: 20%;
 
       .recipe-card {
-        margin-left: 2.8em;
+        margin-left: 2em;
       }
     }
 
