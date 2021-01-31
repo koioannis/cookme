@@ -17,6 +17,11 @@
       </div>
     </div>
 
+    <div id="profile" class="text-center" style="opacity: 0.9"
+      v-else-if="userExists == -1">
+      <b-spinner label="Loading..." class="mt-5"></b-spinner>
+    </div>
+
     <div id="profile" class="text-center" style="opacity: 0.9" v-else>
       <img class="no-account-image" src="@/assets/svg/no_accounts.svg">
       <h4 class="mt-3">Ο χρήστης που ψάχνετε δεν υπάρχει.</h4>
@@ -39,11 +44,11 @@ export default {
   data() {
     return {
       postData: null,
-      userExists: null,
+      userExists: -1,
     };
   },
-  created() {
-    this.$store.dispatch('posts/getAllUserPosts', {
+  async created() {
+    await this.$store.dispatch('posts/getAllUserPosts', {
       username: this.$router.history.current.params.profileId,
     })
       .then((response) => {

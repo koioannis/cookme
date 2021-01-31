@@ -14,7 +14,7 @@
             <form @submit.prevent="findProfile">
               <input type="text" placeholder="Αναζήτηση" class="ml-4"
                 autocomplete="off" v-model="search">
-                </form>
+            </form>
           </div>
         </b-nav-form>
 
@@ -82,6 +82,7 @@ export default {
     },
     findProfile() {
       this.$router.push({ path: `/account/profile/${this.search}` });
+      window.location.reload();
     },
   },
 };
