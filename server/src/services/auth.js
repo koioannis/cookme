@@ -120,6 +120,7 @@ class AuthService {
         },
         accessToken,
         refreshToken: refreshToken.token,
+        isAdmin: userRecord.isAdmin,
       };
     }
 
