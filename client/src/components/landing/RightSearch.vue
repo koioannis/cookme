@@ -4,8 +4,11 @@
       <div class="search-wrapper-box">
         <label class="search-text">Ψάξε την αγαπημένη σου συνταγή:</label>
         <div class="search-input-wrapper rounded shadow-lg d-flex">
-          <img src="@/assets/svg/magnifying_glass.svg" class="magnifying-img ml-3" alt="">
-          <input class= "search-box ml-3" type="text" name="test" placeholder="Πληκτρολόγισε..">
+          <img src="@/assets/svg/magnifying_glass.svg" class="magnifying-img ml-3 " alt="">
+          <form @submit.prevent="findProfile">
+            <input class="search-box ml-3" type="text" v-model="search"
+              name="test" placeholder="Πληκτρολόγισε.." autocomplete="off">
+          </form>
         </div>
       </div>
     </div>
@@ -16,6 +19,16 @@
 <script>
 export default {
   name: 'RightSearch',
+  data() {
+    return {
+      search: null,
+    };
+  },
+  methods: {
+    findProfile() {
+      this.$router.push({ path: `/account/profile/${this.search}` });
+    },
+  },
 };
 </script>
 

@@ -14,7 +14,7 @@
 
     <b-card-body>
       <div class="d-flex justify-content-between">
-        <div class="h5">{{hotRecipeInfo.title}}</div>
+        <div class="h5 recipe-title">{{hotRecipeInfo.title}}</div>
         <div class="small mt-1">{{hotRecipeInfo.grade}}/5</div>
       </div>
       <div class="description">{{hotRecipeInfo.description}}</div>
@@ -57,8 +57,16 @@ export default {
     background-position-y: -3em;
   }
 
+  .recipe-title {
+    overflow: hidden;
+    width: 10em;
+    white-space: nowrap;
+  }
+
   .description {
     font-size: 0.8em;
     opacity: 0.8;
+    height: 3em;
+    overflow: hidden;
   }
 </style>

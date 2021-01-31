@@ -11,7 +11,10 @@
         <b-nav-form class="mx-auto d-md-block d-none">
           <div class="search-wrapper p-3 d-flex align-items-center">
             <img src="@/assets/svg/magnifying_glass_dark.svg" class="ml-3 magnifing-glass">
-            <input type="text" placeholder="Αναζήτηση" class="ml-4">
+            <form @submit.prevent="findProfile">
+              <input type="text" placeholder="Αναζήτηση" class="ml-4"
+                autocomplete="off" v-model="search">
+                </form>
           </div>
         </b-nav-form>
 
@@ -59,6 +62,7 @@ export default {
   data() {
     return {
       navItems: FiltertNavItems,
+      search: null,
     };
   },
   computed: {
@@ -75,6 +79,9 @@ export default {
         .then(() => {
           window.location.reload();
         });
+    },
+    findProfile() {
+      this.$router.push({ path: `/account/profile/${this.search}` });
     },
   },
 };

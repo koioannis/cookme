@@ -3,7 +3,7 @@
     <div class="recipe-preview-img"></div>
     <b-card-body>
       <div class="d-flex justify-content-between">
-        <div class="h5">{{post.title}}</div>
+        <div class="h5 recipe-title">{{post.title}}</div>
         <div class="small mt-1">{{post.grade}}/5</div>
       </div>
       <div class="description">
@@ -31,6 +31,12 @@ export default {
     height: 22em;
 
     background-position-y: -3em;
+  }
+
+  .recipe-title {
+    overflow: hidden;
+    width: 10em;
+    white-space: nowrap;
   }
 
   .description {

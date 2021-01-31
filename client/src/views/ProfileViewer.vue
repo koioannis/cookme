@@ -2,16 +2,24 @@
   <div>
     <Navbar class="fixed-top"/>
 
-    <div id="profile">
+    <div id="profile" v-if="userExists">
       <ProfileInformation />
       <div class="line-break"></div>
-      <b-row align-h="around" class="posts-wrapper mb-5">
+      <b-row align-h="around" v-if="postData != 0" class="posts-wrapper mb-5">
         <div v-for="(post, index) in postData" :key="index" class="mt-5">
           <router-link :to="'/post/view-post/' + post.id" class="post-link">
             <RecipeCard :post="post" style="width: 20em"/>
           </router-link>
         </div>
       </b-row>
+      <div class="text-center mt-5 text-muted" v-else>
+        <h6>Ο χρήστης αυτός δεν έχει καμία δημοσίευση.</h6>
+      </div>
+    </div>
+
+    <div id="profile" class="text-center" style="opacity: 0.9" v-else>
+      <img class="no-account-image" src="@/assets/svg/no_accounts.svg">
+      <h4 class="mt-3">Ο χρήστης που ψάχνετε δεν υπάρχει.</h4>
     </div>
   </div>
 </template>
@@ -31,6 +39,7 @@ export default {
   data() {
     return {
       postData: null,
+      userExists: null,
     };
   },
   created() {
@@ -38,11 +47,11 @@ export default {
       username: this.$router.history.current.params.profileId,
     })
       .then((response) => {
-        console.log(response);
+        this.userExists = 1;
         this.postData = response;
       })
       .catch(() => {
-        console.log('TODO');
+        this.userExists = 0;
       });
   },
 };
@@ -73,6 +82,11 @@ export default {
     .post-link {
       color: black;
       text-decoration: none;
+    }
+
+    .no-account-image {
+      margin-top: 8%;
+      width: 8em;
     }
   }
 
