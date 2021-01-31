@@ -1,9 +1,10 @@
 <template>
   <div id="post-body" class="mb-lg-5 mt-5 ml-4">
     <div class="d-flex justify-content-between">
-      <h3 class="pb-3 recipe-title"><b>Μακαρόνια Μπογιαμπές</b></h3>
-      <div class="d-md-flex d-none align-items-center mb-2 pb-2">
-        <div><b>4.3</b></div>
+      <h3 class="pb-3 recipe-title"><b>{{title}}</b></h3>
+      <div class="d-md-flex d-none align-items-center mb-2 pb-2"
+        style="margin-right: -1.4em">
+        <div><b>{{grade}}</b></div>
         <img class="ml-1" src="@/assets/svg/star.svg" style="width: 30%;">
       </div>
     </div>
@@ -22,21 +23,18 @@
     <div class="description mt-5 mb-md-5 mb-4">
       <h5 class="mt-4 recipe-description-title pb-2"><b>Περιγραφή</b></h5>
       <div class="mt-4">
-        Μέσο της μαγειρικής ανακαλύπτεις τις διάφορες ικανότητες σου.
-        Το σίτε αυτό σου προσφέρει μια δυνατότητα ή ένα πάτημα για να ξεκλειδώσεις
-        τις κρυμμένες ικανότητες που έχεις.
+        {{description}}
       </div>
     </div>
 
     <div class="recipe-steps">
       <h5 class="recipe-steps-title pb-2"><b>Βήματα</b></h5>
-      <div class="mt-4" v-for="step in steps" :key="step">
+      <div class="mt-4" v-for="(step, index) in steps" :key="index">
         <div class="d-flex align-items-end">
-          <div class="step-number font-weight-bold mr-3">{{step}}</div>
+          <div class="step-number font-weight-bold mr-3">{{index+1}}</div>
           <div class="mb-1">
-            Μέσο της μαγειρικής ανακαλύπτεις τις διάφορες ικανότητες σου. Το σίτε αυτό σου
-            προσφέρει μια ή ένα πάτημα για να ξεκλειδώσεις τις κρυμμένες ικανότητες
-            που έχεις.</div>
+            {{step}}
+          </div>
         </div>
       </div>
     </div>
@@ -46,10 +44,15 @@
 <script>
 export default {
   name: 'PostBody',
+  props: [
+    'title',
+    'description',
+    'grade',
+    'steps',
+  ],
   data() {
     return {
       star: 0,
-      steps: 5,
     };
   },
 };

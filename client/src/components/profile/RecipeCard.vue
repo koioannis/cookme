@@ -3,17 +3,21 @@
     <div class="recipe-preview-img"></div>
     <b-card-body>
       <div class="d-flex justify-content-between">
-        <div class="h5">Σαλάτα Καντή</div>
-        <div class="small mt-1">3/5</div>
+        <div class="h5">{{post.title}}</div>
+        <div class="small mt-1">{{post.grade}}/5</div>
       </div>
-      <div class="description">Μια σαλάτα που θα σας κάνει να
-        γλύφετε μέχρι και το τελευταίο δάκτυλο σας.</div>
+      <div class="description">
+        {{post.description}}
+      </div>
     </b-card-body>
   </b-card>
 </template>
 
 <script>
 export default {
+  props: [
+    'post',
+  ],
   name: 'RecipeCard',
 };
 </script>

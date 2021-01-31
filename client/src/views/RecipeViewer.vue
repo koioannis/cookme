@@ -11,10 +11,16 @@
       <b-col cols="10" class="ml-sm-5">
         <b-row>
           <b-col lg="8" class="mb-4 mb-md-auto">
-            <RecipeBody />
+            <RecipeBody
+              :title="title"
+              :description="description"
+              :grade="grade"
+              :steps="steps"/>
           </b-col>
           <b-col class="pt-4 d-sm-block d-none">
-            <IngredientsSection />
+            <IngredientsSection
+              :ingredients="ingredients"
+              :username="username"/>
           </b-col>
         </b-row>
       </b-col>
@@ -37,7 +43,9 @@ export default {
       title: null,
       description: null,
       steps: null,
+      grade: null,
       ingredients: null,
+      username: null,
     };
   },
   mounted() {
@@ -48,10 +56,15 @@ export default {
       id: this.$router.history.current.params.id,
     })
       .then((response) => {
-        console.log(response);
+        this.title = response.title;
+        this.grade = response.grade;
+        this.description = response.description;
+        this.ingredients = response.ingredients;
+        this.steps = response.steps;
+        this.username = response.user.username;
       })
       .catch(() => {
-        // this.$router.push({ path: '/' });
+        this.$router.push({ path: '/' });
       });
   },
   components: {

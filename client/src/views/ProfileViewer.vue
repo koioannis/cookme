@@ -6,8 +6,10 @@
       <ProfileInformation />
       <div class="line-break"></div>
       <b-row align-h="around" class="posts-wrapper mb-5">
-        <div v-for="index in testPosts" :key="index" class="mt-5">
-          <RecipeCard  style="width: 20em"/>
+        <div v-for="(post, index) in postData" :key="index" class="mt-5">
+          <router-link :to="'/post/view-post/' + post.id" class="post-link">
+            <RecipeCard :post="post" style="width: 20em"/>
+          </router-link>
         </div>
       </b-row>
     </div>
@@ -28,8 +30,20 @@ export default {
   },
   data() {
     return {
-      testPosts: 10,
+      postData: null,
     };
+  },
+  created() {
+    this.$store.dispatch('posts/getAllUserPosts', {
+      username: this.$router.history.current.params.profileId,
+    })
+      .then((response) => {
+        console.log(response);
+        this.postData = response;
+      })
+      .catch(() => {
+        console.log('TODO');
+      });
   },
 };
 </script>
@@ -51,6 +65,11 @@ export default {
     .posts-wrapper {
       margin-left: 20%;
       margin-right: 20%;
+    }
+
+    .post-link {
+      color: black;
+      text-decoration: none;
     }
   }
 
