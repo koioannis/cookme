@@ -139,7 +139,7 @@ export default {
     if (this.modification === true) {
       this.id = this.$route.query.data.id;
       this.title = this.$route.query.data.title;
-      this.description = this.$route.query.data.title;
+      this.description = this.$route.query.data.description;
       this.ingredients = this.$route.query.data.ingredients;
       this.steps = this.$route.query.data.steps;
       this.estimatedCost = this.$route.query.data.ingredientsPrice;
