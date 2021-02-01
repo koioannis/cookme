@@ -64,7 +64,7 @@ class PostsService {
   }
 
   async CreatePost({
-    userId, title, description, ingredients, steps,
+    userId, title, description, ingredients, steps, ingredientsPrice,
   }) {
     const userRecord = await this.userModel.findOne({ _id: userId }, (error) => {
       if (error) throw error;
@@ -79,6 +79,7 @@ class PostsService {
       description,
       user: userRecord._id,
       steps,
+      ingredientsPrice,
     });
 
     const ingredientRecords = [];

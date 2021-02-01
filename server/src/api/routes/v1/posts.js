@@ -80,6 +80,7 @@ const posts = (app) => {
       title: Joi.string().required(),
       description: Joi.string().required(),
       steps: Joi.array().required(),
+      ingredientsPrice: Joi.number().required(),
       ingredients: Joi.array().items(Joi.object({
         name: Joi.string().required(),
         quantity: Joi.string().required(),
@@ -98,6 +99,7 @@ const posts = (app) => {
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
+        ingredientsPrice: req.body.ingredientsPrice,
         steps: req.body.steps,
       });
 

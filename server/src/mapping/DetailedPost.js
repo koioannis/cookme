@@ -5,6 +5,7 @@ const DetailedPostDTO = {
   createdAt: 'createdAt',
   steps: 'steps',
   grade: 'grade',
+  ingredientsPrice: 'ingredientsPrice',
   'comments[].createdAt': 'comments[].createdAt',
   'comments[].content': 'comments[].content',
   'comments[].user._id': 'comments[].user.id',

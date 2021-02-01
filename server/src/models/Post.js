@@ -13,6 +13,10 @@ const postSchema = new mongoose.Schema({
     max: 255,
     min: 6,
   },
+  ingredientsPrice: {
+    type: Number,
+    required: true,
+  },
   grade: {
     type: Number,
     required: true,
