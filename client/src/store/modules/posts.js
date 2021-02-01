@@ -19,6 +19,7 @@ const posts = {
           description: data.description,
           ingredients: data.ingredients,
           steps: data.steps,
+          ingredientsPrice: data.estimatedCost,
         }, {
           withCredentials: true,
           headers: {

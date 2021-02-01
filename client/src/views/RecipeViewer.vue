@@ -21,6 +21,7 @@
             <IngredientsSection
               :ingredients="ingredients"
               :username="username"
+              :ingredientsPrice="ingredientsPrice"
               :postId="id"
               @modifyPost="modifyPost"/>
           </b-col>
@@ -49,6 +50,7 @@ export default {
       grade: null,
       ingredients: null,
       username: null,
+      ingredientsPrice: null,
     };
   },
   mounted() {
@@ -65,6 +67,7 @@ export default {
             description: this.description,
             steps: this.steps,
             ingredients: this.ingredients,
+            ingredientsPrice: this.ingredientsPrice,
           },
         },
       });
@@ -78,6 +81,7 @@ export default {
         this.id = response.id;
         this.title = response.title;
         this.grade = response.grade;
+        this.ingredientsPrice = response.ingredientsPrice;
         this.description = response.description;
         this.ingredients = response.ingredients;
         this.steps = response.steps;

@@ -42,5 +42,7 @@ export default {
   .description {
     font-size: 0.8em;
     opacity: 0.8;
+    overflow: hidden;
+    height: 3em;
   }
 </style>

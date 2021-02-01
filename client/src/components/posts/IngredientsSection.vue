@@ -15,7 +15,7 @@
     <div class="d-flex ingredients-header align-items-center pt-2 pb-2">
       <img src="@/assets/svg/ingredients.svg">
       <h3 class="ml-3 mt-1 ingredients-title"><b>Υλικά</b></h3>
-      <h4 class="ml-auto mt-2 pr-3"><b>30€</b></h4>
+      <h4 class="ml-auto mt-2 pr-3"><b>{{ingredientsPrice}}</b></h4>
     </div>
 
     <table class="table table-striped mt-4 text-center">
@@ -61,6 +61,7 @@ export default {
     'ingredients',
     'username',
     'postId',
+    'ingredientsPrice',
   ],
   data() {
     return {

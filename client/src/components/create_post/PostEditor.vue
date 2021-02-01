@@ -19,7 +19,7 @@
     <div class="info-wrapper mt-5">
       <h5>Υλικά</h5>
       <div class="form-group mt-3">
-        <input type="text" class="small-input input-box p-3 mt-2"
+        <input type="number" class="small-input input-box p-3 mt-2" step="0.01"
           placeholder="Τιμή Υλικών" v-model="estimatedCost" required>
       </div>
       <b-row v-for="index in ingredientsNumber" :key="index" cols="2">
@@ -108,6 +108,7 @@ export default {
           title: this.title,
           description: this.description,
           ingredients: this.ingredients,
+          estimatedCost: this.estimatedCost,
           steps: this.steps,
         })
           .then((postId) => {
@@ -122,6 +123,7 @@ export default {
           title: this.title,
           description: this.description,
           ingredients: this.ingredients,
+          estimatedCost: this.estimatedCost,
           steps: this.steps,
         })
           .then((postId) => {
@@ -140,6 +142,7 @@ export default {
       this.description = this.$route.query.data.title;
       this.ingredients = this.$route.query.data.ingredients;
       this.steps = this.$route.query.data.steps;
+      this.estimatedCost = this.$route.query.data.ingredientsPrice;
       this.stepsNumber = this.$route.query.data.steps.length;
       this.ingredientsNumber = this.$route.query.data.ingredients.length;
     }
@@ -183,6 +186,12 @@ export default {
 
     .send-button {
       width: 80%;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 </style>
