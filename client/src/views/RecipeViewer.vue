@@ -20,7 +20,8 @@
           <b-col class="pt-4 d-sm-block d-none">
             <IngredientsSection
               :ingredients="ingredients"
-              :username="username"/>
+              :username="username"
+              :postId="id"/>
           </b-col>
         </b-row>
       </b-col>
@@ -40,6 +41,7 @@ export default {
   name: 'RecipeViewer',
   data() {
     return {
+      id: null,
       title: null,
       description: null,
       steps: null,
@@ -56,6 +58,7 @@ export default {
       id: this.$router.history.current.params.id,
     })
       .then((response) => {
+        this.id = response.id;
         this.title = response.title;
         this.grade = response.grade;
         this.description = response.description;

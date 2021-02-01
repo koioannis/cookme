@@ -6,6 +6,7 @@ const authentication = {
   state: {
     accessToken: localStorage.getItem('access_token') || null,
     username: localStorage.getItem('username') || 'Άγνωστος',
+    admin: localStorage.getItem('isAdmin') || null,
   },
   mutations: {
     retrieveToken(state, token) {
@@ -13,6 +14,9 @@ const authentication = {
     },
     retrieveUsername(state, username) {
       state.username = username;
+    },
+    retrieveAdmin(state, admin) {
+      state.admin = admin;
     },
     destroyToken(state) {
       state.accessToken = null;
@@ -28,6 +32,9 @@ const authentication = {
     getUsername(state) {
       return state.username;
     },
+    getAdmin(state) {
+      return state.admin;
+    },
   },
   actions: {
     login(context, credentials) {
@@ -39,12 +46,15 @@ const authentication = {
           .then((response) => {
             const token = response.data.accessToken;
             const name = response.data.data.username;
+            const admin = response.data.isAdmin;
 
             localStorage.setItem('access_token', token);
             localStorage.setItem('username', name);
+            localStorage.setItem('isAdmin', admin);
 
             context.commit('retrieveToken', token);
             context.commit('retrieveUsername', name);
+            context.commit('retrieveAdmin', admin);
             resolve(response);
           })
           .catch((error) => {
@@ -66,9 +76,11 @@ const authentication = {
 
             localStorage.setItem('access_token', token);
             localStorage.setItem('username', name);
+            localStorage.setItem('isAdmin', false);
 
             context.commit('retrieveToken', token);
             context.commit('retrieveUsername', name);
+            context.commit('retrieveAdmin', false);
             resolve(response);
           })
           .catch((error) => {
@@ -89,6 +101,7 @@ const authentication = {
           .then(() => {
             localStorage.removeItem('username');
             localStorage.removeItem('access_token');
+            localStorage.removeItem('isAdmin');
             context.commit('destroyToken');
             context.commit('destroyUsername');
             resolve();

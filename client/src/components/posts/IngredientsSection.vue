@@ -35,6 +35,22 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-start mt-4"
+      v-if="getUsername === username || getAdmin">
+      <b-button variant="info">Επεξεργασία</b-button>
+      <b-button variant="danger" class="ml-2"
+        v-b-modal.delete-post>Διαγραφή</b-button>
+
+      <b-modal id="delete-post" title="Διαγραφή" centered>
+        <p class="text-danger text-center mt-2 mb-2">{{errorModal}}</p>
+        <p class="my-4">Είστε βάβαιοι οτι θέλετε να διαγράψετε αυτή την δημοσίευση ;</p>
+        <template #modal-footer="{ cancel }">
+          <b-button @click="cancel()">Όχι</b-button>
+          <b-button variant="danger" @click="deletePost">Ναι</b-button>
+        </template>
+      </b-modal>
+    </div>
   </div>
 </template>
 
@@ -44,11 +60,33 @@ export default {
   props: [
     'ingredients',
     'username',
+    'postId',
   ],
   data() {
     return {
-      ingredCount: 8,
+      errorModal: null,
     };
+  },
+  computed: {
+    getUsername() {
+      return this.$store.getters['auth/getUsername'];
+    },
+    getAdmin() {
+      return this.$store.getters['auth/getAdmin'];
+    },
+  },
+  methods: {
+    deletePost() {
+      this.$store.dispatch('posts/deletePost', {
+        postId: this.postId,
+      })
+        .then(() => {
+          this.$router.push({ path: '/' });
+        })
+        .catch(() => {
+          this.errorModal = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';
+        });
+    },
   },
 };
 </script>
