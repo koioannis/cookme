@@ -39,20 +39,23 @@ class AuthService {
       this.logger.silly('Creating user db record');
 
       // Save data to DB
-      let userDetailsRecord = null;
-      if (userData.userDetails) {
-        userDetailsRecord = await this.userDetailsModel.create({
-          ...userData.userDetails,
-        });
-      }
       const userRecord = await this.userModel.create({
         username: userData.username,
         email: userData.email,
         salt: salt.toString('hex'),
-        userDetails: userDetailsRecord,
         password: hashedPassword,
         isAdmin: false,
       });
+
+      let userDetailsRecord = null;
+      if (userData.userDetails) {
+        userDetailsRecord = await this.userDetailsModel.create({
+          ...userData.userDetails,
+          user: userRecord,
+        });
+      }
+      userRecord.userDetails = userDetailsRecord;
+      userRecord.save();
 
       if (!userRecord) {
         const error = new Error('Invalid Password or Email');

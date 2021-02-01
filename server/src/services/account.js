@@ -1,14 +1,46 @@
 const { Service, Container } = require('typedi');
 const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
+const mongoose = require('mongoose');
 const { randomBytes } = require('crypto');
+const objectMapper = require('object-mapper');
 const config = require('../config');
+const userDTO = require('../mapping/user/UserDTO');
 
 Service();
 class AccountService {
   constructor() {
     this.logger = Container.get('logger');
     this.userModel = Container.get('userModel');
+    this.userDetailsModel = Container.get('userDetailsModel');
+  }
+
+  async GetAccountInfo({ username }) {
+    const userRecord = await this.userModel.findOne({ username }).populate('userDetails');
+
+    if (!userRecord) {
+      const error = new Error('user not found');
+      error.status = 404;
+      throw error;
+    }
+
+    return objectMapper(userRecord, userDTO);
+  }
+
+  async UpdateAccountDescription({ userId, description }) {
+    await this.userDetailsModel.findOneAndUpdate(
+      { user: mongoose.Types.ObjectId(userId) }, { description },
+    );
+
+    this.logger.debug(userId);
+    const userRecord = await this.userModel.findOne({ _id: userId }).populate('userDetails');
+    if (!userRecord) {
+      const error = new Error('user not found');
+      error.status = 404;
+      throw error;
+    }
+
+    return objectMapper(userRecord, userDTO);
   }
 
   async ResetPassword(data) {
