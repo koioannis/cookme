@@ -38,7 +38,7 @@
 
     <div class="d-flex justify-content-start mt-4"
       v-if="getUsername === username || getAdmin">
-      <b-button variant="info">Επεξεργασία</b-button>
+      <b-button variant="info" @click="modifyPost">Επεξεργασία</b-button>
       <b-button variant="danger" class="ml-2"
         v-b-modal.delete-post>Διαγραφή</b-button>
 
@@ -86,6 +86,9 @@ export default {
         .catch(() => {
           this.errorModal = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';
         });
+    },
+    modifyPost() {
+      this.$emit('modifyPost');
     },
   },
 };

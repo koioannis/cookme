@@ -53,6 +53,14 @@ export default {
       steps: new Array('Έδω μπαίνει το πρώτο βήμα.', 'Έδω μπαίνει το δεύτερο.'),
     };
   },
+  created() {
+    if (Object.keys(this.$route.query).length !== 0) {
+      this.title = this.$route.query.data.title;
+      this.description = this.$route.query.data.description;
+      this.ingredients = this.$route.query.data.ingredients;
+      this.steps = this.$route.query.data.steps;
+    }
+  },
   methods: {
     updateTitle(param) {
       this.title = param;

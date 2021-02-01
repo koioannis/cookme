@@ -21,7 +21,8 @@
             <IngredientsSection
               :ingredients="ingredients"
               :username="username"
-              :postId="id"/>
+              :postId="id"
+              @modifyPost="modifyPost"/>
           </b-col>
         </b-row>
       </b-col>
@@ -52,6 +53,22 @@ export default {
   },
   mounted() {
     window.scroll(0, 0);
+  },
+  methods: {
+    modifyPost() {
+      this.$router.push({
+        path: '/post/create-post',
+        query: {
+          data: {
+            id: this.id,
+            title: this.title,
+            description: this.description,
+            steps: this.steps,
+            ingredients: this.ingredients,
+          },
+        },
+      });
+    },
   },
   created() {
     this.$store.dispatch('posts/fetchHolePost', {

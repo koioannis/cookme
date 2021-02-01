@@ -84,6 +84,26 @@ const posts = {
           });
       });
     },
+    modifyPost(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`/posts/post/${data.postId}`, {
+          title: data.title,
+          description: data.description,
+        }, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
+          },
+          withCredentials: true,
+        })
+          .then(() => {
+            resolve(data.postId);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
   },
 };
 

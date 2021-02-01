@@ -1,5 +1,5 @@
 <template>
-  <form id="editor" @submit.prevent="createPost">
+  <form id="editor" @submit.prevent="sendPost">
     <h3 class="text-center pt-5"><b><u>Συνταγή</u></b></h3>
     <div class="text-center text-danger mb-3 lead underline" style="font-size:1em">
       <u>{{errorRespone}}</u></div>
@@ -73,6 +73,8 @@ export default {
       ingredients: new Array({ name: '', quantity: '' }, { name: '', quantity: '' }),
       // eslint-disable-next-line no-array-constructor
       steps: new Array('', ''),
+      modification: Object.keys(this.$route.query).length !== 0,
+      id: null,
     };
   },
   methods: {
@@ -100,22 +102,47 @@ export default {
         this.stepsNumber -= 1;
       }
     },
-    createPost() {
-      this.$store.dispatch('posts/createPost', {
-        title: this.title,
-        description: this.description,
-        ingredients: this.ingredients,
-        steps: this.steps,
-      })
-        .then((postId) => {
-          this.$router.push({ path: `/post/view-post/${postId}` });
+    sendPost() {
+      if (this.modification === false) {
+        this.$store.dispatch('posts/createPost', {
+          title: this.title,
+          description: this.description,
+          ingredients: this.ingredients,
+          steps: this.steps,
         })
-        .catch(() => {
-          this.errorRespone = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';
-        });
+          .then((postId) => {
+            this.$router.push({ path: `/post/view-post/${postId}` });
+          })
+          .catch(() => {
+            this.errorRespone = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';
+          });
+      } else {
+        this.$store.dispatch('posts/modifyPost', {
+          postId: this.id,
+          title: this.title,
+          description: this.description,
+          ingredients: this.ingredients,
+          steps: this.steps,
+        })
+          .then((postId) => {
+            this.$router.push({ path: `/post/view-post/${postId}` });
+          })
+          .catch(() => {
+            this.errorRespone = 'Κάτι πήγε στραβά ξαναπροσπαθήστε. Αν δεν μπορείτε να συνδεθείτε στείλτε μας ένα email.';
+          });
+      }
     },
   },
   created() {
+    if (this.modification === true) {
+      this.id = this.$route.query.data.id;
+      this.title = this.$route.query.data.title;
+      this.description = this.$route.query.data.title;
+      this.ingredients = this.$route.query.data.ingredients;
+      this.steps = this.$route.query.data.steps;
+      this.stepsNumber = this.$route.query.data.steps.length;
+      this.ingredientsNumber = this.$route.query.data.ingredients.length;
+    }
     this.$emit('updateIngredients', this.ingredients);
   },
   watch: {
