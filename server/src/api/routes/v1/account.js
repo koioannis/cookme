@@ -2,11 +2,13 @@ const { Router } = require('express');
 const { celebrate, Joi } = require('celebrate');
 const { Container } = require('typedi');
 
+const middlewares = require('../../middlewares');
 const AccountService = require('../../../services/account.js');
 const RouteFactory = require('../../RouteFactory');
 
 const ApiRoutes = RouteFactory('v1');
 const route = Router();
+
 const account = (app) => {
   app.use(route);
   const logger = Container.get('logger');
@@ -51,6 +53,39 @@ const account = (app) => {
 
       return res.status(200).json(message);
     });
+
+  route.put(ApiRoutes.CreateAccountDescription, middlewares.isAuth, celebrate({
+    body: Joi.object({
+      description: Joi.string().required(),
+    }).required(),
+  }), async (req, res, next) => {
+    try {
+      const accountServiceInstance = Container.get(AccountService);
+      const result = await accountServiceInstance.UpdateAccountDescription({
+        userId: res.locals.userId,
+        description: req.body.description,
+      });
+
+      res.json(result);
+      return res.status(200);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
+  route.get(ApiRoutes.GetAccountInfo, async (req, res, next) => {
+    try {
+      const accountServiceInstance = Container.get(AccountService);
+      const result = await accountServiceInstance.GetAccountInfo({
+        username: req.params.username,
+      });
+
+      res.json(result);
+      return res.status(200);
+    } catch (error) {
+      return next(error);
+    }
+  });
 };
 
 module.exports = account;

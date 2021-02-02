@@ -4,7 +4,7 @@ const userDetailsSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: false,
+    required: true,
   },
   firstName: {
     type: String,
@@ -17,6 +17,10 @@ const userDetailsSchema = new mongoose.Schema({
     required: false,
     max: 255,
     min: 6,
+  },
+  description: {
+    type: String,
+    required: false,
   },
 });
 module.exports = mongoose.model('UserDetails', userDetailsSchema);

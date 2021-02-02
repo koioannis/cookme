@@ -29,6 +29,9 @@ const RouteFactory = (version) => {
 
     DeletePost: `${AdminBase}/post/:postId`,
     DeleteComment: `${AdminBase}/comment/:commentId`,
+
+    CreateAccountDescription: `${AccountBase}/description`,
+    GetAccountInfo: `${AccountBase}/info/:username`
   };
 };
 
