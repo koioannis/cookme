@@ -1,9 +1,14 @@
 <template>
   <div id="post">
     <SignTemplate />
-
     <Navbar class="fixed-top"/>
-    <b-row class="content-wrapper">
+
+    <div class="text-center" style="opacity: 0.9; margin-top: 5.9em; height: 10em"
+      v-if="waiting == 1">
+      <b-spinner label="Loading..." class="mt-5"></b-spinner>
+    </div>
+
+    <b-row class="content-wrapper" v-else>
       <b-col class="d-none d-md-block">
         <CommentSection class="side-bar"/>
       </b-col>
@@ -43,6 +48,7 @@ export default {
   name: 'RecipeViewer',
   data() {
     return {
+      waiting: 1,
       id: null,
       title: null,
       description: null,
@@ -86,6 +92,7 @@ export default {
         this.ingredients = response.ingredients;
         this.steps = response.steps;
         this.username = response.user.username;
+        this.waiting = 0;
       })
       .catch(() => {
         this.$router.push({ path: '/' });

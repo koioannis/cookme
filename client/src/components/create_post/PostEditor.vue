@@ -25,12 +25,12 @@
       <b-row v-for="index in ingredientsNumber" :key="index" cols="2">
         <b-col class="form-group mt-1">
           <input type="text" class="small-input input-box p-3 mt-2"
-            placeholder="Τίτλος" v-model="ingredients[index-1].name" required>
+            placeholder="Ύλικο" v-model="ingredients[index-1].name" required>
         </b-col>
 
         <b-col class="form-group mt-1">
           <input type="text" class="small-input input-box p-3 mt-2"
-            placeholder="Τίτλος" v-model="ingredients[index-1].quantity" required>
+            placeholder="Ποσότητα" v-model="ingredients[index-1].quantity" required>
         </b-col>
       </b-row>
       <b-button size="md" class="mt-2 custom-button" @click="addIngredient">
@@ -43,7 +43,7 @@
       <h5>Βήματα</h5>
       <div v-for="index in stepsNumber" :key="index" class="mt-2">
           <textarea class="big-input input-box p-3 mt-2"
-            placeholder="Περιγραφή" v-model="steps[index-1]" required></textarea>
+            placeholder="Βήμα" v-model="steps[index-1]" required></textarea>
       </div>
       <b-button size="md" class="mt-2 mb-2 custom-button" @click="addStep">
         Προσθήκη</b-button>

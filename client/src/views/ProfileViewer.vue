@@ -1,8 +1,9 @@
 <template>
   <div>
     <Navbar class="fixed-top"/>
+    <SignTemplate />
 
-    <div id="profile" v-if="userExists">
+    <div id="profile" v-if="userExists === 1">
       <ProfileInformation />
       <div class="line-break"></div>
       <b-row align-h="around" v-if="postData != 0" class="posts-wrapper mb-5">
@@ -33,6 +34,7 @@
 import Navbar from '@/components/discovery/Navbar.vue';
 import ProfileInformation from '@/components/profile/ProfileInformation.vue';
 import RecipeCard from '@/components/profile/RecipeCard.vue';
+import SignTemplate from '@/components/auth/SignTemplate.vue';
 
 export default {
   name: 'ProfileViewer',
@@ -40,6 +42,7 @@ export default {
     Navbar,
     ProfileInformation,
     RecipeCard,
+    SignTemplate,
   },
   data() {
     return {
@@ -48,6 +51,7 @@ export default {
     };
   },
   async created() {
+    window.scroll(0, 0);
     await this.$store.dispatch('posts/getAllUserPosts', {
       username: this.$router.history.current.params.profileId,
     })

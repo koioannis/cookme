@@ -6,7 +6,7 @@ const authentication = {
   state: {
     accessToken: localStorage.getItem('access_token') || null,
     username: localStorage.getItem('username') || 'Άγνωστος',
-    admin: localStorage.getItem('isAdmin') || null,
+    admin: localStorage.getItem('isAdmin') || false,
   },
   mutations: {
     retrieveToken(state, token) {
@@ -23,6 +23,9 @@ const authentication = {
     },
     destroyUsername(state) {
       state.username = 'Άγνωστος';
+    },
+    destroyAdmin(state) {
+      state.admin = false;
     },
   },
   getters: {
@@ -104,6 +107,7 @@ const authentication = {
             localStorage.removeItem('isAdmin');
             context.commit('destroyToken');
             context.commit('destroyUsername');
+            context.commit('destroyAdmin');
             resolve();
           })
           .catch((error) => {
@@ -128,6 +132,13 @@ const authentication = {
             resolve(token);
           })
           .catch((error) => {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('username');
+            localStorage.removeItem('isAdmin', false);
+
+            context.commit('destroyToken');
+            context.commit('destroyUsername');
+            context.commit('destroyAdmin');
             reject(error);
           });
       });

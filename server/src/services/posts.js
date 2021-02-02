@@ -184,6 +184,8 @@ class PostsService {
       { $match: { user: { $not: { $eq: mongoose.Types.ObjectId(userId) } } } },
     ]);
 
+    await this.postModel.populate(postRecords, { path: 'user' });
+
     if (!postRecords) {
       const error = new Error('Posts not found');
       error.status = 404;

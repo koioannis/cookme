@@ -1,24 +1,28 @@
 <template>
-  <b-card no-body style="width: fit-content">
+  <b-card no-body>
     <template #header>
-      <div class="d-flex ml-1 user-info">
+      <div class="d-flex ml-2 user-info">
         <div class="user-img shadow-lg"></div>
         <div class="user-cred ml-2">
-          <b>{{hotRecipeInfo.user.name}}</b>
-          <p class="small">{{hotRecipeInfo.user.title}}</p>
+          <router-link :to="'/account/profile/'+recentRecipesInfo.user.username" class="post-link">
+            <b>{{recentRecipesInfo.user.username}}</b>
+            <p class="small">Επαγκελματίας μάγειρας</p>
+          </router-link>
         </div>
       </div>
     </template>
 
-    <div class="recipe-preview-img"></div>
+    <router-link :to="'/post/view-post/' + recentRecipesInfo.id" class="post-link">
+      <div class="recipe-preview-img"></div>
 
-    <b-card-body>
-      <div class="d-flex justify-content-between">
-        <div class="h5 recipe-title">{{hotRecipeInfo.title}}</div>
-        <div class="small mt-1">{{hotRecipeInfo.grade}}/5</div>
-      </div>
-      <div class="description">{{hotRecipeInfo.description}}</div>
-    </b-card-body>
+      <b-card-body>
+        <div class="d-flex justify-content-between">
+          <div class="h5 recipe-title">{{recentRecipesInfo.title}}</div>
+          <div class="small mt-1">{{recentRecipesInfo.grade}}/5</div>
+        </div>
+        <div class="description">{{recentRecipesInfo.description}}</div>
+      </b-card-body>
+    </router-link>
   </b-card>
 </template>
 
@@ -26,7 +30,7 @@
 export default {
   name: 'RecipeCard',
   props: [
-    'hotRecipeInfo',
+    'recentRecipesInfo',
   ],
 };
 </script>
@@ -37,12 +41,11 @@ export default {
 
     .user-img {
       background-image: url('../../assets/svg/account_icon.svg');
-      border: 2px solid #999999;
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 100%;
-      width: 3em;
-      height: 3em;
+      width: 2.8em;
+      height: 2.8em;
       overflow: hidden;
     }
   }
@@ -68,5 +71,10 @@ export default {
     opacity: 0.8;
     height: 3em;
     overflow: hidden;
+  }
+
+  .post-link {
+    color: black;
+    text-decoration: none;
   }
 </style>
