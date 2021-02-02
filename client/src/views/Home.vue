@@ -15,17 +15,17 @@
     <div class="whole-page-height-grey d-flex flex-column justify-content-center">
       <div class="header-text-wrapper d-flex justify-content-center">
         <img src="@/assets/svg/star.svg" alt="star" class="star-img d-none d-sm-block">
-        <div class="ml-3 mt-2 h1"><b>Κορυφαίες Συνταγές</b></div>
+        <div class="ml-3 mt-2 h1"><b>Πρόσφατες Συνταγές</b></div>
       </div>
-      <b-row style="margin: auto;">
-          <!-- Need to make the request -->
+      <b-row style="margin: auto;" v-if="recentRecipes !== null">
           <b-col md="6" class="mt-5" lg="3" style="width: 23em;margin: auto"
-            v-for="(recipe, index) in hotRecipe" :key="index">
-            <router-link to="/post/view-post/123" class="post-link">
-              <RecipeCard :hotRecipeInfo="recipe"/>
-            </router-link>
+            v-for="(recipe, index) in recentRecipes" :key="index">
+            <RecipeCard :recentRecipesInfo="recipe"/>
           </b-col>
       </b-row>
+      <div class="error-cards text-muted text-center w-75" v-else>
+        <h5>Ξαναπροσπαθήστε να μπείτε στην ιστοσελίδα μας, κατι πήγε στραβά</h5>
+      </div>
     </div>
 
     <div class="carousel-wrapper d-lg-flex">
@@ -63,8 +63,6 @@ import FooterAbout from '@/components/landing/FooterAbout.vue';
 import Instructions from '@/components/landing/Instruction.vue';
 import SignTemplate from '@/components/auth/SignTemplate.vue';
 
-import BestRecipes from '@/helpers/temp/BestRecipes.json';
-
 export default {
   name: 'Home',
   components: {
@@ -80,8 +78,14 @@ export default {
   },
   data() {
     return {
-      hotRecipe: BestRecipes,
+      recentRecipes: null,
     };
+  },
+  created() {
+    this.$store.dispatch('posts/getRandomPosts', { count: 4 })
+      .then((response) => {
+        this.recentRecipes = response;
+      });
   },
 };
 </script>
@@ -123,13 +127,14 @@ export default {
     }
   }
 
-  .post-link {
-    color: black;
-    text-decoration: none;
-  }
-
   .carousel {
     width: 50%;
+  }
+
+  .error-cards {
+    margin-top: 8% !important;
+    margin-bottom: 6% !important;
+    margin: auto;
   }
 
   @media only screen and (max-width: 1000px) {

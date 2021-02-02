@@ -48,6 +48,7 @@ export default {
     };
   },
   async created() {
+    window.scroll(0, 0);
     await this.$store.dispatch('posts/getAllUserPosts', {
       username: this.$router.history.current.params.profileId,
     })

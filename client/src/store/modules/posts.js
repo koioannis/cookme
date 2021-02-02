@@ -2,15 +2,9 @@ import axios from 'axios';
 
 const posts = {
   namespaced: true,
-  state: {
-
-  },
-  mutations: {
-
-  },
-  getters: {
-
-  },
+  state: {},
+  mutations: {},
+  getters: {},
   actions: {
     createPost(context, data) {
       return new Promise((resolve, reject) => {
@@ -39,7 +33,6 @@ const posts = {
         axios.get(`/posts/post/${data.id}`, {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
           },
           withCredentials: true,
         })
@@ -56,7 +49,22 @@ const posts = {
         axios.get(`/posts/get-all-posts/${data.username}`, {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
+          },
+          withCredentials: true,
+        })
+          .then((response) => {
+            resolve(response.data);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
+    getRandomPosts(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.get(`/posts/get-random-posts/${data.count}`, {
+          headers: {
+            Accept: 'application/json',
           },
           withCredentials: true,
         })
