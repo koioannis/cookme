@@ -9,8 +9,10 @@
     </div>
 
     <b-row class="content-wrapper" v-else>
-      <b-col class="d-none d-md-block">
-        <CommentSection class="side-bar"/>
+      <b-col class="d-none d-lg-block">
+        <CommentSection class="side-bar"
+          :comments="comments"
+          :postId="id"/>
       </b-col>
 
       <b-col cols="10" class="ml-sm-5">
@@ -57,6 +59,7 @@ export default {
       ingredients: null,
       username: null,
       ingredientsPrice: null,
+      comments: null,
     };
   },
   mounted() {
@@ -92,6 +95,7 @@ export default {
         this.ingredients = response.ingredients;
         this.steps = response.steps;
         this.username = response.user.username;
+        this.comments = response.comments;
         this.waiting = 0;
       })
       .catch(() => {
