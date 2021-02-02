@@ -15,6 +15,11 @@
               <div class="ml-2">
                 {{comment.content}}
               </div>
+              <div class="ml-2 text-danger text-right mr-3" style="cursor: pointer"
+                v-if="comment.user.username === username || admin == 'true'"
+                @click="deleteComment(comment.id)">
+                <u>Διαγραφη</u>
+              </div>
             </div>
           </div>
         </div>
@@ -54,11 +59,13 @@ export default {
   data() {
     return {
       userComment: null,
+      username: null,
+      admin: null,
     };
   },
   mounted() {
-    const commentsBox = document.getElementById('comments');
-    commentsBox.scroll(0, commentsBox.scrollHeight);
+    this.username = this.$store.getters['auth/getUsername'];
+    this.admin = this.$store.getters['auth/getAdmin'];
   },
   methods: {
     sendComment() {
@@ -71,6 +78,18 @@ export default {
         })
         .catch(() => {
           this.$route.push({ path: 'error-page' });
+        });
+    },
+    deleteComment(deletedCommentId) {
+      this.$store.dispatch('posts/comments/deleteComment', {
+        postId: this.postId,
+        commentId: deletedCommentId,
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          this.$router.push({ path: '/error-page' });
         });
     },
   },
