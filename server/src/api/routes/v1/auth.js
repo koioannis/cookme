@@ -78,13 +78,15 @@ const auth = (app) => {
     }
   });
 
-  route.post(ApiRoutes.LogOut, middlewares.isAuth, (req, res, next) => {
+  route.post(ApiRoutes.LogOut, middlewares.isAuth, async (req, res, next) => {
     const logger = Container.get('logger');
-    logger.debug('Calling Sign-out endpoint with body: %o', req.body);
+    logger.debug('Calling Sign-out endpoint with token: %o', req.cookies.refreshToken);
     try {
       const authServiceInstance = Container.get(AuthService);
-      authServiceInstance.Logout(res);
-      return res.status(200).json({ message: 'Signed out' });
+      await authServiceInstance.Logout(res.locals.userId, req.cookies.refreshToken);
+
+      res.clearCookie('refreshToken');
+      return res.status(200).end();
     } catch (error) {
       logger.error('error %o', error);
       return next(error);
