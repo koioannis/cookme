@@ -82,15 +82,17 @@ class PostsService {
       ingredientsPrice,
     });
 
-    const ingredientRecords = [];
-    ingredients.forEach(async (ingredient) => {
-      ingredientRecords.push(await this.ingredientModel.create({
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const ingredient of ingredients) {
+      await this.ingredientModel.create({
         name: ingredient.name,
         quantity: ingredient.quantity,
         post: postRecord,
-      }));
-    });
+      });
+    }
 
+    const ingredientRecords = await this.ingredientModel.find({ post: postRecord._id });
+    this.logger.debug('%o', ingredientRecords);
     await postRecord.save();
     await this.postModel.updateOne({ _id: postRecord._id },
       { $push: { ingredients: { $each: ingredientRecords } } });

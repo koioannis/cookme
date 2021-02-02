@@ -11,8 +11,10 @@ const swaggerDocument = require('../../swagger.json');
 
 const expressLoader = (app) => {
   app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Headers', 'Authorization, Set-Cookie, Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.cookme.me');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Headers', 'Authorization, Set-Cookie, Origin, X-Requested-With, Content-Type, Accept, X-HTTP-Method-Override');
+    res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
     next();
   });
 
@@ -29,7 +31,7 @@ const expressLoader = (app) => {
   app.use(methodOverride());
 
   app.use(helmet());
-  app.use(cors({ credentials: true, origin: true }));
+  app.use(cors({ credentials: true, origin: 'https://www.cookme.me' }));
   app.use(bodyParser.json());
   app.use(cookieParser());
 

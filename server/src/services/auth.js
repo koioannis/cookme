@@ -132,10 +132,12 @@ class AuthService {
     throw error;
   }
 
-  Logout(res) {
+  async Logout(userId, oldRefreshToken) {
     // delete the refresh token from user's cookies && db
     this.logger.debug('Deleting cookie');
-    res.clearCookie('refreshToken');
+
+    await this.refreshTokenModel.findOne({ token: oldRefreshToken });
+    await this.userModel.findOne({ _id: userId });
   }
 
   async RefreshToken({ oldAccessToken, oldRefreshToken }) {
@@ -149,9 +151,9 @@ class AuthService {
     const decodedData = jwt.decode(oldAccessToken);
     const { userId, jti } = decodedData;
 
+    this.logger.debug('hello this is the old one', oldRefreshToken);
     let oldRefreshTokenId;
     let refreshTokenError;
-    this.logger.debug(oldRefreshToken);
     await this.refreshTokenModel.findOneAndDelete({ token: oldRefreshToken },
       (error, refreshToken) => {
         try {
@@ -170,8 +172,6 @@ class AuthService {
       refreshTokenError.status = 401;
       throw refreshTokenError;
     }
-
-    this.logger.debug(oldRefreshTokenId);
     const userRecord = await this.userModel.findOne({ _id: userId }, (error, user) => {
       if (error) throw error;
       user.refreshTokens.pull({ _id: oldRefreshTokenId });
@@ -229,7 +229,7 @@ class AuthService {
       },
       config.jwtSecret,
       {
-        expiresIn: '1h',
+        expiresIn: '20s',
         jwtid,
       },
     );
