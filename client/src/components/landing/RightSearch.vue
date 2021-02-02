@@ -4,7 +4,7 @@
       <div class="search-wrapper-box">
         <label class="search-text">Ψάξε την αγαπημένη σου συνταγή:</label>
         <div class="search-input-wrapper rounded shadow-lg d-flex">
-          <img src="@/assets/svg/magnifying_glass.svg" class="magnifying-img ml-3 " alt="">
+          <img src="@/assets/svg/magnifying_glass.svg" class="magnifying-img ml-3">
           <form @submit.prevent="findProfile">
             <input class="search-box ml-3" type="text" v-model="search"
               name="test" placeholder="Πληκτρολόγισε.." autocomplete="off">
@@ -66,7 +66,7 @@ export default {
 
       .magnifying-img {
         width: 7%;
-        margin-top: -0.3em;
+        margin-top: 0.1em;
       }
 
       .search-box {

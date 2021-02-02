@@ -18,7 +18,7 @@
         <div class="ml-3 mt-2 h1"><b>Πρόσφατες Συνταγές</b></div>
       </div>
       <b-row style="margin: auto;" v-if="recentRecipes !== null">
-          <b-col md="6" class="mt-5" lg="3" style="width: 23em;margin: auto"
+          <b-col md="6" lg="auto" class="mt-5" style="width: 23em; margin: auto"
             v-for="(recipe, index) in recentRecipes" :key="index">
             <RecipeCard :recentRecipesInfo="recipe"/>
           </b-col>
@@ -84,7 +84,9 @@ export default {
   created() {
     this.$store.dispatch('posts/getRandomPosts', { count: 4 })
       .then((response) => {
-        this.recentRecipes = response;
+        if (response.leght !== null) {
+          this.recentRecipes = response;
+        }
       });
   },
 };
