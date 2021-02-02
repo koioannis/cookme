@@ -1,5 +1,5 @@
 <template>
-  <b-card class="card-wrapper" style="width: 18em" no-body>
+  <b-card class="card-wrapper" no-body>
     <template #header>
       <div class="d-flex ml-1 user-info">
         <div class="user-img shadow-lg"></div>

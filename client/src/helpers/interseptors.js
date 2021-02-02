@@ -17,8 +17,8 @@ export default function setup() {
           const { config } = error;
           config.headers.Authorization = `Berear ${token}`;
 
-          axios.request(config).then(() => {
-            resolve();
+          axios.request(config).then((resposne) => {
+            resolve(resposne);
           }).catch((errorReq) => {
             reject(errorReq);
           });
