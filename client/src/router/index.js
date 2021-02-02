@@ -8,6 +8,7 @@ import RecipeViewer from '@/views/RecipeViewer.vue';
 import ForgotPassword from '@/views/ForgotPassword.vue';
 import ProfileViewer from '@/views/ProfileViewer.vue';
 import CreateRecipe from '@/views/CreateRecipe.vue';
+import ErrorPage from '@/views/ErrorPage.vue';
 
 import WhoAreWe from '@/components/about/ContentSection/WhoAreWe.vue';
 import HowItWorks from '@/components/about/ContentSection/HowItWorks.vue';
@@ -124,6 +125,11 @@ const routes = [
     path: '/post/create-post',
     name: 'create-recipe',
     component: CreateRecipe,
+  },
+  {
+    path: '/error-page',
+    name: 'error-page',
+    component: ErrorPage,
   },
 ];
 

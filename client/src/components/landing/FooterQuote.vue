@@ -7,7 +7,7 @@
         Μπείτε και εσεις στην ομάδα μας και μοιραστείτε
         τις συνταγές σας με ολόκληρο τον κόσμο!
       </h4>
-      <footer class="blockquote-footer text-left">Η κοινώτητα μας</footer>
+      <footer class="blockquote-footer text-left">Η κοινότητα μας</footer>
     </blockquote>
     <b-button v-if="loggedIn" href="/discovery"
       size="lg" class="custom-button">Αρχική</b-button>

@@ -1,10 +1,15 @@
 import axios from 'axios';
 
+import comments from './comments';
+
 const posts = {
   namespaced: true,
   state: {},
   mutations: {},
   getters: {},
+  modules: {
+    comments,
+  },
   actions: {
     createPost(context, data) {
       return new Promise((resolve, reject) => {
@@ -22,6 +27,43 @@ const posts = {
         })
           .then((response) => {
             resolve(response.data.id);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
+    deletePost(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.delete(`/posts/post/${data.postId}`, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
+          },
+          withCredentials: true,
+        })
+          .then(() => {
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
+    modifyPost(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`/posts/post/${data.postId}`, {
+          title: data.title,
+          description: data.description,
+        }, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
+          },
+          withCredentials: true,
+        })
+          .then(() => {
+            resolve(data.postId);
           })
           .catch(() => {
             reject();
@@ -70,43 +112,6 @@ const posts = {
         })
           .then((response) => {
             resolve(response.data);
-          })
-          .catch(() => {
-            reject();
-          });
-      });
-    },
-    deletePost(context, data) {
-      return new Promise((resolve, reject) => {
-        axios.delete(`/posts/post/${data.postId}`, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
-          },
-          withCredentials: true,
-        })
-          .then(() => {
-            resolve();
-          })
-          .catch(() => {
-            reject();
-          });
-      });
-    },
-    modifyPost(context, data) {
-      return new Promise((resolve, reject) => {
-        axios.patch(`/posts/post/${data.postId}`, {
-          title: data.title,
-          description: data.description,
-        }, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
-          },
-          withCredentials: true,
-        })
-          .then(() => {
-            resolve(data.postId);
           })
           .catch(() => {
             reject();
