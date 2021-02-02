@@ -133,11 +133,12 @@ class AuthService {
   }
 
   async Logout(userId, oldRefreshToken) {
-    // delete the refresh token from user's cookies && db
-    this.logger.debug('Deleting cookie');
+    const oldRefreshTokenRecord = await this.refreshTokenModel.findOne({ token: oldRefreshToken });
+    const userRecord = await this.userModel.findOne({ _id: userId });
+    userRecord.refreshTokens.pull({ _id: oldRefreshTokenRecord._id });
+    await userRecord.save();
 
-    await this.refreshTokenModel.findOne({ token: oldRefreshToken });
-    await this.userModel.findOne({ _id: userId });
+    await this.refreshTokenModel.findOneAndDelete({ _id: oldRefreshTokenRecord._id }).exec();
   }
 
   async RefreshToken({ oldAccessToken, oldRefreshToken }) {
