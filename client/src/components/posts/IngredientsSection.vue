@@ -2,8 +2,10 @@
   <div id="ingredient-section" class="mt-lg-5 pt-5 ml-4">
     <div class="pr-2 pt-3 pb-2 user-info text-right justify-content-end d-none d-lg-flex">
       <div class="user-cred ml-2">
-        <b>{{username}}</b>
-        <p class="small">Επαγγελματίας Μάγειρας</p>
+        <router-link :to="'/account/profile/' + username" class="post-link">
+          <b>{{username}}</b>
+          <p class="small">Επαγγελματίας Μάγειρας</p>
+        </router-link>
       </div>
       <div class="user-img shadow-lg ml-3"></div>
     </div>
@@ -15,7 +17,7 @@
     <div class="d-flex ingredients-header align-items-center pt-2 pb-2">
       <img src="@/assets/svg/ingredients.svg">
       <h3 class="ml-3 mt-1 ingredients-title"><b>Υλικά</b></h3>
-      <h4 class="ml-auto mt-2 pr-3"><b>{{ingredientsPrice}}$</b></h4>
+      <h4 class="ml-auto mt-2 pr-3"><b>{{ingredientsPrice}}€</b></h4>
     </div>
 
     <table class="table table-striped mt-4 text-center">
@@ -102,18 +104,23 @@ export default {
     .youtube-video {
       border-top: 3px solid #EF6D9A;
     }
+
+    .post-link {
+      color: black;
+      text-decoration: none;
+    }
+
     .user-info {
       font-size: 1.1em;
       border-top: 3px solid #EF6D9A;
 
         .user-img {
           background-image: url('../../assets/svg/account_icon.svg');
-          border: 2px solid #bdbdbd;
           background-repeat: no-repeat;
           background-size: cover;
           border-radius: 100%;
-          width: 3em;
-          height: 3em;
+          width: 2.8em;
+          height: 2.8em;
           overflow: hidden;
         }
       }

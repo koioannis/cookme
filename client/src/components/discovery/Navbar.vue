@@ -32,9 +32,9 @@
           </div>
         </b-navbar-nav>
 
-        <b-navbar-nav v-else
+        <b-navbar-nav v-else style="cursor: pointer"
           @click="$bvModal.show('sign-in')" class="guest-wrapper d-md-flex d-none">
-            <span class="font-weight-bold mr-3 mt-2 pt-1">{{getUsername}}</span>
+            <span class="font-weight-bold mr-3 mt-1 pt-1">{{getUsername}}</span>
             <div class="user-img shadow-lg"></div>
         </b-navbar-nav>
 
@@ -128,12 +128,11 @@ export default {
 
     .user-img {
       background-image: url('../../assets/svg/account_icon.svg');
-      border: 3px solid #c4c4c4a6;
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 100%;
-      width: 3em;
-      height: 3em;
+      width: 2.7em;
+      height: 2.7em;
     }
 
     guest-wrapper:hover {

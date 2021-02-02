@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <template #header>
-      <div class="d-flex ml-1 user-info">
+      <div class="d-flex ml-2 user-info">
         <div class="user-img shadow-lg"></div>
         <div class="user-cred ml-2">
           <router-link :to="'/account/profile/'+recentRecipesInfo.user.username" class="post-link">
@@ -41,12 +41,11 @@ export default {
 
     .user-img {
       background-image: url('../../assets/svg/account_icon.svg');
-      border: 2px solid #999999;
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 100%;
-      width: 3em;
-      height: 3em;
+      width: 2.8em;
+      height: 2.8em;
       overflow: hidden;
     }
   }
