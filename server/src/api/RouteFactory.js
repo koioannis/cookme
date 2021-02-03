@@ -20,8 +20,8 @@ const RouteFactory = (version) => {
     PostAction: `${PostsBase}/post/:postId`,
     GetAllPosts: `${PostsBase}/get-all-posts/:username`,
     GetRandomPosts: `${PostsBase}/get-random-posts/:count`,
-    CreateComment: `${PostsBase}/comment/:postId`,
-    Comment: `${PostsBase}/comment/:postId/:commentId`,
+    PostComments: `${PostsBase}/comment/:postId`,
+    SingleComment: `${PostsBase}/comment/:postId/:commentId`,
 
     Follow: `${FollowBase}/:userId`,
     GetAllFollowers: `${FollowBase}/get-all-followers`,
@@ -31,7 +31,7 @@ const RouteFactory = (version) => {
     DeleteComment: `${AdminBase}/comment/:commentId`,
 
     CreateAccountDescription: `${AccountBase}/description`,
-    GetAccountInfo: `${AccountBase}/info/:username`
+    GetAccountInfo: `${AccountBase}/info/:username`,
   };
 };
 

@@ -3,6 +3,7 @@ const objectMapper = require('object-mapper');
 const mongoose = require('mongoose');
 const postDTO = require('../mapping/PostDTO');
 const detailedPostDTO = require('../mapping/DetailedPost');
+const commentDTO = require('../mapping/CommentDTO');
 
 Service();
 class PostsService {
@@ -198,6 +199,27 @@ class PostsService {
       posts.push(objectMapper(post, postDTO));
     });
     return posts;
+  }
+
+  async GetPostComments(postId) {
+    const postRecord = await this.postModel.findOne({ _id: postId }).populate({
+      path: 'comments',
+      populate: 'user',
+    });
+    const commentsRecords = postRecord.comments;
+
+    if (!postRecord || !commentsRecords) {
+      const error = new Error('post not found or post has no comments');
+      error.status = 404;
+      throw error;
+    }
+
+    const comments = [];
+    commentsRecords.forEach((comment) => {
+      comments.push(objectMapper(comment, commentDTO));
+    });
+
+    return comments;
   }
 }
 

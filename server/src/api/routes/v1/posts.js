@@ -125,7 +125,8 @@ const posts = (app) => {
     }
   });
 
-  route.post(ApiRoutes.CreateComment, middlewares.isAuth, celebrate({
+  // create a comment for a post
+  route.post(ApiRoutes.PostComments, middlewares.isAuth, celebrate({
     body: Joi.object({
       content: Joi.string().required(),
     }).required(),
@@ -148,7 +149,23 @@ const posts = (app) => {
     }
   });
 
-  route.delete(ApiRoutes.Comment, middlewares.isAuth, async (req, res, next) => {
+  // get all post comments
+  route.get(ApiRoutes.PostComments, async (req, res, next) => {
+    const logger = Container.get('logger');
+    logger.debug('Calling GetComments end-point with body %o');
+    try {
+      const postsServiceInstance = Container.get(PostsService);
+      const result = await postsServiceInstance.GetPostComments(req.params.postId);
+
+      res.json(result);
+      return res.status(200);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
+  // delete a comment
+  route.delete(ApiRoutes.SingleComment, middlewares.isAuth, async (req, res, next) => {
     const logger = Container.get('logger');
     logger.debug('Calling Comment (Delete) end-point');
     try {
@@ -165,7 +182,8 @@ const posts = (app) => {
     }
   });
 
-  route.put(ApiRoutes.Comment, middlewares.isAuth, celebrate({
+  // edit a comment
+  route.put(ApiRoutes.SingleComment, middlewares.isAuth, celebrate({
     body: Joi.object({
       content: Joi.string().required(),
     }).required(),
