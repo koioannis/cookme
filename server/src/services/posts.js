@@ -26,10 +26,16 @@ class PostsService {
     return objectMapper(postRecord, detailedPostDTO);
   }
 
-  async DeletePost({ postId, userId }) {
-    const postRecord = await this.postModel.findOneAndDelete(
-      { $and: [{ _id: postId }, { user: userId }] },
-    );
+  async DeletePost({ postId, userId, isAdmin }) {
+    let postRecord = null;
+
+    if (!isAdmin) {
+      postRecord = await this.postModel.findOneAndDelete(
+        { $and: [{ _id: postId }, { user: userId }] },
+      );
+    } else {
+      postRecord = await this.postModel.findOneAndDelete({ _id: postId });
+    }
 
     if (!postRecord) {
       const error = new Error('Post not found');
@@ -142,14 +148,14 @@ class PostsService {
   async DeleteComment({
     postId, userId, commentId, isAdmin,
   }) {
-    const oldCommentRecord = await this.commentModel.findOneAndDelete({ _id: commentId }).populate('user');
+    const oldCommentRecord = await this.commentModel.findOne({ _id: commentId }).populate('user');
     if (!oldCommentRecord) {
       const error = new Error('Comment not found');
       error.status = 404;
       throw error;
     }
 
-    if (!isAdmin && oldCommentRecord.user._id !== userId) {
+    if (oldCommentRecord.user._id !== userId && !isAdmin) {
       const error = new Error('Not authorized');
       error.status = 401;
       throw error;
@@ -165,6 +171,8 @@ class PostsService {
       error.status = 404;
       throw error;
     }
+
+    await this.commentModel.deleteOne({ _id: oldCommentRecord._id });
 
     return objectMapper(postRecord, detailedPostDTO);
   }
