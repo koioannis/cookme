@@ -1,6 +1,5 @@
 <template>
   <div class="position-fixed">
-
     <h4 class="font-weight-bold text-center mt-5 pb-2 comment-title">Σχόλια</h4>
 
     <div class="mt-5" id="comments">
@@ -67,6 +66,10 @@ export default {
     this.username = this.$store.getters['auth/getUsername'];
     this.admin = this.$store.getters['auth/getAdmin'];
   },
+  updated() {
+    const element = document.getElementById('other-comments');
+    element.scroll(0, element.scrollHeight);
+  },
   methods: {
     sendComment() {
       this.$store.dispatch('posts/comments/createComment', {
@@ -114,7 +117,7 @@ export default {
     height: 100%;
 
     #other-comments {
-      height: 60%;
+      height: 65%;
       overflow-y: scroll;
 
       .content-wrapper {
@@ -155,5 +158,11 @@ export default {
 
   #other-comments::-webkit-scrollbar {
     display: none;
+  }
+
+  @media only screen and (max-height: 850px) {
+    #comments {
+      height: 80% !important;
+    }
   }
 </style>
