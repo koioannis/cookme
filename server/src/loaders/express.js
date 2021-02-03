@@ -5,13 +5,14 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const swaggerUi = require('swagger-ui-express');
 const { isCelebrateError } = require('celebrate');
+const config = require('../config');
 
 const routes = require('../api');
 const swaggerDocument = require('../../swagger.json');
 
 const expressLoader = (app) => {
   app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Origin', config.client);
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Headers', 'Authorization, Set-Cookie, Origin, X-Requested-With, Content-Type, Accept, X-HTTP-Method-Override');
     res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
@@ -31,7 +32,7 @@ const expressLoader = (app) => {
   app.use(methodOverride());
 
   app.use(helmet());
-  app.use(cors({ credentials: true, origin: 'http://localhost:8080' }));
+  app.use(cors({ credentials: true, origin: config.client }));
   app.use(bodyParser.json());
   app.use(cookieParser());
 

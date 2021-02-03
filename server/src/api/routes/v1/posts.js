@@ -42,6 +42,7 @@ const posts = (app) => {
         await postsServiceInstance.DeletePost({
           postId: req.params.postId,
           userId: res.locals.userId,
+          isAdmin: res.locals.isAdmin,
         });
 
         return res.status(200).end();
@@ -172,6 +173,8 @@ const posts = (app) => {
       const postsServiceInstance = Container.get(PostsService);
       const result = await postsServiceInstance.DeleteComment({
         postId: req.params.postId,
+        userId: res.locals.userId,
+        isAdmin: res.locals.isAdmin,
         commentId: req.params.commentId,
       });
 

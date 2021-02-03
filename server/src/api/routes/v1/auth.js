@@ -8,6 +8,7 @@ const RouteFactory = require('../../RouteFactory');
 
 const route = Router();
 const ApiRoutes = RouteFactory('v1');
+const config = require('../../../config');
 
 const auth = (app) => {
   app.use(route);
@@ -32,11 +33,7 @@ const auth = (app) => {
 
         const { refreshToken, ...data } = authenticationResult;
         if (authenticationResult.accessToken && authenticationResult.refreshToken) {
-          res.cookie('refreshToken', refreshToken, {
-            secure: false,
-            httpOnly: true,
-            sameSite: true,
-          });
+          res.cookie('refreshToken', refreshToken, config.cookieSettings);
         }
         res.json(data);
 
@@ -63,11 +60,7 @@ const auth = (app) => {
 
       const { refreshToken, ...data } = authenticationResult;
       if (authenticationResult.accessToken && authenticationResult.refreshToken) {
-        res.cookie('refreshToken', refreshToken, {
-          secure: false,
-          httpOnly: true,
-          sameSite: true,
-        });
+        res.cookie('refreshToken', refreshToken, config.cookieSettings);
       }
       res.json(data);
 
@@ -108,11 +101,7 @@ const auth = (app) => {
       });
 
       if (accessToken && refreshToken) {
-        res.cookie('refreshToken', refreshToken, {
-          secure: false,
-          httpOnly: true,
-          sameSite: true,
-        });
+        res.cookie('refreshToken', refreshToken, config.cookieSettings);
       }
 
       res.json({ accessToken });
