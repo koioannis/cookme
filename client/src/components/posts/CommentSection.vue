@@ -103,7 +103,7 @@ export default {
         postId: this.postId,
       })
         .then((response) => {
-          if (response.length !== 0) {
+          if (response.length !== 0 && response.length !== this.commentsInfo.length) {
             this.commentsInfo = response;
           }
         });
