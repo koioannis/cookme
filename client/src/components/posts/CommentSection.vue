@@ -84,7 +84,6 @@ export default {
           this.getComments();
         })
         .catch(() => {
-          clearInterval(this.commentReload);
           this.$router.push({ path: '/error-page' });
         });
     },
@@ -97,7 +96,6 @@ export default {
           window.location.reload();
         })
         .catch(() => {
-          clearInterval(this.commentReload);
           this.$router.push({ path: '/error-page' });
         });
     },
@@ -116,6 +114,9 @@ export default {
     loggedIn() {
       return this.$store.getters['auth/loggedIn'];
     },
+  },
+  destroyed() {
+    clearInterval(this.commentReload);
   },
 };
 </script>
