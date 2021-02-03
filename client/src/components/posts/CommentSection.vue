@@ -3,7 +3,7 @@
     <h4 class="font-weight-bold text-center mt-5 pb-2 comment-title">Σχόλια</h4>
 
     <div class="mt-5" id="comments">
-      <div v-if="commentsInfo" id="other-comments">
+      <div v-if="commentsInfo.length !== 0" id="other-comments">
         <div v-for="(comment, index) in commentsInfo" :key="index" class="mb-5">
           <div class="comment-box d-flex">
             <div class="user-img mr-2"></div>
@@ -57,7 +57,7 @@ export default {
   ],
   data() {
     return {
-      commentsInfo: this.comments,
+      commentsInfo: this.comments || [],
       userComment: null,
       username: null,
       admin: null,
@@ -104,7 +104,7 @@ export default {
         postId: this.postId,
       })
         .then((response) => {
-          if (response.length !== 0 && response.length !== this.commentsInfo.length) {
+          if (response.length !== 0 && this.commentsInfo.length !== response.length) {
             this.commentsInfo = response;
           }
         });
