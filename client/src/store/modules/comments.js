@@ -25,6 +25,22 @@ const comments = {
           });
       });
     },
+    getPostComment(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.get(`/posts/comment/${data.postId}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+          withCredentials: true,
+        })
+          .then((response) => {
+            resolve(response.data);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
     deleteComment(context, data) {
       return new Promise((resolve, reject) => {
         axios.delete(`/posts/comment/${data.postId}/${data.commentId}`, {

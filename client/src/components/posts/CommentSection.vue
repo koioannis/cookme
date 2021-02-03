@@ -3,8 +3,8 @@
     <h4 class="font-weight-bold text-center mt-5 pb-2 comment-title">Σχόλια</h4>
 
     <div class="mt-5" id="comments">
-      <div v-if="comments" id="other-comments">
-        <div v-for="(comment, index) in comments" :key="index" class="mb-5">
+      <div v-if="commentsInfo" id="other-comments">
+        <div v-for="(comment, index) in commentsInfo" :key="index" class="mb-5">
           <div class="comment-box d-flex">
             <div class="user-img mr-2"></div>
             <div class="content-wrapper">
@@ -57,6 +57,7 @@ export default {
   ],
   data() {
     return {
+      commentsInfo: this.comments,
       userComment: null,
       username: null,
       admin: null,
@@ -65,6 +66,7 @@ export default {
   mounted() {
     this.username = this.$store.getters['auth/getUsername'];
     this.admin = this.$store.getters['auth/getAdmin'];
+    setInterval(this.getComments, 3000);
   },
   updated() {
     const element = document.getElementById('other-comments');
@@ -77,7 +79,8 @@ export default {
         content: this.userComment,
       })
         .then(() => {
-          window.location.reload();
+          this.userComment = null;
+          this.getComments();
         })
         .catch(() => {
           this.$route.push({ path: 'error-page' });
@@ -93,6 +96,16 @@ export default {
         })
         .catch(() => {
           this.$router.push({ path: '/error-page' });
+        });
+    },
+    getComments() {
+      this.$store.dispatch('posts/comments/getPostComment', {
+        postId: this.postId,
+      })
+        .then((response) => {
+          if (response.length !== 0) {
+            this.commentsInfo = response;
+          }
         });
     },
   },
