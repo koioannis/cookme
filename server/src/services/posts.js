@@ -155,10 +155,13 @@ class PostsService {
       throw error;
     }
 
-    if (oldCommentRecord.user._id !== userId && !isAdmin) {
-      const error = new Error('Not authorized');
-      error.status = 401;
-      throw error;
+    this.logger.debug(oldCommentRecord.user._id !== userId);
+    if (String(oldCommentRecord.user._id) !== userId) {
+      if (!isAdmin) {
+        const error = new Error('Not authorized');
+        error.status = 401;
+        throw error;
+      }
     }
 
     const postRecord = await this.postModel.findOneAndUpdate(

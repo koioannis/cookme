@@ -8,7 +8,7 @@ if (env.error) {
 const getCookieSettings = (nodeEnv) => ({
   secure: nodeEnv === 'production',
   httpOnly: true,
-  samesite: nodeEnv === 'production' ? 'none' : false,
+  sameSite: nodeEnv === 'production' ? 'strict' : false,
 });
 
 const config = {
