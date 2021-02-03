@@ -5,10 +5,10 @@ if (env.error) {
   throw new Error('🔥 couldn\'t find .env file 🔥');
 }
 
-const getCookieSettings = (onProduction) => ({
-  secure: onProduction,
+const getCookieSettings = (nodeEnv) => ({
+  secure: nodeEnv === 'production',
   httpOnly: true,
-  samesite: onProduction ? 'none' : false,
+  samesite: nodeEnv === 'production' ? 'none' : false,
 });
 
 const config = {
@@ -39,7 +39,7 @@ const config = {
     maxConcurrency: process.env.AGENDA_MAX_CONCURRENCY,
   },
 
-  client: process.env.ON_PRODUCTION ? 'https://www.cookme.com' : 'http://localhost:8080',
-  cookieSettings: getCookieSettings(process.env.ON_PRODUCTION),
+  client: process.env.NODE_ENV === 'production' ? 'https://www.cookme.me' : 'http://localhost:8080',
+  cookieSettings: getCookieSettings(process.env.NODE_ENV),
 };
 module.exports = config;
