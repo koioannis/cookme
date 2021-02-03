@@ -17,7 +17,7 @@
         <img src="@/assets/svg/star.svg" alt="star" class="star-img d-none d-sm-block">
         <div class="ml-3 mt-2 h1"><b>Πρόσφατες Συνταγές</b></div>
       </div>
-      <b-row style="margin: auto;" v-if="recentRecipes !== null">
+      <b-row style="margin: auto;" v-if="recentRecipes">
           <b-col md="6" lg="auto" class="mt-5" style="width: 23em; margin: auto"
             v-for="(recipe, index) in recentRecipes" :key="index">
             <RecipeCard :recentRecipesInfo="recipe"/>
