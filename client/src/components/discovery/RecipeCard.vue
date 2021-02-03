@@ -4,30 +4,36 @@
       <div class="d-flex ml-1 user-info">
         <div class="user-img shadow-lg"></div>
         <div class="user-cred ml-2">
-          <b>Μαρία Γεωργίου</b>
-          <p class="small">Επαγγελματίας Μάγειρας</p>
+          <router-link :to="'/account/profile/' + recipe.user.username" class="post-link">
+            <b>{{recipe.user.username}}</b>
+            <p class="small">Επαγγελματίας Μάγειρας</p>
+          </router-link>
         </div>
       </div>
     </template>
 
+    <router-link :to="'/post/view-post/' + recipe.id" class="post-link">
     <div class="recipe-preview-img"></div>
 
-    <b-card-body>
-      <div class="d-flex justify-content-between">
-        <div class="h5 recipe-title">Σαλάτα Μποέμι</div>
-        <div class="small mt-1">4.3/5</div>
-      </div>
-      <div class="description">
-        Μια σαλάτα που θα σας κάνει να γλύφετε
-        μέχρι και το τελευταίο δάκτυλο σας.
-      </div>
-    </b-card-body>
+      <b-card-body>
+        <div class="d-flex justify-content-between">
+          <div class="h5 recipe-title">{{recipe.title}}</div>
+          <div class="small mt-1">{{recipe.grade}}/5</div>
+        </div>
+        <div class="description">
+          {{recipe.description}}
+        </div>
+      </b-card-body>
+    </router-link>
   </b-card>
 </template>
 
 <script>
 export default {
   name: 'RecipeCard',
+  props: [
+    'recipe',
+  ],
 };
 </script>
 
@@ -70,6 +76,11 @@ export default {
       opacity: 0.8;
       height: 3em;
       overflow: hidden;
+    }
+
+    .post-link {
+      color: black;
+      text-decoration: none;
     }
   }
 </style>

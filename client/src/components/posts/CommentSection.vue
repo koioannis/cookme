@@ -61,12 +61,13 @@ export default {
       userComment: null,
       username: null,
       admin: null,
+      commentReload: null,
     };
   },
   mounted() {
     this.username = this.$store.getters['auth/getUsername'];
     this.admin = this.$store.getters['auth/getAdmin'];
-    setInterval(this.getComments, 3000);
+    this.commentReload = setInterval(this.getComments, 5000);
   },
   updated() {
     const element = document.getElementById('other-comments');
@@ -83,7 +84,8 @@ export default {
           this.getComments();
         })
         .catch(() => {
-          this.$route.push({ path: 'error-page' });
+          clearInterval(this.commentReload);
+          this.$router.push({ path: '/error-page' });
         });
     },
     deleteComment(deletedCommentId) {
@@ -95,6 +97,7 @@ export default {
           window.location.reload();
         })
         .catch(() => {
+          clearInterval(this.commentReload);
           this.$router.push({ path: '/error-page' });
         });
     },
@@ -103,7 +106,7 @@ export default {
         postId: this.postId,
       })
         .then((response) => {
-          if (response.length !== 0) {
+          if (response.length !== 0 && response.length !== this.commentsInfo.length) {
             this.commentsInfo = response;
           }
         });

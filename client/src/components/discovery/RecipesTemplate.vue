@@ -1,14 +1,23 @@
 <template>
   <b-container>
-    <h3 class="font-weight-bold mt-md-5 mt-4 mb-2
-      pb-3 category-title">{{navItems[currentPage].title}}</h3>
-    <b-row align-h="around" style="margin: auto">
-      <div v-for='item in maxNumberOfRecipes' :key='item'>
-        <router-link to="/post/view-post/123" class="post-link">
-          <RecipeCard class="mt-4 ml-md-4"/>
-        </router-link>
-      </div>
-    </b-row>
+    <div id="profile" class="text-center" style="opacity: 0.9"
+      v-if="waiting == -1">
+      <b-spinner label="Loading..." class="mt-5"></b-spinner>
+    </div>
+
+    <div v-else-if="waiting === 1">
+      <h3 class="font-weight-bold mt-md-5 mt-4 mb-2
+        pb-3 category-title">{{navItems[currentPage].title}}</h3>
+      <b-row align-h="around" style="margin: auto">
+        <div v-for='(recipe, item) in recipesInfo' :key='item'>
+          <RecipeCard :recipe="recipe" class="mt-4 ml-md-4"/>
+        </div>
+      </b-row>
+    </div>
+
+    <div v-else class="text-center text-muted mt-5">
+      Δεν υπάρχουν δημοσιέυσεις.
+    </div>
   </b-container>
 </template>
 
@@ -26,9 +35,19 @@ export default {
   ],
   data() {
     return {
-      maxNumberOfRecipes: 15,
+      waiting: -1,
+      recipesInfo: null,
       navItems: FiltertNavItems,
     };
+  },
+  created() {
+    this.$store.dispatch('posts/getRandomPosts', { count: 15 })
+      .then((response) => {
+        if (response.leght !== null) {
+          this.recipesInfo = response;
+          this.waiting = 1;
+        }
+      });
   },
 };
 </script>
@@ -37,11 +56,6 @@ export default {
   .category-title {
     border-bottom: 2px #F15D90 solid;
     width: fit-content;
-  }
-
-  .post-link {
-    color: black;
-    text-decoration: none;
   }
 
   @media only screen and (max-width: 750px) {
