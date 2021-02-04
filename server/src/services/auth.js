@@ -47,13 +47,10 @@ class AuthService {
         isAdmin: false,
       });
 
-      let userDetailsRecord = null;
-      if (userData.userDetails) {
-        userDetailsRecord = await this.userDetailsModel.create({
-          ...userData.userDetails,
-          user: userRecord,
-        });
-      }
+      const userDetailsRecord = await this.userDetailsModel.create({
+        ...userData.userDetails,
+        user: userRecord,
+      });
       userRecord.userDetails = userDetailsRecord;
       userRecord.save();
 
@@ -224,7 +221,7 @@ class AuthService {
       },
       config.jwtSecret,
       {
-        expiresIn: '5s',
+        expiresIn: '1h',
         jwtid,
       },
     );

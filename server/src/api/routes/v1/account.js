@@ -54,16 +54,11 @@ const account = (app) => {
       return res.status(200).json(message);
     });
 
-  route.put(ApiRoutes.CreateAccountDescription, middlewares.isAuth, celebrate({
-    body: Joi.object({
-      description: Joi.string().required(),
-    }).required(),
-  }), async (req, res, next) => {
+  route.get(ApiRoutes.AccountInfoWithUsername, async (req, res, next) => {
     try {
       const accountServiceInstance = Container.get(AccountService);
-      const result = await accountServiceInstance.UpdateAccountDescription({
-        userId: res.locals.userId,
-        description: req.body.description,
+      const result = await accountServiceInstance.GetAccountInfo({
+        username: req.params.username,
       });
 
       res.json(result);
@@ -73,11 +68,22 @@ const account = (app) => {
     }
   });
 
-  route.get(ApiRoutes.GetAccountInfo, async (req, res, next) => {
+  route.patch(ApiRoutes.AccountInfo, middlewares.isAuth, celebrate({
+    body: Joi.object({
+      description: Joi.string(),
+      firstName: Joi.string(),
+      lastName: Joi.string(),
+    }).or('firstName', 'description', 'lastName'),
+  }), async (req, res, next) => {
     try {
       const accountServiceInstance = Container.get(AccountService);
-      const result = await accountServiceInstance.GetAccountInfo({
-        username: req.params.username,
+      const result = await accountServiceInstance.ModifyAccountInfo({
+        userId: res.locals.userId,
+        update: {
+          description: req.body.description,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+        },
       });
 
       res.json(result);

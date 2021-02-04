@@ -27,18 +27,19 @@ class AccountService {
     return objectMapper(userRecord, userDTO);
   }
 
-  async UpdateAccountDescription({ userId, description }) {
-    await this.userDetailsModel.findOneAndUpdate(
-      { user: mongoose.Types.ObjectId(userId) }, { description },
+  async ModifyAccountInfo({ userId, update }) {
+    this.logger.debug(update);
+    const userDetailsRecord = await this.userDetailsModel.findOneAndUpdate(
+      { user: mongoose.Types.ObjectId(userId) }, update,
     );
+    this.logger.debug('%o', userDetailsRecord);
 
-    this.logger.debug(userId);
-    const userRecord = await this.userModel.findOne({ _id: userId }).populate('userDetails');
-    if (!userRecord) {
-      const error = new Error('user not found');
+    if (!userDetailsRecord) {
+      const error = new Error('not found');
       error.status = 404;
       throw error;
     }
+    const userRecord = await this.userModel.findOne({ _id: userId }).populate('userDetails');
 
     return objectMapper(userRecord, userDTO);
   }
