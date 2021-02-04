@@ -54,7 +54,7 @@ const account = (app) => {
       return res.status(200).json(message);
     });
 
-  route.get(ApiRoutes.AccountInfo, async (req, res, next) => {
+  route.get(ApiRoutes.AccountInfoWithUsername, async (req, res, next) => {
     try {
       const accountServiceInstance = Container.get(AccountService);
       const result = await accountServiceInstance.GetAccountInfo({
