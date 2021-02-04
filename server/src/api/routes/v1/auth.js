@@ -8,6 +8,7 @@ const RouteFactory = require('../../RouteFactory');
 
 const route = Router();
 const ApiRoutes = RouteFactory('v1');
+const config = require('../../../config');
 
 const auth = (app) => {
   app.use(route);
@@ -32,11 +33,7 @@ const auth = (app) => {
 
         const { refreshToken, ...data } = authenticationResult;
         if (authenticationResult.accessToken && authenticationResult.refreshToken) {
-          res.cookie('refreshToken', refreshToken, {
-            secure: false,
-            httpOnly: true,
-            sameSite: true,
-          });
+          res.cookie('refreshToken', refreshToken, config.cookieSettings);
         }
         res.json(data);
 
@@ -63,11 +60,7 @@ const auth = (app) => {
 
       const { refreshToken, ...data } = authenticationResult;
       if (authenticationResult.accessToken && authenticationResult.refreshToken) {
-        res.cookie('refreshToken', refreshToken, {
-          secure: false,
-          httpOnly: true,
-          sameSite: true,
-        });
+        res.cookie('refreshToken', refreshToken, config.cookieSettings);
       }
       res.json(data);
 
@@ -94,25 +87,19 @@ const auth = (app) => {
   });
 
   route.post(ApiRoutes.RefreshToken, async (req, res, next) => {
-    const logger = Container.get('logger');
-    logger.info('Calling refresh endpoint with body %o', req.body);
-
     const oldAccessToken = req.header('Authorization').split(' ')[1];
     const oldRefreshToken = req.cookies.refreshToken;
     const authServiceInstance = Container.get(AuthService);
-
+    const logger = Container.get('logger');
     try {
       const { refreshToken, accessToken } = await authServiceInstance.RefreshToken({
         oldAccessToken,
         oldRefreshToken,
       });
 
+      logger.debug('%o', config.cookieSettings);
       if (accessToken && refreshToken) {
-        res.cookie('refreshToken', refreshToken, {
-          secure: false,
-          httpOnly: true,
-          sameSite: true,
-        });
+        res.cookie('refreshToken', refreshToken, config.cookieSettings);
       }
 
       res.json({ accessToken });

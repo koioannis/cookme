@@ -1,12 +1,15 @@
 const dotenv = require('dotenv');
 
-// Set NODE_ENV to 'development' by default
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 const env = dotenv.config();
 if (env.error) {
   throw new Error('🔥 couldn\'t find .env file 🔥');
 }
+
+const getCookieSettings = (nodeEnv) => ({
+  secure: nodeEnv === 'production',
+  httpOnly: true,
+  sameSite: nodeEnv === 'production' ? 'strict' : false,
+});
 
 const config = {
   port: parseInt(process.env.PORT, 10),
@@ -35,6 +38,8 @@ const config = {
     processEvery: parseInt(process.env.AGENDA_POOL_TIME, 10),
     maxConcurrency: process.env.AGENDA_MAX_CONCURRENCY,
   },
-};
 
+  client: process.env.NODE_ENV === 'production' ? 'https://www.cookme.me' : 'http://localhost:8080',
+  cookieSettings: getCookieSettings(process.env.NODE_ENV),
+};
 module.exports = config;

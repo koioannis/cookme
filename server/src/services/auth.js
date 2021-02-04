@@ -152,37 +152,31 @@ class AuthService {
     const decodedData = jwt.decode(oldAccessToken);
     const { userId, jti } = decodedData;
 
-    this.logger.debug('hello this is the old one', oldRefreshToken);
-    let oldRefreshTokenId;
-    let refreshTokenError;
-    await this.refreshTokenModel.findOneAndDelete({ token: oldRefreshToken },
-      (error, refreshToken) => {
-        try {
-          if (!refreshToken) throw new Error('Did not find the refresh token in database');
-          if (!refreshToken.used) throw new Error('Token has not been user');
-          if (refreshToken.invalidated) throw new Error('Token has been invalidated');
-          if (dateFns.isPast(refreshToken.expireDate)) throw new Error('Refresh Token has expired');
-          if (jti !== refreshToken.jwtId) throw new Error('Jti of access token doesn\'t match the refresh token\'s jti');
-          if (userId !== String(refreshToken.user)) throw new Error('User on JWT must match the user on refresh token');
-          oldRefreshTokenId = refreshToken._id;
-        } catch (err) {
-          refreshTokenError = err;
-        }
-      });
-    if (refreshTokenError) {
-      refreshTokenError.status = 401;
-      throw refreshTokenError;
-    }
-    const userRecord = await this.userModel.findOne({ _id: userId }, (error, user) => {
-      if (error) throw error;
-      user.refreshTokens.pull({ _id: oldRefreshTokenId });
-      user.save();
-    });
+    const oldRefreshTokenRecord = await this.refreshTokenModel.findOne(
+      { token: oldRefreshToken },
+    );
 
+    if (!oldRefreshTokenRecord) {
+      const error = new Error('refresh token not found');
+      error.status = 404;
+      throw error;
+    }
+
+    if (oldRefreshTokenRecord.jwtId !== jti) {
+      const error = new Error('wrong access token');
+      error.status = 401;
+      throw error;
+    }
+
+    // delete old one
+    await this.refreshTokenModel.deleteOne({ _id: oldRefreshTokenRecord._id });
+    const userRecord = await this.userModel.findOneAndUpdate({ _id: userId },
+      { $pull: { refreshTokens: oldRefreshTokenRecord._id } }, { new: true });
+
+    // create new one
     const { accessToken, jwtid } = this.generateToken(userRecord);
     const refreshToken = this.generateRefreshToken(userRecord, jwtid);
     const refreshTokenRecord = await this.refreshTokenModel.create(refreshToken);
-    await refreshTokenRecord.save();
     await userRecord.refreshTokens.push(refreshTokenRecord);
     await userRecord.save();
 
@@ -230,7 +224,7 @@ class AuthService {
       },
       config.jwtSecret,
       {
-        expiresIn: '2h',
+        expiresIn: '5s',
         jwtid,
       },
     );
