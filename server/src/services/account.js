@@ -28,7 +28,6 @@ class AccountService {
   }
 
   async ModifyAccountInfo({ userId, update }) {
-    this.logger.debug(update);
     const userDetailsRecord = await this.userDetailsModel.findOneAndUpdate(
       { user: mongoose.Types.ObjectId(userId) }, update,
     );
