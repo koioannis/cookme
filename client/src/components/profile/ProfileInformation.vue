@@ -4,22 +4,24 @@
     <div class="usr-info ml-md-5 mt-3 mt-md-0">
       <h4 v-if="modify === false">{{name}}</h4>
       <div v-else>
-        <input type="text" class="small-input input-box mb-3" placeholder="Όνομα">
-        <input type="text" class="small-input input-box mb-3 ml-3" placeholder="Επώνυμο">
+        <input type="text" class="small-input input-box mb-3"
+          placeholder="Όνομα" v-model="firstModel">
+        <input type="text" class="small-input input-box mb-3 ml-3"
+          placeholder="Επώνυμο" v-model="lastModel">
       </div>
 
       <p class="profile-username">{{profileId}}</p>
       <p class="description-title"><b>Περιγραφή</b></p>
       <p class="description" v-if="modify === false">{{description}}</p>
-      <textarea placeholder="Γράψτε κάτι.." class="big-input input-box" v-else></textarea>
+      <textarea placeholder="Γράψτε κάτι.." class="big-input input-box mb-2"
+        v-else v-model="descriptionModel"></textarea>
 
-      <b-button size="sm" class="custom-button" @click="modify = true"
+      <b-button class="custom-button" size="sm" @click="modify = true"
         v-if="getUsername === profileId && modify === false">Επεξεργασία</b-button>
 
       <div class="d-flex justify-content-md-start justify-content-center" v-if="modify === true">
-        <b-button size="sm" class="custom-button">Αποθήκευση</b-button>
-        <b-button size="sm" class="ml-2" @click="modify = false">
-          Ακύρωση</b-button>
+        <b-button size="sm" class="custom-button" @click="changeAccountInfo">Αποθήκευση</b-button>
+        <b-button size="sm" class="ml-2" @click="cancelModification">Ακύρωση</b-button>
       </div>
     </div>
   </div>
@@ -32,9 +34,45 @@ export default {
     return {
       profileId: this.$router.history.current.params.profileId,
       modify: false,
-      name: 'Όνομα Μάγειρα',
+      name: null,
       description: 'Ο χρήστης αυτός δεν έχει βάλει περιγραφή.',
+      firstModel: null,
+      lastModel: null,
+      descriptionModel: null,
     };
+  },
+  methods: {
+    cancelModification() {
+      this.modify = false;
+      this.firstModel = null;
+      this.lastModel = null;
+      this.descriptionModel = null;
+    },
+    changeAccountInfo() {
+      this.$store.dispatch('account/setAccountInfo', {
+        firstName: this.firstModel,
+        lastName: this.lastModel,
+        description: this.descriptionModel,
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          this.$router.push({ path: '/error-page' });
+        });
+    },
+  },
+  created() {
+    this.$store.dispatch('account/getAccountInfo', {
+      username: this.profileId,
+    })
+      .then((response) => {
+        this.name = `${(response.firstName || 'Όνομα')} ${(response.lastName || 'Επίθετο')}`;
+        if (response.description != null) this.description = response.description;
+      })
+      .catch(() => {
+        this.$router.push({ path: '/error-page' });
+      });
   },
   computed: {
     getUsername() {
