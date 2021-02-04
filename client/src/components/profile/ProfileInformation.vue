@@ -34,7 +34,7 @@ export default {
     return {
       profileId: this.$router.history.current.params.profileId,
       modify: false,
-      name: null,
+      name: 'Όνομα Επίθετο',
       description: 'Ο χρήστης αυτός δεν έχει βάλει περιγραφή.',
       firstModel: null,
       lastModel: null,
@@ -44,15 +44,12 @@ export default {
   methods: {
     cancelModification() {
       this.modify = false;
-      this.firstModel = null;
-      this.lastModel = null;
-      this.descriptionModel = null;
     },
     changeAccountInfo() {
       this.$store.dispatch('account/setAccountInfo', {
-        firstName: this.firstModel,
-        lastName: this.lastModel,
-        description: this.descriptionModel,
+        firstName: this.firstModel === '' ? null : this.firstModel,
+        lastName: this.lastModel === '' ? null : this.lastModel,
+        description: this.descriptionModel === '' ? null : this.descriptionModel,
       })
         .then(() => {
           window.location.reload();
@@ -67,8 +64,15 @@ export default {
       username: this.profileId,
     })
       .then((response) => {
-        this.name = `${(response.firstName || 'Όνομα')} ${(response.lastName || 'Επίθετο')}`;
-        if (response.description != null) this.description = response.description;
+        const details = response.userDetails;
+        if (details != null) {
+          this.name = `${(details.firstName || 'Όνομα')} ${(details.lastName || 'Επίθετο')}`;
+          if (details.description != null) this.description = details.description;
+
+          this.firstModel = details.firstName || null;
+          this.lastModel = details.lastName || null;
+          this.descriptionModel = details.description || null;
+        }
       })
       .catch(() => {
         this.$router.push({ path: '/error-page' });
@@ -120,11 +124,14 @@ export default {
       width: 30%;
       height: 2.5em;
       padding-left: 1em;
+      padding-right: 1em;
     }
 
     .big-input {
       padding-left: 1em;
+      padding-right: 1em;
       padding-top: 0.5em;
+      padding-bottom: 0.5em;
     }
   }
 

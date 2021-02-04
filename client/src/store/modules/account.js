@@ -16,9 +16,9 @@ const account = {
     setAccountInfo(context, data) {
       return new Promise((resolve, reject) => {
         axios.patch('/account/info', {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          description: data.description,
+          ...(data.firstName === null ? null : { firstName: data.firstName }),
+          ...(data.lastName === null ? null : { lastName: data.lastName }),
+          ...(data.description === null ? null : { description: data.description }),
         }, {
           headers: {
             Accept: 'application/json',
@@ -39,7 +39,7 @@ const account = {
         axios.get(`/account/info/${data.username}`,
           { withCredentials: true })
           .then((response) => {
-            resolve(response.data.userDetails);
+            resolve(response.data);
           })
           .catch(() => {
             reject();
