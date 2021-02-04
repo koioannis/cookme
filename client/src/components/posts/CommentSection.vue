@@ -30,7 +30,9 @@
 
       <div class="d-flex mb-5" v-if="loggedIn === true">
         <textarea rows="1" class="big-input input-box" placeholder="Γράψτε κάτι.."
-          v-model="userComment" maxlength="100"></textarea>
+          v-model="userComment" maxlength="100"
+          @keydown.enter.exact.prevent
+          @keydown.capture.enter="sendComment" required></textarea>
         <b-button size="sm" class="custom-button ml-2"
           style="border-radius: 20%" @click="sendComment"><h3>></h3></b-button>
       </div>
@@ -75,6 +77,7 @@ export default {
   },
   methods: {
     sendComment() {
+      if (this.userComment == null || this.userComment.trim() === '') return;
       this.$store.dispatch('posts/comments/createComment', {
         postId: this.postId,
         content: this.userComment,
