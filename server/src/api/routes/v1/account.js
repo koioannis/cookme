@@ -79,11 +79,7 @@ const account = (app) => {
       const accountServiceInstance = Container.get(AccountService);
       const result = await accountServiceInstance.ModifyAccountInfo({
         userId: res.locals.userId,
-        update: {
-          description: req.body.description,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-        },
+        update: req.body,
       });
 
       res.json(result);

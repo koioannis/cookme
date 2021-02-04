@@ -70,8 +70,8 @@ export default {
     this.commentReload = setInterval(this.getComments, 5000);
   },
   updated() {
-    const element = document.getElementById('other-comments');
-    element.scroll(0, element.scrollHeight);
+    const commentBox = document.getElementById('other-comments');
+    commentBox.scroll(0, commentBox.scrollHeight);
   },
   methods: {
     sendComment() {

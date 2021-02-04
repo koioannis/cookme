@@ -4,8 +4,48 @@ const account = {
   namespaced: true,
   state: {},
   mutation: {},
-  getters: {},
+  getters: {
+    profileInfo(state) {
+      return {
+        name: state.name,
+        description: state.description,
+      };
+    },
+  },
   actions: {
+    setAccountInfo(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.patch('/account/info', {
+          ...(data.firstName === null ? null : { firstName: data.firstName }),
+          ...(data.lastName === null ? null : { lastName: data.lastName }),
+          ...(data.description === null ? null : { description: data.description }),
+        }, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${context.rootState.auth.accessToken}`,
+          },
+          withCredentials: true,
+        })
+          .then(() => {
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
+    getAccountInfo(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.get(`/account/info/${data.username}`,
+          { withCredentials: true })
+          .then((response) => {
+            resolve(response.data);
+          })
+          .catch(() => {
+            reject();
+          });
+      });
+    },
     forgotPassword(context, data) {
       return new Promise((resolve, reject) => {
         axios.post('/account/forgot-password', {

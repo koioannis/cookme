@@ -84,9 +84,7 @@ export default {
   created() {
     this.$store.dispatch('posts/getRandomPosts', { count: 4 })
       .then((response) => {
-        if (response.leght !== null) {
-          this.recentRecipes = response;
-        }
+        this.recentRecipes = response;
       });
   },
 };

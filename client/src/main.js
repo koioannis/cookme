@@ -11,7 +11,7 @@ import store from './store';
 
 import interceptorsSetup from './helpers/interseptors';
 
-axios.defaults.baseURL = 'https://api.cookme.me/api/v1';
+axios.defaults.baseURL = 'http://localhost:3000/api/v1';
 interceptorsSetup();
 
 // Install BootstrapVue

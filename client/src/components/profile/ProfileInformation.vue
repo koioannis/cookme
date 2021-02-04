@@ -2,11 +2,27 @@
   <div class="profile-info d-md-flex d-block align-items-center text-center text-md-left">
     <img src="@/assets/svg/account_icon.svg" class="account-img">
     <div class="usr-info ml-md-5 mt-3 mt-md-0">
-      <h4>First Last Name</h4>
+      <h4 v-if="modify === false">{{name}}</h4>
+      <div v-else>
+        <input type="text" class="small-input input-box mb-3"
+          placeholder="Όνομα" v-model="firstModel">
+        <input type="text" class="small-input input-box mb-3 ml-3"
+          placeholder="Επώνυμο" v-model="lastModel">
+      </div>
+
       <p class="profile-username">{{profileId}}</p>
       <p class="description-title"><b>Περιγραφή</b></p>
-      <p class="description">Όλοι μου την ζωή ήθελα να γίνω ο καλύτερος μάγειρας
-        που πέρασε στο κόσμο αυτό. #love</p>
+      <p class="description" v-if="modify === false">{{description}}</p>
+      <textarea placeholder="Γράψτε κάτι.." class="big-input input-box mb-2"
+        v-else v-model="descriptionModel"></textarea>
+
+      <b-button class="custom-button" size="sm" @click="modify = true"
+        v-if="getUsername === profileId && modify === false">Επεξεργασία</b-button>
+
+      <div class="d-flex justify-content-md-start justify-content-center" v-if="modify === true">
+        <b-button size="sm" class="custom-button" @click="changeAccountInfo">Αποθήκευση</b-button>
+        <b-button size="sm" class="ml-2" @click="cancelModification">Ακύρωση</b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +33,55 @@ export default {
   data() {
     return {
       profileId: this.$router.history.current.params.profileId,
+      modify: false,
+      name: 'Όνομα Επίθετο',
+      description: 'Ο χρήστης αυτός δεν έχει βάλει περιγραφή.',
+      firstModel: null,
+      lastModel: null,
+      descriptionModel: null,
     };
+  },
+  methods: {
+    cancelModification() {
+      this.modify = false;
+    },
+    changeAccountInfo() {
+      this.$store.dispatch('account/setAccountInfo', {
+        firstName: this.firstModel === '' ? null : this.firstModel,
+        lastName: this.lastModel === '' ? null : this.lastModel,
+        description: this.descriptionModel === '' ? null : this.descriptionModel,
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          this.$router.push({ path: '/error-page' });
+        });
+    },
+  },
+  created() {
+    this.$store.dispatch('account/getAccountInfo', {
+      username: this.profileId,
+    })
+      .then((response) => {
+        const details = response.userDetails;
+        if (details != null) {
+          this.name = `${(details.firstName || 'Όνομα')} ${(details.lastName || 'Επίθετο')}`;
+          if (details.description != null) this.description = details.description;
+
+          this.firstModel = details.firstName || null;
+          this.lastModel = details.lastName || null;
+          this.descriptionModel = details.description || null;
+        }
+      })
+      .catch(() => {
+        this.$router.push({ path: '/error-page' });
+      });
+  },
+  computed: {
+    getUsername() {
+      return this.$store.getters['auth/getUsername'];
+    },
   },
 };
 </script>
@@ -35,7 +99,7 @@ export default {
 
     .profile-username {
       font-size: 1.1em;
-      margin-top: -0.5em;
+      margin-top: -0.3em;
       opacity: 0.7;
     }
 
@@ -46,8 +110,33 @@ export default {
 
     .description {
       margin-top: -0.5em;
-      width: 80%;
     }
+
+    .input-box {
+      border: none;
+      box-shadow: 2px 3px 10px #b9b9b9ad !important;
+      outline: none;
+      color: rgba(0, 0, 0, 0.788);
+      width: 100%;
+    }
+
+    .small-input {
+      width: 30%;
+      height: 2.5em;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    .big-input {
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+    }
+  }
+
+  textarea {
+    resize: none;
   }
 
   @media only screen and (max-width: 1000px) {
