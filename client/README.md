@@ -60,20 +60,20 @@ After that visit [http://localhost:8080/](http://localhost:8080/). There you wil
 ## Project Steps
 
 1. Landing Page
-    - [ ] Authentication
+    - [x] Authentication
         - [x] Sign In
         - [x] Sign Up
         - [x] Forgot Password
-        - [ ] Add functionality
+        - [x] Add functionality
     - [x] How does it work
-    - [ ] Interact with posts
+    - [x] Interact with posts
 2. About
     - [x] Create all the different endpoints
     - [x] Add more endpoints
     - [x] Create Contact form
     - [x] Make it more responsive
     - [ ] Add Contact Logic
-    - [ ] Optimize the code
+    - [x] Optimize the code
 3. Discover
     -  SignedIn
         - [x] View Posts
@@ -81,18 +81,33 @@ After that visit [http://localhost:8080/](http://localhost:8080/). There you wil
         - [x] Interact with the posts
     - SignedOut
         - [x] View Posts
-    - [ ] Responsive
-    - [ ] Add Logic
-        - [ ] Search Bar
-        - [ ] Show Different Posts
+    - [x] Responsive
+    - [x] Add Logic
+        - [x] Search Bar
+        - [x] Show Different Posts
 4. Post
     - [x] Show Information
     - [x] Make Responsive
     - [ ] Optimize the Code
-    - [ ] Add Logic
-        - [ ] Ingredients Check
-        - [ ] Comments
+    - [ ] Images
+    - [ ] More Editing Features
+    - [ ] Improvements on Comments (Sockets - HTTPS)
+    - [x] Add Logic
+        - [x] Ingredients Check
+        - [x] Comments
         - [ ] Likes / Starts
+5. Profile
+    - [ ] Delete Profile
+    - [ ] Setting
+    - [ ] Notification (Comments, Likes on Posts)
+    - [ ] Followers
+    - [ ] Follower Logic (Follow, Unfollow)
+    - [ ] Add Picture
+6. Home Page
+    - [ ] Create Home Page
+    - [ ] Easy access for creating a post
+    - [ ] Advertisements Space
+    - [ ] Chat System
 
 ## Conclusion
 
