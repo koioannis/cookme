@@ -40,11 +40,28 @@ export default {
       navItems: FiltertNavItems,
     };
   },
+  watch: {
+    currentPage() {
+      this.recipeSorting();
+    },
+  },
+  methods: {
+    recipeSorting() {
+      if (this.currentPage === 'recent') {
+        this.recipesInfo.sort((a, b) => ((a.createdAt > b.createdAt) ? 1 : -1));
+      } else if (this.currentPage === 'hot' || this.currentPage === 'popular') {
+        this.recipesInfo.sort((a, b) => ((a.grade > b.grade) ? -1 : 1));
+      } else if (this.currentPage === 'fast') {
+        this.recipesInfo.sort((a, b) => ((a.user.username > b.user.username) ? -1 : 1));
+      }
+    },
+  },
   created() {
     this.$store.dispatch('posts/getRandomPosts', { count: 15 })
       .then((response) => {
         if (response.leght !== null) {
           this.recipesInfo = response;
+          this.recipeSorting();
           this.waiting = 1;
         }
       });

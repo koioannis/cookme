@@ -185,4 +185,10 @@ export default {
       height: 80% !important;
     }
   }
+
+  @media only screen and (max-height: 650px) {
+    #comments {
+      height: 70% !important;
+    }
+  }
 </style>
