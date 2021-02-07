@@ -9,6 +9,7 @@ const getCookieSettings = (nodeEnv) => ({
   secure: nodeEnv === 'production',
   httpOnly: true,
   sameSite: nodeEnv === 'production' ? 'strict' : false,
+  expires: new Date(Date.now() + 3600 * 1000 * 24 * 365),
 });
 
 const config = {
