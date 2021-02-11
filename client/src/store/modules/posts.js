@@ -55,6 +55,9 @@ const posts = {
         axios.patch(`/posts/post/${data.postId}`, {
           title: data.title,
           description: data.description,
+          steps: data.steps,
+          ingredientsPrice: data.ingredientsPrice,
+          ingredients: data.ingredients,
         }, {
           headers: {
             Accept: 'application/json',

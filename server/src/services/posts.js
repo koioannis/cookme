@@ -50,16 +50,17 @@ class PostsService {
     await userRecord.save();
   }
 
-  async ModifyPost({ postId, data, userId }) {
-    const update = {};
-    if (data.title) update.title = data.title;
-    if (data.description) update.description = data.description;
+  // refactor this ASAP...
+  async ModifyPost({ postId, update, userId }) {
+    const { ingredients } = update;
+    // eslint-disable-next-line no-param-reassign
+    delete update.ingredients;
 
     const postRecord = await this.postModel.findOneAndUpdate({
       $and: [{ _id: postId }, { user: userId }],
     }, update, (error) => {
       if (error) throw error;
-    }, { new: true });
+    });
 
     if (!postRecord) {
       const error = new Error('Post not found');
@@ -67,7 +68,11 @@ class PostsService {
       throw error;
     }
 
-    return objectMapper(postRecord, detailedPostDTO);
+    await this.ingredientModel.findOneAndUpdate({ post: postRecord._id }, ingredients);
+
+    const newPostRecord = await this.postModel.findOne({ _id: postRecord._id }).populate('ingredients');
+
+    return objectMapper(newPostRecord, detailedPostDTO);
   }
 
   async CreatePost({

@@ -55,7 +55,13 @@ const posts = (app) => {
     body: Joi.object({
       title: Joi.string(),
       description: Joi.string(),
-    }).or('title', 'description'),
+      steps: Joi.array(),
+      ingredientsPrice: Joi.number(),
+      ingredients: Joi.array().items(Joi.object({
+        name: Joi.string().required(),
+        quantity: Joi.string().required(),
+      })),
+    }).or('title', 'description', 'steps', 'ingredientsPrice', 'ingredients'),
   }),
   async (req, res, next) => {
     const logger = Container.get('logger');
@@ -66,7 +72,7 @@ const posts = (app) => {
 
       const results = await postsServiceInstance.ModifyPost({
         postId: req.params.postId,
-        data: req.body,
+        update: req.body,
         userId: res.locals.userId,
       });
       res.json(results);

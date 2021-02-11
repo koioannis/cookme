@@ -123,7 +123,7 @@ export default {
           title: this.title,
           description: this.description,
           ingredients: this.ingredients,
-          estimatedCost: this.estimatedCost,
+          ingredientsPrice: this.estimatedCost,
           steps: this.steps,
         })
           .then((postId) => {
