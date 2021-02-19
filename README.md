@@ -1,6 +1,10 @@
 # cookme
 A web application about cooking made in terms of WWW Technologies university course.
 
+## Landing Page
+
+![CookMeLandingPage](https://github.com/koioannis/cookme/CookMeLandingPage.png)
+
 ## Source
 * [Client](https://github.com/koioannis/cookme/tree/main/client) was implemented with [VueJs](https://vuejs.org/).
 * [Server](https://github.com/koioannis/cookme/tree/main/server) was implemented with [Node](https://vuejs.org/) and [ExpressJs](https://expressjs.com/).

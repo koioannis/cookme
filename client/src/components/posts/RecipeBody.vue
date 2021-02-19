@@ -14,9 +14,9 @@
       <div>
         <h6>Βαθμολογίστε το!</h6>
         <img v-for="key in 5" :key="key"
-          :src="[key<=star ? require('@/assets/svg/yellow_star.svg'):
+          :src="[key<=star || starSelected>=key ? require('@/assets/svg/yellow_star.svg'):
           require('@/assets/svg/empty_star.svg')]" :class="{'ml-2': key !== 1}" id="stars"
-          @mouseover="star = key" @mouseleave="star = 0">
+          @mouseover="star = key" @mouseleave="star = 0" @click="starSelected = key">
       </div>
     </div>
 
@@ -53,6 +53,7 @@ export default {
   data() {
     return {
       star: 0,
+      starSelected: 3,
     };
   },
 };
