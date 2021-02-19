@@ -1,7 +1,7 @@
 # cookme
 A web application about cooking made in terms of WWW Technologies university course.
 
-## Landing Page
+#### Landing Page Overview
 
 ![CookMeLandingPage](https://github.com/koioannis/cookme/blob/main/CookMeLandingPage.png)
 
