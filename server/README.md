@@ -41,6 +41,7 @@ The .env file values are explained below:
 ## Project Structure
 The folder structure of this app is shown and explained below:
 
+```bash
 ./src
 ├── api
 │   ├── middlewares
@@ -52,6 +53,7 @@ The folder structure of this app is shown and explained below:
 ├── services
 ├── templates
 └── app.js
+```
 
 | Name | Description |
 | ------------------------ | --------------------------------------------------------------------------------------------- |
