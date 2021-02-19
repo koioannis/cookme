@@ -13,7 +13,7 @@ git clone https://github.com/koioannis/cookme.git
 ```
 - Install dependencies
 ```
-cd cookme
+cd cookme/server
 npm install
 ```
 - Build and run the project
