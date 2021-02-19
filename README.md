@@ -3,7 +3,7 @@ A web application about cooking made in terms of WWW Technologies university cou
 
 ## Landing Page
 
-![CookMeLandingPage](https://github.com/koioannis/cookme/CookMeLandingPage.png)
+![CookMeLandingPage](https://github.com/koioannis/cookme/blob/main/CookMeLandingPage.png)
 
 ## Source
 * [Client](https://github.com/koioannis/cookme/tree/main/client) was implemented with [VueJs](https://vuejs.org/).
