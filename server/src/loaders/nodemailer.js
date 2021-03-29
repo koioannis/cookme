@@ -27,10 +27,8 @@ class NodeMailer {
     const htmlToSend = template(replacements);
 
 
-    // Type the email address you want your email to be sent from
-    // It would probably make sense to put it under .env and config file
     const mailOptions = {
-      from: '',
+      from: config.forgotPassword.senderEmail,
       to: data.to,
       subject: data.subject,
       text: data.url,
